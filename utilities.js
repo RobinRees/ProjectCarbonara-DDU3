@@ -65,15 +65,6 @@ export async function createNewUser(userData) { // user har undefined på båda 
         return user;
     } else {
         console.log("Username already exists");
-        // här händer något med score om användare redan finns. Bör lägga in att det endast uppdatera 
-        // score är högre    }
+        return { error: "Username already exists" }
     }
 }
-
-// const user = new User({ username: "Anna", score: 10 });
-
-// let myOPT = {
-//     method: "POST",
-//     headres: {"Content-Type": "application/json"},
-//     body: JSON.stringify({username: username})
-// }

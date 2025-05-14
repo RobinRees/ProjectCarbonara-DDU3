@@ -53,8 +53,11 @@ function test2() {
         });
 }
 
-// test1()
 
+
+const test1BTN = document.getElementById("test1")
+
+test1BTN.addEventListener("click", test1);
 
 const test2BTN = document.getElementById("test2")
 
