@@ -8,3 +8,7 @@ export function createOptions(status = 200) {
         }
     };
 }
+
+export function checkContentType(contentType) {
+    return contentType === "application/json"
+}
