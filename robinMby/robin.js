@@ -53,7 +53,7 @@ async function createChoices() {
         const div = document.createElement("div");
         div.classList.add("choice");
 
-        const text = document.createElement("span");
+        const text = document.createElement("p");
         text.textContent = choice.name;
         div.appendChild(text);
 
