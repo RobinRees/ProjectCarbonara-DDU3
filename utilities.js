@@ -47,17 +47,21 @@ export class User {
 
 
 }
-// Har justerat denna function, kanske fungerar som tänkt nu // oscar
-export async function createNewUser(username, score) {
+
+export async function createNewUser(username, score) { // user har undefined på båda värena atm
     const user = new User({ username: username, score: score })
-    const JSONscoreboard = Deno.readTextFileSync("/database/scoreboard.json");
+    const JSONscoreboard = Deno.readTextFileSync("database/scoreboard.json");
 
     let scoreboard = JSON.parse(JSONscoreboard);
+    console.log(user);
 
     const existingUser = scoreboard.find(x => x.username === user.username)
+    console.log(existingUser);
 
-    if (existingUser != undefined) {
+    if (existingUser != undefined) { // TROR EJ DENNA FUNGERAR KORREKT ÄNNU, EJ FÄRDIG
         scoreboard.push(user)
+        Deno.writeTextFileSync("database/scoreboard.json", JSON.stringify(scoreboard))
+        return user;
     } else {
         console.log("Username already exists");
         // här händer något med score om användare redan finns. Bör lägga in att det endast uppdatera 
