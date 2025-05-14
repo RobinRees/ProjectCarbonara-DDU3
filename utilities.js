@@ -16,10 +16,11 @@ export function checkContentType(contentType) {
 
 
 export class User {
-    constructor(data = {}) {
-        this._username = data.username
-        this._score = data.score
+    constructor(data) {
+        this.username = data.username
+        this.score = data.score
     }
+
 
     get username() {
         return this._username
@@ -27,7 +28,7 @@ export class User {
 
     set username(value) {
         if (typeof value !== "string") {
-            return console.log("ERROR")
+            throw new Error("Username must be a string");
         }
 
         this._username = value
@@ -39,13 +40,11 @@ export class User {
 
     set score(value) {
         if (typeof value !== "number") {
-            return console.log("ERROR")
+            throw new Error("Score must be a positive numebr");
         }
 
         this._score = value
     }
-
-
 }
 
 export async function createNewUser(username, score) { // user har undefined på båda värena atm
@@ -53,7 +52,7 @@ export async function createNewUser(username, score) { // user har undefined på
     const JSONscoreboard = Deno.readTextFileSync("database/scoreboard.json");
 
     let scoreboard = JSON.parse(JSONscoreboard);
-    console.log(user);
+    console.log(user), "rad 56 utilities";
 
     const existingUser = scoreboard.find(x => x.username === user.username)
     console.log(existingUser);
