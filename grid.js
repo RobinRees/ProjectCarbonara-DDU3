@@ -1,36 +1,62 @@
-const main = document.body.appendChild(document.createElement("main"))
+const main = document.body.appendChild(document.createElement("main"));
 
-main.style.display = `grid`
-main.style.gridTemplateRows = `repeat(3, 1fr)`
-main.style.gridTemplateColumns = `repeat(3, 1fr)`
+main.style.display = `grid`;
+main.style.gridTemplateRows = `repeat(3, 1fr)`;
+main.style.gridTemplateColumns = `repeat(3, 1fr)`;
+main.style.width = "300px";
+main.style.height = "300px";
 
-
-function createGrid() {
-    
-    for (let i = 0; i < 3; i++){
-        for (let j = 0; j< 3; j++){
-            let randomNumbers = Math.floor(Math.random() * 9)+1
-            const div = main.appendChild(document.createElement("div"))
-            div.classList.add("cell")
-            div.style.border = `1px solid black`
-
-            div.textContent = randomNumbers
-
-            div.addEventListener("click", (event)=> {
-                if (event.target && event.target.tagName === "DIV"){
-                    if(event.target.textContent === "5"){
-                        div.classList.add("Correct")
-                        div.style.background = `green`
-                    }
-                    else { 
-                        div.style.background = `red`
-                    }
-                }
-            })
-        }
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
-
-
+    return array;
 }
 
-createGrid()
+async function fetchIngredients() {
+    const response = await fetch("ingredients.json");
+    const ingredients = await response.json();
+    return ingredients;
+}
+
+async function createGrid() {
+    let ingredients = await fetchIngredients();
+
+    ingredients = shuffle(ingredients).slice(0, 9);
+
+    let index = 0;
+
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            const div = document.createElement("div");
+            div.classList.add("cell");
+            div.style.border = `1px solid black`;
+            div.style.display = "flex";
+            div.style.alignItems = "center";
+            div.style.justifyContent = "center";
+            div.style.fontSize = "14px";
+            div.style.color = "white";
+            div.style.backgroundSize = "cover";
+            div.style.backgroundPosition = "center";
+
+            const ingredient = ingredients[index];
+            div.textContent = ingredient.name;
+            div.style.backgroundImage = `url(${ingredient.image})`;
+
+            div.addEventListener("click", (event) => {
+                if (ingredient.name === "Tomato") {
+                    div.classList.add("Correct");
+                    div.style.backgroundColor = `green`;
+                } else {
+                    div.style.backgroundColor = `red`;
+                }
+            });
+
+            main.appendChild(div);
+            index++;
+        }
+    }
+}
+
+createGrid();
