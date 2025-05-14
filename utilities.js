@@ -36,7 +36,7 @@ export class User {
     }
 
     set score(value){
-        if (typeof value !== "number"){
+        if (typeof value !== "string"){
             return console.log("ERROR")
         }
 
@@ -60,7 +60,7 @@ export async function createUser(username, score){
         // här addar vi user i listan med score
     }
 }
-// const user = new User({ username: "Anna", score: 10 });
+// ex const user = new User({ username: "Anna", score: 10 });
 
 let myOPT = {
     method: "POST",
