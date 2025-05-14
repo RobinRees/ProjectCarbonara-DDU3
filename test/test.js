@@ -28,7 +28,7 @@ function test1() {
 
 
 function test2() {
-    return fetch("http://localhost:8000/carbonaraGame", {
+    return fetch("http://localhost:8000/completedGame", {
         method: "POST",
         headers: {
             "Content-Type" : "application/json"

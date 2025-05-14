@@ -12,6 +12,7 @@ async function handler(request) {
         return new Response(null, createOptions())
     }
 
+    
     if (request.method === "GET" && url.pathname === "/carbonaraGame") {
         if (checkContentType(contentType)) {
             console.log("Sad")
