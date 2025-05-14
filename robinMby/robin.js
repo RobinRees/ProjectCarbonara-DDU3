@@ -20,8 +20,10 @@ async function createChoices() {
     
     const ingredientsArray = [];
     for (let i = 1; i <= 20; i++) {
-        const ingredient = meal[`strIngredient${i}`]
-        if (ingredient) {
+        let ingredientName = "strIngredient" + i;
+        let ingredient = meal[ingredientName];
+
+        if (ingredient && ingredient !== "") {
             ingredientsArray.push(ingredient)
         }
     }
