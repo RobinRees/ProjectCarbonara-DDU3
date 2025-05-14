@@ -8,7 +8,6 @@ async function handler(request) {
     const contentType = request.headers.get("Content-Type")
 
 
-
     if (request.method === "OPTIONS") {
         return new Response(null, createOptions())
     }
@@ -27,12 +26,13 @@ async function handler(request) {
 
     if (url.pathname === "/completedGame") {
         console.log("request to completedGame");
+        const userData = await request.json()
 
         if (request.method === "POST") {
             console.log("POST request recieved");
-
             if (checkContentType(contentType)) {
-                const newUser = createNewUser()
+
+                const newUser = await createNewUser(userData)
                 return new Response(JSON.stringify(newUser), createOptions())
             } else {
                 return new Response(JSON.stringify({ error: "Bad Content-Type" }), createOptions(400));

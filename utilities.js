@@ -16,10 +16,11 @@ export function checkContentType(contentType) {
 
 
 export class User {
-    constructor(data = {}) {
-        this._username = data.username
-        this._score = data.score
+    constructor(data) {
+        this.username = data.username
+        this.score = data.score
     }
+
 
     get username() {
         return this._username
@@ -27,7 +28,7 @@ export class User {
 
     set username(value) {
         if (typeof value !== "string") {
-            return console.log("ERROR")
+            throw new Error("Username must be a string");
         }
 
         this._username = value
@@ -39,40 +40,31 @@ export class User {
 
     set score(value) {
         if (typeof value !== "number") {
-            return console.log("ERROR")
+            throw new Error("Score must be a positive numebr");
         }
 
         this._score = value
     }
-
-
 }
 
-export async function createNewUser(username, score) { // user har undefined på båda värena atm
-    const user = new User({ username: username, score: score })
+export async function createNewUser(userData) { // user har undefined på båda värena atm
+    console.log(userData);
+
+    const user = new User(userData)
     const JSONscoreboard = Deno.readTextFileSync("database/scoreboard.json");
 
     let scoreboard = JSON.parse(JSONscoreboard);
-    console.log(user);
+    console.log(user), "rad 56 utilities";
 
-    const existingUser = scoreboard.find(x => x.username === user.username)
+    const existingUser = scoreboard.find(x => x._username === user._username)
     console.log(existingUser);
 
-    if (existingUser != undefined) { // TROR EJ DENNA FUNGERAR KORREKT ÄNNU, EJ FÄRDIG
+    if (scoreboard.length == 0 || existingUser == undefined) {
         scoreboard.push(user)
         Deno.writeTextFileSync("database/scoreboard.json", JSON.stringify(scoreboard))
         return user;
     } else {
         console.log("Username already exists");
-        // här händer något med score om användare redan finns. Bör lägga in att det endast uppdatera 
-        // score är högre    }
+        return { error: "Username already exists" }
     }
 }
-
-// const user = new User({ username: "Anna", score: 10 });
-
-// let myOPT = {
-//     method: "POST",
-//     headres: {"Content-Type": "application/json"},
-//     body: JSON.stringify({username: username})
-// }
