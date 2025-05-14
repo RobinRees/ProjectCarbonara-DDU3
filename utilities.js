@@ -67,5 +67,5 @@ export async function createUser(username, score){
 let myOPT = {
     method: "POST",
     headres: {"Content-Type": "application/json"},
-    body: JSON.stringify({"username": username})
+    body: JSON.stringify({username: username})
 }

@@ -33,7 +33,7 @@ function test2() {
         headers: {
             "Content-Type" : "application/json"
         },
-        body : JSON.stringify( { name: "mordor" } )
+        body : JSON.stringify( { username: "mordor" } )
     })
         .then(response => {
         const createDivOne = document.createElement("div");
