@@ -88,15 +88,18 @@ async function createChoices() {
 
 
 function getRandomItem(array, count) {
-    const shuffled = [...array].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
-}
+    const result = [];
+    while (result.length < count) {
+      const item = array[Math.floor(Math.random() * array.length)];
+      if (!result.includes(item)) {
+        result.push(item);
+      }
+    }
+    return result;
+  }
 
 function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]]
-    }
+    return array.sort(() => Math.random() - 0.5);
 }
 
 document.getElementById("nextButton").addEventListener("click", () => {
