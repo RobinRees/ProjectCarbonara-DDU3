@@ -88,9 +88,15 @@ async function createChoices() {
 
 
 function getRandomItem(array, count) {
-    const shuffled = [...array].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
-}
+    const result = [];
+    while (result.length < count) {
+      const item = array[Math.floor(Math.random() * array.length)];
+      if (!result.includes(item)) {
+        result.push(item);
+      }
+    }
+    return result;
+  }
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
