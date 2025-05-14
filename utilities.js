@@ -16,56 +16,59 @@ export function checkContentType(contentType) {
 
 
 export class User {
-    constructor (data = {}){
+    constructor(data = {}) {
         this._username = data.username
         this._score = data.score
     }
 
-    get username(){
+    get username() {
         return this._username
     }
 
-    set username(value){
-        if (typeof value !== "string"){
+    set username(value) {
+        if (typeof value !== "string") {
             return console.log("ERROR")
         }
 
         this._username = value
     }
 
-    get score(){
+    get score() {
         return this._score
     }
 
-    set score(value){
-        if (typeof value !== "number"){
+    set score(value) {
+        if (typeof value !== "number") {
             return console.log("ERROR")
         }
 
-       this._score = value
+        this._score = value
     }
 
-    
+
 }
+// Har justerat denna function, kanske fungerar som tänkt nu // oscar
+export async function createNewUser(username, score) {
+    const user = new User({ username: username, score: score })
+    const JSONscoreboard = Deno.readTextFileSync("/database/scoreboard.json");
 
-export async function createUser(username, score){
-    const user = new User({ username: `${username}`, score: `${score}` })
-    const response = await fetch("fil till alla användare")
-    let users = await response.json()
-    
-    const existingUser = users.find(x => x.username === user.username)
+    let scoreboard = JSON.parse(JSONscoreboard);
 
-    if(existingUser){
-        // här händer något med score om användare redan finns. Bör lägga in att det endast uppdatera 
-        // score är högre
+    const existingUser = scoreboard.find(x => x.username === user.username)
+
+    if (existingUser != undefined) {
+        scoreboard.push(user)
     } else {
-        // här addar vi user i listan med score
+        console.log("Username already exists");
+        // här händer något med score om användare redan finns. Bör lägga in att det endast uppdatera 
+        // score är högre    }
     }
 }
+
 // const user = new User({ username: "Anna", score: 10 });
 
-let myOPT = {
-    method: "POST",
-    headres: {"Content-Type": "application/json"},
-    body: JSON.stringify({username: username})
-}
+// let myOPT = {
+//     method: "POST",
+//     headres: {"Content-Type": "application/json"},
+//     body: JSON.stringify({username: username})
+// }
