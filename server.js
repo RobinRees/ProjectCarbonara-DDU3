@@ -20,7 +20,19 @@ async function handler(request) {
         } else {
             return new Response(JSON.stringify({ error: "Bad Content-Type" }), createOptions(400));
         }
+    }
 
+    if (url.pathname === "/completedGame") {
+        if (request.method === "POST") {
+            if (checkContentType(contentType)) {
+                const newUser = createNewUser()
+                return new Response(JSON.stringify(newUser), createOptions())
+            } else {
+                return new Response(JSON.stringify({ error: "Bad Content-Type" }), createOptions(400));
+            }
+        } else {
+            return new Response(JSON.stringify({ error: "Method not allowed" }), createOptions(400))
+        }
     }
     console.log("ERROR");
 
