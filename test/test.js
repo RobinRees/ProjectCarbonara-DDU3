@@ -54,4 +54,8 @@ function test2() {
 }
 
 // test1()
-test2()
+
+
+const test2BTN = document.getElementById("test2")
+
+test2BTN.addEventListener("click", test2);

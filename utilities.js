@@ -56,10 +56,10 @@ export async function createNewUser(userData) { // user har undefined på båda 
     let scoreboard = JSON.parse(JSONscoreboard);
     console.log(user), "rad 56 utilities";
 
-    const existingUser = scoreboard.find(x => x.username === user.username)
+    const existingUser = scoreboard.find(x => x._username === user._username)
     console.log(existingUser);
 
-    if (existingUser != undefined) { // TROR EJ DENNA FUNGERAR KORREKT ÄNNU, EJ FÄRDIG
+    if (scoreboard.length == 0 || existingUser == undefined) {
         scoreboard.push(user)
         Deno.writeTextFileSync("database/scoreboard.json", JSON.stringify(scoreboard))
         return user;
