@@ -47,8 +47,10 @@ export class User {
     }
 }
 
-export async function createNewUser(username, score) { // user har undefined på båda värena atm
-    const user = new User({ username: username, score: score })
+export async function createNewUser(userData) { // user har undefined på båda värena atm
+    console.log(userData);
+
+    const user = new User(userData)
     const JSONscoreboard = Deno.readTextFileSync("database/scoreboard.json");
 
     let scoreboard = JSON.parse(JSONscoreboard);
