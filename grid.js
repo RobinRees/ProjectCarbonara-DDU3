@@ -31,7 +31,7 @@ async function createGrid() {
         for (let j = 0; j < 3; j++) {
             const div = document.createElement("div");
             div.classList.add("cell");
-            div.style.border = `1px solid black`;
+            div.style.border = `1px solid green`;
             div.style.display = "flex";
             div.style.alignItems = "center";
             div.style.justifyContent = "center";
@@ -39,6 +39,7 @@ async function createGrid() {
             div.style.color = "white";
             div.style.backgroundSize = "cover";
             div.style.backgroundPosition = "center";
+            div.style.backgroundColor = "Black";
 
             const ingredient = ingredients[index];
             div.textContent = ingredient.name;
