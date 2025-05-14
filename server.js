@@ -24,8 +24,8 @@ async function handler(request) {
     if (url.pathname === "/completedGame") {
         if (request.method === "POST") {
             if (checkContentType(contentType)) {
-                const newUser = createNewUser()
-                return new Response(JSON.stringify(newUser), createOptions())
+                // const newUser = createNewUser()
+                return new Response(JSON.stringify({ message: "Success" }), createOptions())
             } else {
                 return new Response(JSON.stringify({ error: "Bad Content-Type" }), createOptions(400));
             }
