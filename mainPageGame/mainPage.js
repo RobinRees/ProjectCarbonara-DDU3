@@ -95,7 +95,7 @@ async function createChoices() {
                 lives--
                 livesBox.innerHTML = `Life left: ${lives}`;
                 if (lives === 0) {
-                    alert("YOU LOOSE") // KAN FORTSÄTTA PÅ DETTA STYLA KANSKE
+                    looseScreen.style.display = "flex"; //Detta är loose screen, kanske en endpoint istället
                 }
             }
         });

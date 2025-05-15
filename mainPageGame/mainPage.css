@@ -80,3 +80,18 @@ main {
     justify-content: center;
     align-items: center;
 }
+
+#looseScreen {
+    display: none;
+    width: 700px;
+    height: 500px;
+    background-color: aquamarine;
+    position: absolute;
+    border: 5px blue solid;
+    border-radius: 10%;
+
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
