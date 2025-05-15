@@ -15,56 +15,53 @@ export function checkContentType(contentType) {
 
 
 
-export class User {
+export class User { // Om vi använder get/set får vi objekt med nycklar som: _.username
     constructor(data) {
         this.username = data.username
         this.score = data.score
     }
+    // get username() {
+    //     return this._username
+    // }
 
+    // set username(value) {
+    //     if (typeof value !== "string") {
+    //         throw new Error("Username must be a string");
+    //     }
 
-    get username() {
-        return this._username
-    }
+    //     this._username = value
+    // }
 
-    set username(value) {
-        if (typeof value !== "string") {
-            throw new Error("Username must be a string");
-        }
+    // get score() {
+    //     return this._score
+    // }
 
-        this._username = value
-    }
+    // set score(value) {
+    //     if (typeof value !== "number") {
+    //         throw new Error("Score must be a positive numebr");
+    //     }
 
-    get score() {
-        return this._score
-    }
-
-    set score(value) {
-        if (typeof value !== "number") {
-            throw new Error("Score must be a positive numebr");
-        }
-
-        this._score = value
-    }
+    //     this._score = value
+    // }
 }
 
-export async function createNewUser(userData) { // user har undefined på båda värena atm
+export async function createNewUser(userData) {
     console.log(userData);
 
-    const user = new User(userData)
+    const newUser = new User(userData)
     const JSONscoreboard = Deno.readTextFileSync("database/scoreboard.json");
 
     let scoreboard = JSON.parse(JSONscoreboard);
-    console.log(user), "rad 56 utilities";
 
-    const existingUser = scoreboard.find(x => x._username === user._username)
-    console.log(existingUser);
+    const nameTaken = scoreboard.some(x => x.username === newUser.username) // Kollar om 1 användre redan har det, true elelr false
 
-    if (scoreboard.length == 0 || existingUser == undefined) {
-        scoreboard.push(user)
-        Deno.writeTextFileSync("database/scoreboard.json", JSON.stringify(scoreboard))
-        return user;
-    } else {
+    if (nameTaken) {
         console.log("Username already exists");
         return { error: "Username already exists" }
+    } else {
+        scoreboard.push(newUser)
+        Deno.writeTextFileSync("database/scoreboard.json", JSON.stringify(scoreboard))
+        return newUser;
+
     }
 }
