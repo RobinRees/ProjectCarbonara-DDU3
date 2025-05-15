@@ -8,22 +8,12 @@ body {
 }
 
 main {
-    width: 50vw;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
-#foodImage {
-    width: 500px;
-    height: 500px;
-    border: solid black 3px;
-    margin-top: 30px;
-    display: block;
-    padding: 0;
-}
+
+
 
 #choicesBox {
     width: 300px;
@@ -55,9 +45,38 @@ main {
     margin-top: 200px;
     height: 200px;
     width: 200px;
+    display: none;
 }
 
 .choice p {
     margin: 0px;
     text-align: center;
+}
+
+#foodTitle {
+    display: none;
+}
+
+#left {
+    display: flex;
+    justify-content: center;
+}
+
+#recepieBox {
+    padding-top: 60px;
+    width: 400px;
+
+}
+
+#middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
