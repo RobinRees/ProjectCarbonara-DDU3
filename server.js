@@ -24,8 +24,8 @@ async function handler(request) {
         }
     }
 
-    if (url.pathname === "/completedGame") {
-        console.log("request to completedGame");
+    if (url.pathname === "/signUp") {
+        console.log("request to signUp");
         const userData = await request.json()
 
         if (request.method === "POST") {

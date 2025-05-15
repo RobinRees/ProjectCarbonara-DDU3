@@ -33,7 +33,7 @@ function test1() {
 }
 // TESTAR ATT ADDERA USER
 function test2() {
-    return fetch("http://localhost:8000/completedGame", {
+    return fetch("http://localhost:8000/signUp", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -59,7 +59,7 @@ function test2() {
 }
 // TESTAR ATT ADDERA ANNAN NY USER
 function test3() {
-    return fetch("http://localhost:8000/completedGame", {
+    return fetch("http://localhost:8000/signUp", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -85,7 +85,7 @@ function test3() {
 }
 // ADDERAR REDAN EXISTERANDE USER
 function test4() {
-    return fetch("http://localhost:8000/completedGame", {
+    return fetch("http://localhost:8000/signUp", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -111,7 +111,7 @@ function test4() {
 }
 // TESTAR MED FEL CONTENT-TYPE
 function test5() {
-    return fetch("http://localhost:8000/completedGame", {
+    return fetch("http://localhost:8000/signUp", {
         method: "POST",
         headers: {
             "Content-Type": "html/text"
@@ -137,7 +137,7 @@ function test5() {
 }
 // TESTAR MED FEL METOD
 function test6() {
-    return fetch("http://localhost:8000/completedGame", {
+    return fetch("http://localhost:8000/signUp", {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"

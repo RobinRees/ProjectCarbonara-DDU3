@@ -17,11 +17,22 @@ export function checkContentType(contentType) {
 
 export class User { // Om vi använder get/set får vi objekt med nycklar som: _.username
     constructor(data) {
+        const JSONscoreboard = Deno.readTextFileSync("database/scoreboard.json");
+        let scoreboard = JSON.parse(JSONscoreboard);
+
+
         if (typeof data.username !== "string") {
             alert("Username must be at least 3 characters")
         }
         this.username = data.username
-        this.score = data.score
+        this.password = data.password
+
+        const ids = scoreboard.map(user => user.id)
+        if (ids.length === 0) {
+            this.id = 1
+        } else {
+            this.id = Math.max(...ids) + 1
+        }
     }
 }
 
