@@ -17,6 +17,9 @@ export function checkContentType(contentType) {
 
 export class User { // Om vi använder get/set får vi objekt med nycklar som: _.username
     constructor(data) {
+        if (typeof data.username !== "string" || data.username.trim().length < 3) {
+            return { error: "Username must be at least 3 characters" }
+        }
         this.username = data.username
         this.score = data.score
     }
