@@ -32,8 +32,16 @@ async function handler(request) {
             console.log("POST request recieved");
             if (checkContentType(contentType)) {
 
-                const newUser = await createNewUser(userData)
-                return new Response(JSON.stringify(newUser), createOptions())
+                const resultNewUser = await createNewUser(userData)
+
+                if (resultNewUser.addedUser) {
+                    return new Response(JSON.stringify(resultNewUser.addedUser), createOptions())
+                }
+
+                if (resultNewUser.nameTaken) {
+                    return new Response(JSON.stringify({ error: resultNewUser.nameTaken }), createOptions(409))
+                }
+
             } else {
                 return new Response(JSON.stringify({ error: "Bad Content-Type" }), createOptions(400));
             }
