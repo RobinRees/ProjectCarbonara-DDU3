@@ -31,14 +31,17 @@ async function handler(request) {
         if (request.method === "POST") {
             console.log("POST request recieved");
             if (checkContentType(contentType)) {
-                
-                const newUser = await createNewUser(userData)
-                if (newUser.error) {
-                    return new Response(JSON.stringify( newUser )), createOptions(400);
+
+                const resultNewUser = await createNewUser(userData)
+
+                if (resultNewUser.addedUser) {
+                    return new Response(JSON.stringify(resultNewUser.addedUser), createOptions())
                 }
 
-                
-                return new Response(JSON.stringify(newUser), createOptions())
+                if (resultNewUser.nameTaken) {
+                    return new Response(JSON.stringify({ error: resultNewUser.nameTaken }), createOptions(409))
+                }
+
             } else {
                 return new Response(JSON.stringify({ error: "Bad Content-Type" }), createOptions(400));
             }

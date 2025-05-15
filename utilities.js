@@ -17,8 +17,8 @@ export function checkContentType(contentType) {
 
 export class User { // Om vi använder get/set får vi objekt med nycklar som: _.username
     constructor(data) {
-        if (typeof data.username !== "string" || data.username.trim().length < 3) {
-            return { error: "Username must be at least 3 characters" }
+        if (typeof data.username !== "string") {
+            alert("Username must be at least 3 characters")
         }
         this.username = data.username
         this.score = data.score
@@ -29,6 +29,8 @@ export async function createNewUser(userData) {
     console.log(userData);
 
     const newUser = new User(userData)
+    console.log(newUser, "rad 33");
+
     const JSONscoreboard = Deno.readTextFileSync("database/scoreboard.json");
 
     let scoreboard = JSON.parse(JSONscoreboard);
@@ -37,11 +39,11 @@ export async function createNewUser(userData) {
 
     if (nameTaken) {
         console.log("Username already exists");
-        return { error: "Username already exists" }
+        return { nameTaken: "Username already exists" }
     } else {
         scoreboard.push(newUser)
         Deno.writeTextFileSync("database/scoreboard.json", JSON.stringify(scoreboard))
-        return newUser;
+        return { addedUser: newUser };
 
     }
 }
