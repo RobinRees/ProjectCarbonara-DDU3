@@ -11,6 +11,7 @@ async function createChoices() {
 
     const meal = currentMealData.meals[0];
 
+
     const img = document.createElement("img");
     img.src = meal.strMealThumb;
     img.style.width = "100%";
