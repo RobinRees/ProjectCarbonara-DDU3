@@ -83,7 +83,10 @@ async function createChoices() {
                 if (correctGuesses === allCorrect) {
                     document.getElementById("nextButton").style.display = "block";
                     document.getElementById("foodTitle").textContent = mealName;
-                    document.getElementById("recepieBox").innerHTML = mealRecipie;
+                    document.getElementById("recepieBox").innerHTML = `<h2>Insructions for ${mealName}</h2>
+                    <br>
+                    <p>${mealRecipie}</p>
+                    `;
                     foodTitle.style.display = "block"
                     
                 }
