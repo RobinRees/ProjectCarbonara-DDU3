@@ -11,6 +11,10 @@ async function createChoices() {
 
     const meal = currentMealData.meals[0];
 
+    const mealName = meal.strMeal;
+    console.log(mealName)
+
+    const mealRecipie = meal.strInstructions;
 
     const img = document.createElement("img");
     img.src = meal.strMealThumb;
@@ -78,11 +82,15 @@ async function createChoices() {
                 correctGuesses++;
                 if (correctGuesses === allCorrect) {
                     document.getElementById("nextButton").style.display = "block";
+                    document.getElementById("foodTitle").textContent = mealName;
+                    document.getElementById("recepieBox").innerHTML = mealRecipie;
+                    foodTitle.style.display = "block"
                     
                 }
             } else {
                 div.style.border = "3px solid red";
                 lives--
+                livesBox.innerHTML = `Life left: ${lives}`;
                 if (lives === 0) {
                     alert("YOU LOOSE") // KAN FORTSÄTTA PÅ DETTA STYLA KANSKE
                 }
@@ -112,9 +120,11 @@ function shuffleArray(array) {
 
 document.getElementById("nextButton").addEventListener("click", () => {
     document.getElementById("nextButton").style.display = "none";
+    foodTitle.style.display = "none";
     correctGuesses = 0;
     choicesBox.innerHTML = "";
     foodImageDiv.innerHTML = "";
+    recepieBox.innerHTML = "";
     createChoices();
 });
 
