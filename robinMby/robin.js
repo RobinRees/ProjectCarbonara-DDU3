@@ -2,6 +2,7 @@ const foodImageDiv = document.getElementById("foodImage");
 const choicesBox = document.getElementById("choicesBox");
 let correctGuesses = 0;
 const allCorrect = 3;
+let lives = 9;
 
 
 async function createChoices() {
@@ -37,7 +38,7 @@ async function createChoices() {
     const allChoices = [
         ...selectedIngredients.map(name => ({
             name,
-            image: `https://www.themealdb.com/images/ingredients/${encodeURIComponent(name)}.png`,
+            image: `https://www.themealdb.com/images/ingredients/${name}.png`,
             isCorrect: true
         })),
         ...selectedFakeIngredients.map(item => ({
@@ -79,7 +80,10 @@ async function createChoices() {
                 }
             } else {
                 div.style.border = "3px solid red";
-                //Kanske förlora ett liv här????
+                lives--
+                if (lives === 0) {
+                    alert("YOU LOOSE") // KAN FORTSÄTTA PÅ DETTA STYLA KANSKE
+                }
             }
         });
 
