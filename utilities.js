@@ -23,29 +23,6 @@ export class User { // Om vi använder get/set får vi objekt med nycklar som: _
         this.username = data.username
         this.score = data.score
     }
-    // get username() {
-    //     return this._username
-    // }
-
-    // set username(value) {
-    //     if (typeof value !== "string") {
-    //         throw new Error("Username must be a string");
-    //     }
-
-    //     this._username = value
-    // }
-
-    // get score() {
-    //     return this._score
-    // }
-
-    // set score(value) {
-    //     if (typeof value !== "number") {
-    //         throw new Error("Score must be a positive numebr");
-    //     }
-
-    //     this._score = value
-    // }
 }
 
 export async function createNewUser(userData) {
