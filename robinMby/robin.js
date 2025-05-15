@@ -77,6 +77,7 @@ async function createChoices() {
                 correctGuesses++;
                 if (correctGuesses === allCorrect) {
                     document.getElementById("nextButton").style.display = "block";
+                    
                 }
             } else {
                 div.style.border = "3px solid red";
