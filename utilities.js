@@ -40,13 +40,13 @@ export async function createNewUser(userData) {
     console.log(userData);
 
     const newUser = new User(userData)
-    console.log(newUser, "rad 33");
+    console.log(newUser, "rad 43");
 
     const JSONscoreboard = Deno.readTextFileSync("database/scoreboard.json");
 
     let scoreboard = JSON.parse(JSONscoreboard);
 
-    const nameTaken = scoreboard.some(x => x.username === newUser.username) // Kollar om 1 användre redan har det, true elelr false
+    const nameTaken = scoreboard.some(x => x.username === newUser.username) // Kollar om 1 användre redan har det namnet, true elelr false
 
     if (nameTaken) {
         console.log("Username already exists");

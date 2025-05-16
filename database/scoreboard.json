@@ -1,14 +1,12 @@
 [
     {
         "username": "mordor",
-        "score": 33
+        "password": "hej123",
+        "id": 1
     },
     {
         "username": "dragonslayer",
-        "score": 2
-    },
-    {
-        "username": "mordor",
-        "score": 33
-    },
+        "password": "carbonara69",
+        "id": 2
+    }
 ]

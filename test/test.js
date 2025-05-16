@@ -38,7 +38,7 @@ function test2() {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username: "mordor", score: 33 })
+        body: JSON.stringify({ username: "mordor", password: "hej123" })
     })
         .then(response => {
             const createDivOne = document.createElement("div");
@@ -64,7 +64,7 @@ function test3() {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username: "dragonslayer", score: 2 })
+        body: JSON.stringify({ username: "dragonslayer", password: "carbonara69" })
     })
         .then(response => {
             const createDivOne = document.createElement("div");
@@ -90,7 +90,7 @@ function test4() {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username: "mordor", score: 50 })
+        body: JSON.stringify({ username: "mordor", score: "bygg321" })
     })
         .then(response => {
             const createDivOne = document.createElement("div");
