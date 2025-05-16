@@ -9,15 +9,59 @@
 </head>
 
 <body>
-    <div id="sebbe"></div>
     <main>
-        <button type="button" id="test1">TEST1</button>
-        <button type="button" id="test2">TEST2</button>
-        <button type="button" id="test3">TEST3</button>
-        <button type="button" id="test4">TEST4</button>
-        <button type="button" id="test5">TEST5</button>
-        <button type="button" id="test6">TEST6</button>
+        <button type="button" id="test1">
+            <h1>TEST1</h1>
+            <h2>Testar att hämta slumpmässig maträtt</h2>
+            <p>Förväntad status: 200</p>
+            <p id="statusResponse1"></p>
+            <p id="dataResponse1"></p>
+        </button>
+
+        <button type="button" id="test2">
+            <h1>TEST2</h1>
+            <h2>Testar att addera unik användare</h2>
+            <p>Förväntad status: 200</p>
+            <p id="statusResponse2"></p>
+            <p id="dataResponse2"></p>
+        </button>
+
+        <button type="button" id="test3">
+            <h1>TEST3</h1>
+            <h2>Testar att addera ytterligare unik användare</h2>
+            <p>Förväntad status: 200</p>
+            <p id="statusResponse3"></p>
+            <p id="dataResponse3"></p>
+
+        </button>
+
+        <button type="button" id="test4">
+            <h1>TEST4</h1>
+            <h2>Testar att addera användare som existerar</h2>
+            <p>Förväntad status: 409</p>
+            <p id="statusResponse4"></p>
+            <p id="dataResponse4"></p>
+
+        </button>
+
+        <button type="button" id="test5">
+            <h1>TEST5</h1>
+            <h2>Testar att hämta slumpmässig maträtt</h2>
+            <p>Förväntad status: 400</p>
+            <p id="statusResponse5"></p>
+            <p id="dataResponse5"></p>
+        </button>
+
+        <button type="button" id="test6">
+            <h1>TEST6</h1>
+            <h2>Testar att hämta slumpmässig maträtt</h2>
+            <p>Förväntad status: 400</p>
+            <p id="statusResponse6"></p>
+            <p id="dataResponse6"></p>
+        </button>
+
         <button type="button" id="test7">TEST7</button>
+
     </main>
     <script src="test.js"></script>
 </body>

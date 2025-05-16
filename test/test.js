@@ -7,159 +7,151 @@ const test5BTN = document.getElementById("test5")
 const test6BTN = document.getElementById("test6")
 
 // TESTAR ATT HÄMTA MÅLTID VIA FETCH
-function test1() {
-    return fetch("http://localhost:8000/carbonaraGame", {
+async function test1() {
+    const response = await fetch("http://localhost:8000/carbonaraGame", {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
         }
     })
-        .then(response => {
-            const createDivOne = document.createElement("div");
-            createDivOne.textContent = `Status: ${response.status}`;
-            main.appendChild(createDivOne);
-            return response.json();
-        })
-        .then(data => {
-            const createDivTwo = document.createElement("div");
-            createDivTwo.textContent = `Data: ${JSON.stringify(data)}`;
-            main.appendChild(createDivTwo);
-        })
-        .catch(error => {
-            const errorDiv = document.createElement("div");
-            errorDiv.textContent = `Fel: ${error.message}`;
-            main.appendChild(errorDiv);
-        });
+    const data = await response.json()
+    console.log(data.error);
+
+
+    statusResponse1.textContent = `Status: ${response.status}`;
+    console.log(response.status);
+
+    const expectedStatus = 200;
+    if (response.status === expectedStatus) {
+        document.getElementById("test1").classList.add("testOK");
+        dataResponse1.textContent = `${data.meals[0].strMeal}`;
+    } else {
+        document.getElementById("test1").classList.add("testFAIL");
+
+        dataResponse1.textContent = `Error: ${data.error}`;
+    }
 }
 // TESTAR ATT ADDERA USER
-function test2() {
-    return fetch("http://localhost:8000/signUp", {
+async function test2() {
+    const response = await fetch("http://localhost:8000/signUp", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({ username: "mordor", password: "hej123" })
     })
-        .then(response => {
-            const createDivOne = document.createElement("div");
-            createDivOne.textContent = `Status: ${response.status}`;
-            main.appendChild(createDivOne);
-            return response.json();
-        })
-        .then(data => {
-            const createDivTwo = document.createElement("div");
-            createDivTwo.textContent = `Data: ${JSON.stringify(data)}`;
-            main.appendChild(createDivTwo);
-        })
-        .catch(error => {
-            const errorDiv = document.createElement("div");
-            errorDiv.textContent = `Fel: ${error.message}`;
-            main.appendChild(errorDiv);
-        });
+
+    const data = await response.json()
+    console.log(data);
+
+    statusResponse2.textContent = `Status: ${response.status}`;
+    const expectedStatus = 200;
+    if (response.status === expectedStatus) {
+        document.getElementById("test2").classList.add("testOK");
+        dataResponse2.textContent = `${JSON.stringify(data)}`;
+    } else {
+        document.getElementById("test2").classList.add("testFAIL");
+
+        dataResponse2.textContent = `Error: ${data.error}`;
+    }
 }
+
+
 // TESTAR ATT ADDERA ANNAN NY USER
-function test3() {
-    return fetch("http://localhost:8000/signUp", {
+async function test3() {
+    const response = await fetch("http://localhost:8000/signUp", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({ username: "dragonslayer", password: "carbonara69" })
     })
-        .then(response => {
-            const createDivOne = document.createElement("div");
-            createDivOne.textContent = `Status: ${response.status}`;
-            main.appendChild(createDivOne);
-            return response.json();
-        })
-        .then(data => {
-            const createDivTwo = document.createElement("div");
-            createDivTwo.textContent = `Data: ${JSON.stringify(data)}`;
-            main.appendChild(createDivTwo);
-        })
-        .catch(error => {
-            const errorDiv = document.createElement("div");
-            errorDiv.textContent = `Fel: ${error.message}`;
-            main.appendChild(errorDiv);
-        });
+
+    const data = await response.json()
+    console.log(data);
+
+
+
+    statusResponse3.textContent = `Status: ${response.status}`;
+    const expectedStatus = 200;
+    if (response.status === expectedStatus) {
+        document.getElementById("test3").classList.add("testOK");
+        dataResponse3.textContent = `${JSON.stringify(data)}`;
+    } else {
+        document.getElementById("test3").classList.add("testFAIL");
+
+        dataResponse3.textContent = `Error: ${data.error}`;
+    }
 }
 // ADDERAR REDAN EXISTERANDE USER
-function test4() {
-    return fetch("http://localhost:8000/signUp", {
+async function test4() {
+    const response = await fetch("http://localhost:8000/signUp", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username: "mordor", score: "bygg321" })
+        body: JSON.stringify({ username: "mordor", password: "hej123" })
     })
-        .then(response => {
-            const createDivOne = document.createElement("div");
-            createDivOne.textContent = `Status: ${response.status}`;
-            main.appendChild(createDivOne);
-            return response.json();
-        })
-        .then(data => {
-            const createDivTwo = document.createElement("div");
-            createDivTwo.textContent = `Data: ${JSON.stringify(data)}`;
-            main.appendChild(createDivTwo);
-        })
-        .catch(error => {
-            const errorDiv = document.createElement("div");
-            errorDiv.textContent = `Fel: ${error.message}`;
-            main.appendChild(errorDiv);
-        });
+
+    const data = await response.json()
+    console.log(data);
+
+    statusResponse4.textContent = `Status: ${response.status}`;
+    const expectedStatus = 409;
+    if (response.status === expectedStatus) {
+        document.getElementById("test4").classList.add("testOK");
+        dataResponse4.textContent = `${data.error}`;
+    } else {
+        document.getElementById("test4").classList.add("testFAIL");
+
+        dataResponse4.textContent = `Error: ${data.error}`;
+    }
 }
 // TESTAR MED FEL CONTENT-TYPE
-function test5() {
-    return fetch("http://localhost:8000/signUp", {
+async function test5() {
+    const response = await fetch("http://localhost:8000/signUp", {
         method: "POST",
         headers: {
             "Content-Type": "html/text"
         },
-        body: JSON.stringify({ username: "mordor", score: 50 })
+        body: JSON.stringify({ username: "sebbe", password: "husky" })
     })
-        .then(response => {
-            const createDivOne = document.createElement("div");
-            createDivOne.textContent = `Status: ${response.status}`;
-            main.appendChild(createDivOne);
-            return response.json();
-        })
-        .then(data => {
-            const createDivTwo = document.createElement("div");
-            createDivTwo.textContent = `Data: ${JSON.stringify(data)}`;
-            main.appendChild(createDivTwo);
-        })
-        .catch(error => {
-            const errorDiv = document.createElement("div");
-            errorDiv.textContent = `Fel: ${error.message}`;
-            main.appendChild(errorDiv);
-        });
+    const data = await response.json()
+    console.log(data);
+
+    statusResponse5.textContent = `Status: ${response.status}`;
+    const expectedStatus = 400;
+    if (response.status === expectedStatus) {
+        document.getElementById("test5").classList.add("testOK");
+        dataResponse5.textContent = `${data.error}`;
+    } else {
+        document.getElementById("test5").classList.add("testFAIL");
+
+        dataResponse5.textContent = `Error: ${data.error}`;
+    }
 }
 // TESTAR MED FEL METOD
-function test6() {
-    return fetch("http://localhost:8000/signUp", {
+async function test6() {
+    const response = await fetch("http://localhost:8000/signUp", {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username: "test", score: 100 })
+        body: JSON.stringify({ username: "test", password: "testing" })
     })
-        .then(response => {
-            const createDivOne = document.createElement("div");
-            createDivOne.textContent = `Status: ${response.status}`;
-            main.appendChild(createDivOne);
-            return response.json();
-        })
-        .then(data => {
-            const createDivTwo = document.createElement("div");
-            createDivTwo.textContent = `Data: ${JSON.stringify(data)}`;
-            main.appendChild(createDivTwo);
-        })
-        .catch(error => {
-            const errorDiv = document.createElement("div");
-            errorDiv.textContent = `Fel: ${error.message}`;
-            main.appendChild(errorDiv);
-        });
+    const data = await response.json()
+    console.log(data);
+
+    statusResponse6.textContent = `Status: ${response.status}`;
+    const expectedStatus = 400;
+    if (response.status === expectedStatus) {
+        document.getElementById("test6").classList.add("testOK");
+        dataResponse6.textContent = `${data.error}`;
+    } else {
+        document.getElementById("test6").classList.add("testFAIL");
+
+        dataResponse6.textContent = `Error: ${data.error}`;
+    };
 }
 
 
@@ -168,6 +160,10 @@ function test6() {
 
 test1BTN.addEventListener("click", test1);
 test2BTN.addEventListener("click", test2);
+// test2BTN.addEventListener("click", function (event) {
+//     event.preventDefault();
+//     test2();
+// });
 test3BTN.addEventListener("click", test3);
 test4BTN.addEventListener("click", test4);
 test5BTN.addEventListener("click", test5);

@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+main {
+    width: auto;
+    display: grid;
+    grid-template-columns: 500px;
+    gap: 45px;
+}
+
+button {
+    width: 100%;
+
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 25px;
+}
+
+.testOK {
+    background-color: green;
+}
+
+.testFAIL {
+    background-color: tomato;
+}
+
+p {
+    font-weight: bolder;
+}
