@@ -8,5 +8,15 @@
         "username": "dragonslayer",
         "password": "carbonara69",
         "id": 2
+    },
+    {
+        "username": "test",
+        "password": "test123",
+        "id": 3
+    },
+    {
+        "username": "newuser",
+        "password": "hejsan123",
+        "id": 4
     }
 ]

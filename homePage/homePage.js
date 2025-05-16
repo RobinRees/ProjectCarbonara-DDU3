@@ -13,6 +13,7 @@ password.placeholder = "Password"
 
 let startButton = main.appendChild(document.createElement("button"));
 startButton.id = "startButton";
+startButton.type = "button"
 startButton.textContent = "Start";
 
 
@@ -22,7 +23,7 @@ helpButton.textContent = "Help";
 
 
 let rulesDiv = document.createElement("div");
-rulesDiv.style.display = "none"; 
+rulesDiv.style.display = "none";
 rulesDiv.style.flexDirection = "column";
 rulesDiv.style.height = "150px";
 rulesDiv.style.width = "300px";
@@ -58,30 +59,31 @@ cancelButton.addEventListener("click", () => {
     rulesDiv.style.display = "none";
 });
 
-startButton.addEventListener("click", addUser())
+startButton.addEventListener("click", addUser)
 
 async function addUser() {
-    let checkUserInput = username.value
-    let checkPasswordInput = password.value
-    
-    if(checkUserInput === "" || checkPasswordInput === ""){
-        Alert ("Input field cannot be empty")
+    console.log("skall addera user");
+
+    let usernameInput = username.value
+    let passwordInput = password.value
+
+    if (usernameInput === "" || passwordInput === "") {
+        Alert("Input field cannot be empty")
     } else {
         let request = new Request("http://localhost:8000/signUp")
         let myOpt = {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({"username": checkUserInput, "password": checkPasswordInput})
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ "username": usernameInput, "password": passwordInput })
         }
 
         let response = await fetch(request, myOpt)
-        let checkLogin = await response.json()
+        let checkSignUp = await response.json()
 
-        if(response.status === 409) {
-            alert(checkLogin.error)
+        if (response.status === 409) {
+            alert(checkSignUp.error)
         }
         console.log("We did it")
-        
-    }
 
+    }
 }

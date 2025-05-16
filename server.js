@@ -27,6 +27,7 @@ async function handler(request) {
     if (url.pathname === "/signUp") {
         console.log("request to signUp");
         const userData = await request.json()
+        console.log(userData);
 
         if (request.method === "POST") {
             console.log("POST request recieved");
