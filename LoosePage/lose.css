@@ -1,0 +1,27 @@
+body {
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+}
+
+main {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#leaderboard {
+    width: 500px;
+    height: 500px;
+    background-color: rgb(43, 226, 98);
+}
+
+#personalBox {
+    width: 100%;
+    display: flex;
+}
+
+#personalBox button {
+    margin-left: auto;
+}
