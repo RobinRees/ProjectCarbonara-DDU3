@@ -11,17 +11,51 @@ main {
     align-items: center;
 }
 
+#randomApiImage {
+    width: 250px;
+    height: 250px;
+    border: 1px solid black;
+
+    display: flex; /* Ta bort dessa tre senare */
+    align-items: center; /* Ta bort dessa tre senare */
+    justify-content: center; /* Ta bort dessa tre senare */
+}
+
 #leaderboard {
     width: 500px;
-    height: 500px;
     background-color: rgb(43, 226, 98);
+    border: 1px solid black;
+    margin-top: 20px;
+    position: absolute;
+    display: none;
+}
+
+#leaderboard h1 {
+    text-align: center;
 }
 
 #personalBox {
     width: 100%;
     display: flex;
+
 }
 
 #personalBox button {
     margin-left: auto;
+}
+
+table {
+  width: 100%;
+  font-size: 14px;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 10px 15px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
 }
