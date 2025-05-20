@@ -26,8 +26,8 @@ async function createTopTen() {
         const nameCell = document.createElement("td");
         const scoreCell = document.createElement("td");
         if (player === undefined) {
-            nameCell.textContent = "undifined"
-            scoreCell.textContent = "undifined"
+            nameCell.textContent = "No user"
+            scoreCell.textContent = "No user"
             
         } else {
             nameCell.textContent = player.username;
