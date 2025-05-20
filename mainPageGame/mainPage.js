@@ -1,4 +1,3 @@
-import { createOptions } from "../utilities.js";
 
 const foodImageDiv = document.getElementById("foodImage");
 const choicesBox = document.getElementById("choicesBox");
@@ -10,7 +9,7 @@ console.log(lives);
 
 async function createChoices() {
     const currentMealData = await fetch("https://www.themealdb.com/api/json/v1/1/random.php").then(response => response.json());
-    const ingredientsData = await fetch("/database/ingredients.json", createOptions()).then(response => response.json());
+    const ingredientsData = await fetch("/database/ingredients.json").then(response => response.json());
 
     const meal = currentMealData.meals[0];
 
@@ -72,12 +71,6 @@ async function createChoices() {
             div.style.backgroundImage = `url("${choice.image}")`
             div.style.backgroundSize = "cover";
             div.style.backgroundRepeat = "no-repeat";
-            // const img = document.createElement("img");
-            img.src = choice.image;
-            img.style.width = "40px";
-            img.style.height = "40px";
-            img.style.marginTop = "5px"
-            div.appendChild(img);
             div.style.flexDirection = "column";
         }
 

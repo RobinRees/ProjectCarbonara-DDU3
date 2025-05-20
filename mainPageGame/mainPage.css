@@ -63,6 +63,12 @@ main {
 }
 
 
+#foodImage {
+    width: 350px;
+    height: 350px;
+    border: 1px solid black;
+}
+
 
 #recepieBox {
     padding-top: 60px;
