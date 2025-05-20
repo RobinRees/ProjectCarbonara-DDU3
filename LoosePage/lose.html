@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loss-Screen</title>
+    <link rel="stylesheet" href="lose.css">
+</head>
+<body>
+    <main>
+        <h1>You Lost</h1>
+        <div>
+            <div id="randomApiImage">
+                <p>Random API gif här?</p>
+            </div>
+            <div id="scoreBox">
+                <p>Your score: <span id="totalScore"></span></p>
+                <p>Your personal best: <span class="scorePersonalBest"></span></p>
+            </div>
+            <button type="button">Play again</button>
+            <button type="button" id="leaderboardButton">Leaderboard</button>
+        </div>
+
+        <div id="leaderboard">
+            <h1>Leaderboard</h1>
+            <div id="tabellBox">
+                <table id="tabell">
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>TotalScore</th>
+                    </tr>
+                </table>
+            </div>
+            <div id="personalBox">
+                <p>Your PB is <span class="scorePersonalBest">__</span> and you are nr <span id="personalSpot">__</span> on the leaderboard</p>
+                <button type="button" id="backButton">Back</button>
+            </div>
+        </div>
+    </main>
+    <script src="lose.js"></script>
+</body>
+</html>
