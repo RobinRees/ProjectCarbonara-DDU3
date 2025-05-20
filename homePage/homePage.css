@@ -1,0 +1,20 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#rulesDiv {
+    display: none;
+    flex-direction: column;
+    height: 150px;
+    width: 300px;
+    background-color: blanchedalmond;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    border: 2px solid black;
+}

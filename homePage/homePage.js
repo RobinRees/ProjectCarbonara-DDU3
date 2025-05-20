@@ -1,9 +1,4 @@
 const main = document.body.appendChild(document.createElement("main"));
-main.style.display = "flex";
-main.style.flexDirection = "column";
-main.style.alignItems = "center";
-main.style.justifyContent = "center";
-main.style.gap = "10px";
 
 let username = main.appendChild(document.createElement("input"));
 username.placeholder = "Username"
@@ -23,6 +18,7 @@ helpButton.textContent = "Help";
 
 
 let rulesDiv = document.createElement("div");
+rulesDiv.id = "rulesDiv"
 rulesDiv.style.display = "none";
 rulesDiv.style.flexDirection = "column";
 rulesDiv.style.height = "150px";
