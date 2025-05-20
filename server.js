@@ -1,7 +1,6 @@
 
-import { createOptions } from "./utilities.js";
-import { checkContentType } from "./utilities.js";
-import { createNewUser } from "./utilities.js";
+import { checkUserCredentials, createOptions, checkContentType, createNewUser } from "./utilities.js";
+
 
 async function handler(request) {
     const url = new URL(request.url);
@@ -50,10 +49,31 @@ async function handler(request) {
             return new Response(JSON.stringify({ error: "Method not allowed" }), createOptions(400))
         }
     }
+
+    if (url.pathname === "/logIn") {
+        console.log("request to log in page");
+        const loginData = await request.json()
+        console.log(loginData);
+
+        if (request.method === "POST") {
+            if (checkContentType(contentType)) {
+
+                const userExists = await checkUserCredentials(loginData)
+
+                if (userExists) {
+                    return new Response(JSON.stringify({ message: "Login Successful" }), createOptions())
+                } else {
+                    return new Response(JSON.stringify({ error: "User does not exist" }), createOptions(404))
+                }
+            } else {
+                return new Response(JSON.stringify({ error: "Bad Content-Type" }), createOptions(400));
+            }
+        } else {
+            return new Response(JSON.stringify({ error: "Method not allowed" }), createOptions(400))
+        }
+    }
     console.log("ERROR");
-
     return new Response(JSON.stringify({ error: "Bad pathname or Method not allowed" }), createOptions(400))
-
 }
 
 
