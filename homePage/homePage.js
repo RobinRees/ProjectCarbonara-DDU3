@@ -123,7 +123,7 @@ async function createNewProfile() {
         let response = await fetch(request, myOpt)
         let checkSignUp = await response.json()
 
-        if (response.status === 404) {
+        if (response.status === 409) {
             alert(checkSignUp.error)
         }
         if (response.status === 200){
