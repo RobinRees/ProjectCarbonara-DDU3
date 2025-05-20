@@ -26,6 +26,7 @@ export class User { // Om vi använder get/set får vi objekt med nycklar som: _
         }
         this.username = data.username
         this.password = data.password
+        this.score = 0;
 
         const ids = scoreboard.map(user => user.id)
         if (ids.length === 0) {
