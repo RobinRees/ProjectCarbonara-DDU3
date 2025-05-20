@@ -44,9 +44,10 @@ main {
     margin-left: auto;
 }
 
-table {
-  width: 100%;
+#tabell {
+  display: grid;
   font-size: 14px;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 th, td {

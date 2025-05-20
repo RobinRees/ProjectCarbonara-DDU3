@@ -9,22 +9,19 @@ async function createTopTen() {
   
     table.innerHTML = ""
     table.innerHTML = `
-                    <tr>
-                        <th>Rank</th>
-                        <th>Name</th>
-                        <th>TotalScore</th>
-                    </tr>
+                    <div id="rankColumn">Rank</div>
+                    <div id="nameColumn">Name</div>
+                    <div id="scoreColumn">TotalScore</div>
                     `
 
     for (let i = 0; i <= 9; i++) {
         const player = topPlayers[i];
-        const row = document.createElement("tr");
         
-        const rankCell = document.createElement("td");
+        const rankCell = document.createElement("div");
         rankCell.textContent = i + 1;
 
-        const nameCell = document.createElement("td");
-        const scoreCell = document.createElement("td");
+        const nameCell = document.createElement("div");
+        const scoreCell = document.createElement("div");
         if (player === undefined) {
             nameCell.textContent = "No user"
             scoreCell.textContent = "No user"
@@ -35,10 +32,9 @@ async function createTopTen() {
         }
 
 
-        row.appendChild(rankCell);
-        row.appendChild(nameCell);
-        row.appendChild(scoreCell);
-        table.appendChild(row);
+        table.appendChild(rankCell);
+        table.appendChild(nameCell);
+        table.appendChild(scoreCell);
     }
 }
 
