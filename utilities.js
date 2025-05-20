@@ -14,7 +14,6 @@ export function checkContentType(contentType) {
 }
 
 
-
 export class User { // Om vi använder get/set får vi objekt med nycklar som: _.username
     constructor(data) {
         const JSONscoreboard = Deno.readTextFileSync("database/scoreboard.json");
@@ -58,4 +57,13 @@ export async function createNewUser(userData) {
         return { addedUser: newUser };
 
     }
+}
+
+export async function checkUserCredentials(loginData) {
+    const JSONusers = Deno.readTextFileSync("database/scoreboard.json");
+    let users = JSON.parse(JSONusers);
+    return users.some(x => {
+        x.name === loginData.name &&
+            x.password === loginData.password
+    });
 }
