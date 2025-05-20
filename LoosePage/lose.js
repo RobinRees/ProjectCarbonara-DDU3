@@ -1,17 +1,38 @@
-function createTopTen() {
-    const table = document.getElementById("tabell");
+async function createTopTen() {
 
-    for (let i = 1; i <= 10; i++) {
+    const table = document.getElementById("tabell");
+    const response = await fetch("../database/scoreboard.json")
+    const scoreboard = await response.json();
+
+
+    let topPlayers = scoreboard.sort((a, b) => b.score - a.score);
+  
+    table.innerHTML = ""
+    table.innerHTML = `
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>TotalScore</th>
+                    </tr>
+                    `
+
+    for (let i = 0; i <= 9; i++) {
+        const player = topPlayers[i];
         const row = document.createElement("tr");
         
         const rankCell = document.createElement("td");
-        rankCell.textContent = i;
+        rankCell.textContent = i + 1;
 
         const nameCell = document.createElement("td");
-        nameCell.textContent = "Name";
-
         const scoreCell = document.createElement("td");
-        scoreCell.textContent = "Number";
+        if (player === undefined) {
+            nameCell.textContent = "undifined"
+            scoreCell.textContent = "undifined"
+            
+        } else {
+            nameCell.textContent = player.username;
+            scoreCell.textContent = player.score;
+        }
 
 
         row.appendChild(rankCell);
@@ -21,13 +42,18 @@ function createTopTen() {
     }
 }
 
-createTopTen();
 
 const leaderboardButton = document.getElementById("leaderboardButton");
 const leaderboard = document.getElementById("leaderboard");
 
 leaderboardButton.addEventListener("click", () => {
     leaderboard.style.display = "block";
+
+
+
+    createTopTen();
+
+    
 });
 
 const backButton = document.getElementById("backButton");
