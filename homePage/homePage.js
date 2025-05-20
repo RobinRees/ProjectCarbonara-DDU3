@@ -80,10 +80,12 @@ async function logIn() {
         let response = await fetch(request, myOpt)
         let checkSignUp = await response.json()
 
-        if (response.status === 409) {
+        if (response.status === 404) {
             alert(checkSignUp.error)
         }
-        console.log("We did it")
+       if (response.status === 200){
+            window.location.href = "../mainPageGame/mainPage.html"
+        }
 
     }
 }
@@ -121,7 +123,7 @@ async function createNewProfile() {
         let response = await fetch(request, myOpt)
         let checkSignUp = await response.json()
 
-        if (response.status === 409) {
+        if (response.status === 404) {
             alert(checkSignUp.error)
         }
         if (response.status === 200){
