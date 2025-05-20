@@ -59,13 +59,54 @@ cancelButton.addEventListener("click", () => {
     rulesDiv.style.display = "none";
 });
 
-startButton.addEventListener("click", addUser)
+startButton.addEventListener("click", logIn)
 
-async function addUser() {
+async function logIn() {
     console.log("skall addera user");
 
     let usernameInput = username.value
     let passwordInput = password.value
+
+    if (usernameInput === "" || passwordInput === "") {
+        Alert("Input field cannot be empty")
+    } else {
+        let request = new Request("http://localhost:8000/logIn")
+        let myOpt = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ "username": usernameInput, "password": passwordInput })
+        }
+
+        let response = await fetch(request, myOpt)
+        let checkSignUp = await response.json()
+
+        if (response.status === 409) {
+            alert(checkSignUp.error)
+        }
+        console.log("We did it")
+
+    }
+}
+
+let signUp = main.appendChild(document.createElement("input"));
+signUp.placeholder = "Sign Up"
+
+let createPassword = main.appendChild(document.createElement("input"));
+createPassword.placeholder = "Create Password"
+
+let createPlayer = main.appendChild(document.createElement("button"));
+createPlayer.id = "createPlayer";
+createPlayer.type = "button"
+createPlayer.textContent = "Create and start Playing";
+
+
+createPlayer.addEventListener("click", createNewProfile)
+
+async function createNewProfile() {
+    console.log("skall addera user");
+
+    let usernameInput = signUp.value
+    let passwordInput = createPassword.value
 
     if (usernameInput === "" || passwordInput === "") {
         Alert("Input field cannot be empty")
