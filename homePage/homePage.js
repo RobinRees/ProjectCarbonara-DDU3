@@ -124,7 +124,9 @@ async function createNewProfile() {
         if (response.status === 409) {
             alert(checkSignUp.error)
         }
-        console.log("We did it")
+        if (response.status === 200){
+            window.location.href = "../mainPageGame/mainPage.html"
+        }
 
     }
 }
