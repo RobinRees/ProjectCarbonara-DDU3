@@ -1,13 +1,16 @@
+import { createOptions } from "../utilities.js";
+
 const foodImageDiv = document.getElementById("foodImage");
 const choicesBox = document.getElementById("choicesBox");
 let correctGuesses = 0;
 const allCorrect = 3;
 let lives = 9;
 
+console.log(lives);
 
 async function createChoices() {
     const currentMealData = await fetch("https://www.themealdb.com/api/json/v1/1/random.php").then(response => response.json());
-    const ingredientsData = await fetch("/database/ingredients.json").then(response => response.json());
+    const ingredientsData = await fetch("/database/ingredients.json", createOptions()).then(response => response.json());
 
     const meal = currentMealData.meals[0];
 
@@ -18,12 +21,14 @@ async function createChoices() {
 
     const img = document.createElement("img");
     img.src = meal.strMealThumb;
+    console.log(meal.strMealThumb);
+
     img.style.width = "100%";
     img.style.height = "100%";
     img.style.objectFit = "cover";
     foodImageDiv.appendChild(img);
-    
-    
+
+
     const ingredientsArray = [];
     for (let i = 1; i <= 20; i++) {
         let ingredientName = "strIngredient" + i;
@@ -64,7 +69,10 @@ async function createChoices() {
         div.appendChild(text);
 
         if (choice.image) {
-            const img = document.createElement("img");
+            div.style.backgroundImage = `url("${choice.image}")`
+            div.style.backgroundSize = "cover";
+            div.style.backgroundRepeat = "no-repeat";
+            // const img = document.createElement("img");
             img.src = choice.image;
             img.style.width = "40px";
             img.style.height = "40px";
@@ -78,7 +86,9 @@ async function createChoices() {
             div.classList.add("clicked");
 
             if (choice.isCorrect) {
-                div.style.border = "3px solid green";
+                div.style.border = "3px solid lightGreen";
+                div.style.backgroundColor = "lightGreen"
+
                 correctGuesses++;
                 if (correctGuesses === allCorrect) {
                     document.getElementById("nextButton").style.display = "block";
@@ -88,10 +98,11 @@ async function createChoices() {
                     <p>${mealRecipie}</p>
                     `;
                     foodTitle.style.display = "block"
-                    
+
                 }
             } else {
-                div.style.border = "3px solid red";
+                div.style.border = "3px solid tomato";
+                div.style.backgroundColor = "tomato"
                 lives--
                 livesBox.innerHTML = `Life left: ${lives}`;
                 if (lives === 0) {
@@ -109,13 +120,13 @@ async function createChoices() {
 function getRandomItem(array, count) {
     const result = [];
     while (result.length < count) {
-      const item = array[Math.floor(Math.random() * array.length)];
-      if (!result.includes(item)) {
-        result.push(item);
-      }
+        const item = array[Math.floor(Math.random() * array.length)];
+        if (!result.includes(item)) {
+            result.push(item);
+        }
     }
     return result;
-  }
+}
 
 function shuffleArray(array) {
     return array.sort(() => Math.random() - 0.5);

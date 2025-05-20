@@ -10,21 +10,21 @@ body {
 main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    padding: 100px 50px 0px 50px;
 }
 
 
 
 
 #choicesBox {
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    height: 445px;
     border: solid black 3px;
-    margin-top: 50px;
-
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    gap: 5px;
+    gap: 10px;
+    padding: 10px;
 }
 
 .choice {
@@ -32,7 +32,7 @@ main {
     border: 1px solid #333;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
 }
 
 #foodTitle {
@@ -49,12 +49,24 @@ main {
 }
 
 .choice p {
-    margin: 0px;
+    margin: 10px;
     text-align: center;
+    background-color: white;
+    font-weight: bold;
+    padding: 0px;
+    border: 1px solid black;
 }
+
 
 #foodTitle {
     display: none;
+}
+
+
+
+#recepieBox {
+    padding-top: 60px;
+    width: 400px;
 }
 
 #left {
@@ -62,17 +74,12 @@ main {
     justify-content: center;
 }
 
-#recepieBox {
-    padding-top: 60px;
-    width: 400px;
-
-}
-
 #middle {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 30px;
 }
 
 #right {
@@ -94,4 +101,12 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#livesBox {
+    padding: 10px 50px;
+    background-color: goldenrod;
+    font-weight: bold;
+    border-radius: 50px;
+    font-size: 25px;
 }
