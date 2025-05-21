@@ -1,15 +1,26 @@
 
 const foodImageDiv = document.getElementById("foodImage");
 const choicesBox = document.getElementById("choicesBox");
+const showScore = document.getElementById("score");
 let correctGuesses = 0;
 const allCorrect = 3;
 let lives = 9;
+let currentScore = 0;
+showScore.innerHTML = `Current score: ${currentScore}`
+
+
+const player = JSON.parse(localStorage.getItem("player"));
+console.log(player);
+
+console.log(player.username); // "mordor"
+document.getElementById("usernameDisplay").textContent = `Current player: ${player.username}`;
 
 console.log(lives);
 
 async function createChoices() {
+    const player = JSON.parse(localStorage.getItem("player")); // SPELARE SOM SPARAS AV LOGIN/SIGNUP
     const currentMealData = await fetch("https://www.themealdb.com/api/json/v1/1/random.php").then(response => response.json());
-    const ingredientsData = await fetch("/database/ingredients.json").then(response => response.json());
+    const ingredientsData = await fetch("../database/ingredients.json").then(response => response.json());
 
     const meal = currentMealData.meals[0];
 
@@ -79,10 +90,11 @@ async function createChoices() {
             div.classList.add("clicked");
 
             if (choice.isCorrect) {
-                div.style.border = "3px solid lightGreen";
                 div.style.backgroundColor = "lightGreen"
 
                 correctGuesses++;
+                currentScore = currentScore + 10;
+                showScore.innerHTML = `Current score: ${currentScore}`
                 if (correctGuesses === allCorrect) {
                     document.getElementById("nextButton").style.display = "block";
                     document.getElementById("foodTitle").textContent = mealName;
@@ -92,14 +104,21 @@ async function createChoices() {
                     `;
                     foodTitle.style.display = "block"
 
+
                 }
             } else {
-                div.style.border = "3px solid tomato";
                 div.style.backgroundColor = "tomato"
                 lives--
                 livesBox.innerHTML = `Life left: ${lives}`;
                 if (lives === 0) {
-                    looseScreen.style.display = "flex"; //Detta är loose screen, kanske en endpoint istället
+                    player.score = currentScore;
+                    fetch("http://localhost:8000/completedGame", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ id: player.id, newScore: player.score })
+                    });
+                    window.location.href = "../LoosePage/lose.html"
+
                 }
             }
         });

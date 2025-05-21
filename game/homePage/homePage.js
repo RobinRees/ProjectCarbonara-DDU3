@@ -34,7 +34,7 @@ cancelButton.addEventListener("click", () => {
 });
 
 startButton.addEventListener("click", logIn)
-
+const player = JSON.parse(localStorage.getItem("player"));
 async function logIn() {
     console.log("skall addera user");
 
@@ -52,12 +52,27 @@ async function logIn() {
         }
 
         let response = await fetch(request, myOpt)
-        let checkSignUp = await response.json()
+        let loggedInUser = await response.json()
+        console.log(loggedInUser);
+
+        console.log(response.status);
+
 
         if (response.status === 404) {
-            alert(checkSignUp.error)
+            console.log("bad");
+
+            alert("User not found")
         }
-       if (response.status === 200){
+        if (response.status === 200) {
+            console.log("good");
+
+            // Spara användardata (UTAN LÖSENORD) i localStorage
+            localStorage.setItem("player", JSON.stringify({
+                username: usernameInput,
+                id: loggedInUser.id,
+                score: loggedInUser.score
+            }));
+            await new Promise(resolve => setTimeout(resolve, 100));
             window.location.href = "../mainPageGame/mainPage.html"
         }
 
@@ -84,12 +99,18 @@ async function createNewProfile() {
         }
 
         let response = await fetch(request, myOpt)
-        let checkSignUp = await response.json()
+        let newUser = await response.json()
 
         if (response.status === 409) {
-            alert(checkSignUp.error)
+            alert(newUser.error)
         }
-        if (response.status === 200){
+        if (response.status === 200) {
+
+            localStorage.setItem("player", JSON.stringify({
+                username: usernameInput,
+                id: newUser.id,
+                score: newUser.score
+            }));
             window.location.href = "../mainPageGame/mainPage.html"
         }
 
