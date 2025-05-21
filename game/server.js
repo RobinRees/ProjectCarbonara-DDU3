@@ -101,7 +101,7 @@ async function handler(request) {
 
     }
     return await serveDir(request, {
-        fsRoot: "./game",
+        fsRoot: ".",
         urlRoot: "",       // <- inga prefix krävs i URL
         showDirListing: false,
         enableCors: true,
