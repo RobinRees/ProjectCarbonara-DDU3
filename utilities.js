@@ -14,7 +14,7 @@ export function checkContentType(contentType) {
 }
 
 
-export class User { // Om vi använder get/set får vi objekt med nycklar som: _.username
+export class User {
     constructor(data) {
         const JSONscoreboard = Deno.readTextFileSync("database/scoreboard.json");
         let scoreboard = JSON.parse(JSONscoreboard);
