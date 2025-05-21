@@ -1,9 +1,18 @@
 main {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#bigLeft, #bigRigth {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+#littleLeft, #littleRight {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
 }
 
 #rulesDiv {
@@ -17,4 +26,14 @@ main {
     padding: 10px;
     position: relative;
     border: 2px solid black;
+}
+
+#rulesText {
+    margin: 0px;
+}
+
+#cancelButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }

@@ -1,51 +1,34 @@
-const main = document.body.appendChild(document.createElement("main"));
+let username = document.querySelector("#username");
 
-let username = main.appendChild(document.createElement("input"));
-username.placeholder = "Username"
+let password = document.querySelector("#password");
 
-let password = main.appendChild(document.createElement("input"));
-password.placeholder = "Password"
-
-let startButton = main.appendChild(document.createElement("button"));
-startButton.id = "startButton";
-startButton.type = "button"
-startButton.textContent = "Start";
+let startButton = document.querySelector("#startButton");
 
 
-let helpButton = main.appendChild(document.createElement("button"));
+
+let helpButton = bigLeft.appendChild(document.createElement("button"));
 helpButton.id = "helpHowToPlay";
 helpButton.textContent = "Help";
 
 
 let rulesDiv = document.createElement("div");
 rulesDiv.id = "rulesDiv"
-rulesDiv.style.display = "none";
-rulesDiv.style.flexDirection = "column";
-rulesDiv.style.height = "150px";
-rulesDiv.style.width = "300px";
-rulesDiv.style.background = "lightgreen";
-rulesDiv.style.justifyContent = "space-between";
-rulesDiv.style.alignItems = "center";
-rulesDiv.style.padding = "10px";
-rulesDiv.style.position = "relative";
-rulesDiv.style.border = "2px solid green";
 
 
 let rulesText = document.createElement("p");
+rulesText.id = "rulesText"
 rulesText.textContent = "Här är reglerna för spelet:";
-rulesText.style.margin = "0";
 
 
 let cancelButton = document.createElement("button");
+cancelButton.id = "cancelButton"
 cancelButton.textContent = "X";
-cancelButton.style.position = "absolute";
-cancelButton.style.top = "5px";
-cancelButton.style.right = "5px";
+
 
 rulesDiv.appendChild(cancelButton);
 rulesDiv.appendChild(rulesText);
 
-main.appendChild(rulesDiv);
+bigLeft.appendChild(rulesDiv);
 
 helpButton.addEventListener("click", () => {
     rulesDiv.style.display = "flex";
@@ -86,16 +69,11 @@ async function logIn() {
     }
 }
 
-let signUp = main.appendChild(document.createElement("input"));
-signUp.placeholder = "Sign Up"
+let signUp = document.querySelector("#signUp");
 
-let createPassword = main.appendChild(document.createElement("input"));
-createPassword.placeholder = "Create Password"
+let createPassword = document.querySelector("#createPassword");
 
-let createPlayer = main.appendChild(document.createElement("button"));
-createPlayer.id = "createPlayer";
-createPlayer.type = "button"
-createPlayer.textContent = "Create and start Playing";
+let createPlayer = document.querySelector("#createPlayer");
 
 
 createPlayer.addEventListener("click", createNewProfile)
