@@ -1,17 +1,13 @@
-let username = document.querySelector("#username");
+const username = document.querySelector("#username");
+const password = document.querySelector("#password");
+const startButton = document.querySelector("#startButton");
+const signUp = document.querySelector("#signUp");
+const createPassword = document.querySelector("#createPassword");
+const createPlayer = document.querySelector("#createPlayer");
+const helpButton = document.querySelector("#helpButton");
+const littleLeft = document.querySelector("#littleLeft");
 
-let password = document.querySelector("#password");
-
-let startButton = document.querySelector("#startButton");
-
-
-
-let helpButton = bigLeft.appendChild(document.createElement("button"));
-helpButton.id = "helpHowToPlay";
-helpButton.textContent = "Help";
-
-
-let rulesDiv = document.createElement("div");
+const rulesDiv = document.createElement("div");
 rulesDiv.id = "rulesDiv"
 
 
@@ -27,8 +23,7 @@ cancelButton.textContent = "X";
 
 rulesDiv.appendChild(cancelButton);
 rulesDiv.appendChild(rulesText);
-
-bigLeft.appendChild(rulesDiv);
+littleLeft.appendChild(rulesDiv);
 
 helpButton.addEventListener("click", () => {
     rulesDiv.style.display = "flex";
@@ -68,12 +63,6 @@ async function logIn() {
 
     }
 }
-
-let signUp = document.querySelector("#signUp");
-
-let createPassword = document.querySelector("#createPassword");
-
-let createPlayer = document.querySelector("#createPlayer");
 
 
 createPlayer.addEventListener("click", createNewProfile)
