@@ -83,7 +83,7 @@ export async function retrieveUserByName(loginData) {
 
 export async function updateUserScore(userInfo) {
 
-    const id = userInfo.id;
+    const id = Number(userInfo.id);
     const newScore = userInfo.newScore;
 
     // Hämta alla användare

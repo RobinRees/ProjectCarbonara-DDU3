@@ -85,7 +85,7 @@ async function createChoices() {
             div.style.flexDirection = "column";
         }
 
-        div.addEventListener("click", () => {
+        div.addEventListener("click", async () => {
             if (div.classList.contains("clicked")) return;
             div.classList.add("clicked");
 
@@ -112,7 +112,7 @@ async function createChoices() {
                 livesBox.innerHTML = `Life left: ${lives}`;
                 if (lives === 0) {
                     player.score = currentScore;
-                    fetch("http://localhost:8000/completedGame", {
+                    await fetch("http://localhost:8000/completedGame", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ id: player.id, newScore: player.score })

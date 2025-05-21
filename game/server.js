@@ -95,8 +95,8 @@ async function handler(request) {
         if (checkContentType(contentType)) {
 
             const userInfo = await request.json();
-            updateUserScore(userInfo);
-            return new Response("Score updated", { status: 200 });
+            await updateUserScore(userInfo);
+            return new Response("Score updated", createOptions(200));
         }
 
     }
