@@ -34,7 +34,7 @@ cancelButton.addEventListener("click", () => {
 });
 
 startButton.addEventListener("click", logIn)
-const player = JSON.parse(localStorage.getItem("player"));
+
 async function logIn() {
     console.log("skall addera user");
 

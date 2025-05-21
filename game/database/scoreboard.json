@@ -1,3 +1,26 @@
 [
-  
+  {
+    "username": "Klas",
+    "password": "Klas",
+    "score": 80,
+    "id": 1
+  },
+  {
+    "username": "dsfh",
+    "password": "dsfh",
+    "score": 50,
+    "id": 2
+  },
+  {
+    "username": "GHS",
+    "password": "FGH",
+    "score": 10,
+    "id": 3
+  },
+  {
+    "username": "sag",
+    "password": "sag",
+    "score": 60,
+    "id": 4
+  }
 ]
