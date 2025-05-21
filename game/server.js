@@ -1,5 +1,12 @@
-
-import { checkUserCredentials, createOptions, checkContentType, createNewUser } from "./utilities.js";
+import { serveDir, serveFile } from "jsr:@std/http/file-server";
+import {
+    checkUserCredentials,
+    createOptions,
+    checkContentType,
+    createNewUser,
+    updateUserScore,
+    retrieveUserByName
+} from "./utilities.js";
 
 
 async function handler(request) {
@@ -53,16 +60,25 @@ async function handler(request) {
     if (url.pathname === "/logIn") {
         console.log("request to log in page");
         const loginData = await request.json()
-        console.log(loginData);
 
         if (request.method === "POST") {
             if (checkContentType(contentType)) {
+                console.log("HUND");
 
-                const userExists = await checkUserCredentials(loginData)
+                const userExists = await checkUserCredentials(loginData);
+                console.log(loginData, "rad 69");
+                console.log(userExists);
+
+
+                const user = await retrieveUserByName(loginData);
+                console.log(user, "rad 70 server");
 
                 if (userExists) {
-                    return new Response(JSON.stringify({ message: "Login Successful" }), createOptions())
+                    console.log("användaren finns");
+
+                    return new Response(JSON.stringify(user), createOptions())
                 } else {
+                    console.log("användaren finns EJ");
                     return new Response(JSON.stringify({ error: "User does not exist" }), createOptions(404))
                 }
             } else {
@@ -73,7 +89,23 @@ async function handler(request) {
         }
     }
     console.log("ERROR");
-    return new Response(JSON.stringify({ error: "Bad pathname or Method not allowed" }), createOptions(400))
+
+
+    if (url.pathname === "/completedGame" && request.method === "POST") {
+        if (checkContentType(contentType)) {
+
+            const userInfo = await request.json();
+            updateUserScore(userInfo);
+            return new Response("Score updated", { status: 200 });
+        }
+
+    }
+    return await serveDir(request, {
+        fsRoot: "./game",
+        urlRoot: "",       // <- inga prefix krävs i URL
+        showDirListing: false,
+        enableCors: true,
+    });
 }
 
 

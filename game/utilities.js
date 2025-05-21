@@ -39,7 +39,7 @@ export class User { // Om vi använder get/set får vi objekt med nycklar som: _
 export async function createNewUser(userData) {
     console.log(userData);
 
-    const newUser = new User(userData)
+    const newUser = new User(userData);
     console.log(newUser, "rad 43");
 
     const JSONscoreboard = Deno.readTextFileSync("database/scoreboard.json");
@@ -53,7 +53,7 @@ export async function createNewUser(userData) {
         return { nameTaken: "Username already exists" }
     } else {
         scoreboard.push(newUser)
-        Deno.writeTextFileSync("database/scoreboard.json", JSON.stringify(scoreboard))
+        Deno.writeTextFileSync("database/scoreboard.json", JSON.stringify(scoreboard, null, 2))
         return { addedUser: newUser };
 
     }
@@ -62,8 +62,37 @@ export async function createNewUser(userData) {
 export async function checkUserCredentials(loginData) {
     const JSONusers = Deno.readTextFileSync("database/scoreboard.json");
     let users = JSON.parse(JSONusers);
+    console.log(users);
+
     return users.some(x => {
-        x.name === loginData.name &&
+        return x.username === loginData.username &&
             x.password === loginData.password
     });
+}
+
+export async function retrieveUserByName(loginData) {
+    console.log(loginData, "rad 72 utilities");
+    console.log(loginData.username);
+
+    const JSONusers = Deno.readTextFileSync("database/scoreboard.json");
+    let users = JSON.parse(JSONusers);
+    return users.find(x => x.username === loginData.username);
+}
+
+
+
+export async function updateUserScore(userInfo) {
+
+    const id = userInfo.id;
+    const newScore = userInfo.newScore;
+
+    // Hämta alla användare
+    const users = JSON.parse(await Deno.readTextFile("database/scoreboard.json"));
+
+    // Uppdatera rätt användares score
+    const user = users.find(u => u.id === id);
+    if (newScore > user.score) {
+        user.score = newScore;
+    }
+    await Deno.writeTextFile("database/scoreboard.json", JSON.stringify(users, null, 2));
 }

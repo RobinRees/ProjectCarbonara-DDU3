@@ -38,6 +38,7 @@ main {
 #foodTitle {
     padding: 0;
     margin: 0;
+    text-align: center;
 }
 
 #nextButton {
@@ -49,14 +50,25 @@ main {
 }
 
 .choice p {
-    margin: 10px;
+    margin: 0;
     text-align: center;
-    background-color: white;
+    background-color: black;
     font-weight: bold;
-    padding: 0px;
     border: 1px solid black;
+    color: white;
+    width: 100%;
 }
 
+#usernameDisplay {
+    background-color: goldenrod;
+    display: inline;
+    width: fit-content;
+    padding: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    position: absolute;
+    top: 20px;
+}
 
 #foodTitle {
     display: none;
@@ -71,13 +83,16 @@ main {
 
 
 #recepieBox {
-    padding-top: 60px;
     width: 400px;
+    overflow-y: scroll;
+    height: 345px;
+    /* border: 1px solid black; */
+    padding: 0 15px;
 }
 
 #left {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 }
 
 #middle {
