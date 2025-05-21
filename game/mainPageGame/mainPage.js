@@ -112,12 +112,13 @@ async function createChoices() {
                 livesBox.innerHTML = `Life left: ${lives}`;
                 if (lives === 0) {
                     player.score = currentScore;
-                    looseScreen.style.display = "flex"; //Detta är loose screen, kanske en endpoint istället
                     fetch("http://localhost:8000/completedGame", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ id: player.id, newScore: player.score })
                     });
+                    window.location.href = "../LoosePage/lose.html"
+
                 }
             }
         });

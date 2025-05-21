@@ -22,7 +22,7 @@
   {
     "username": "yoman",
     "password": "nej123",
-    "score": 0,
+    "score": 50,
     "id": 5
   },
   {
@@ -36,5 +36,11 @@
     "password": "kallebra",
     "score": 40,
     "id": 7
+  },
+  {
+    "username": "batman",
+    "password": "robinhood123",
+    "score": 0,
+    "id": 8
   }
 ]
