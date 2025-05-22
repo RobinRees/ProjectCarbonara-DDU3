@@ -1,37 +1,52 @@
+body{
+    margin: 20px;
+    background-color: aqua;
+}
+
 main {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    background-color: azure;
 }
 
-#bigLeft, #bigRigth {
+#bigLeft, #bigRight {
     display: flex;
     flex-direction: row;
+    width: 50vw;
+    justify-content: center;
+    align-items: center;
 }
 
-#littleLeft, #littleRight {
+#littleLeft, #littleRight, #rulesDiv {
     display: flex;
     flex-direction: column;
-}
-
-#rulesDiv {
-    display: none;
-    flex-direction: column;
-    background-color: blanchedalmond;
-    justify-content: space-between;
+    background-color: chocolate;
+    height: 25vw;
+    width: 25vw;
+    border-radius: 50%;
     align-items: center;
-    padding: 10px;
-    position: relative;
-    border: 2px solid black;
-    height: 10px;
+    justify-content: center;
 }
 
-#rulesText {
-    margin: 0px;
+#littleLeft h1, #littleRight h1{
+    color: white;
+    text-align: center;
+    border: 1px solid black;
+    height: 5vw;
+    width: 10vw;
+    margin: 0;
+    padding: 0;
 }
 
-#cancelButton {
-    position: absolute;
-    top: 5px;
-    right: 5px;
+body h1{
+    color: white;
+    text-align: center;
+    border: 1px solid black;
+}
+
+button, input{
+    text-align: center;
+    height: 5vw;
+    width: 10vw;
+    border-radius: 50%;
 }
