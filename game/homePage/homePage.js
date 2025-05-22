@@ -6,36 +6,8 @@ const startButton = document.querySelector("#startButton");
 const signUp = document.querySelector("#signUp");
 const createPassword = document.querySelector("#createPassword");
 const createPlayer = document.querySelector("#createPlayer");
-const helpButton = document.querySelector("#helpButton");
 const littleLeft = document.querySelector("#littleLeft");
 
-const rulesDiv = document.createElement("div");
-rulesDiv.id = "rulesDiv"
-
-
-let rulesText = document.createElement("p");
-rulesText.id = "rulesText"
-rulesText.textContent = "Här är reglerna för spelet:";
-
-
-let cancelButton = document.createElement("button");
-cancelButton.id = "cancelButton"
-cancelButton.textContent = "X";
-
-
-rulesDiv.appendChild(cancelButton);
-rulesDiv.appendChild(rulesText);
-littleLeft.appendChild(rulesDiv);
-
-helpButton.addEventListener("click", () => {
-    rulesDiv.style.display = "flex";
-});
-
-cancelButton.addEventListener("click", () => {
-    rulesDiv.style.display = "none";
-});
-
-startButton.addEventListener("click", logIn)
 async function logIn() {
 
     console.log("skall addera user");
@@ -65,14 +37,11 @@ async function logIn() {
         }
         if (response.status === 200) {
             console.log("Seccessful login");
-            window.location.href = "/game" // obs måste ändras
+            window.location.href = "/game" 
 
         }
     }
 }
-
-
-createPlayer.addEventListener("click", createNewProfile)
 
 async function createNewProfile() {
     console.log("skall addera user");
@@ -104,3 +73,6 @@ async function createNewProfile() {
 
     }
 }
+
+startButton.addEventListener("click", logIn)
+createPlayer.addEventListener("click", createNewProfile)
