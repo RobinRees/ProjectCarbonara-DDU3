@@ -141,4 +141,4 @@ async function handler(request) {
 
 
 
-Deno.serve({port: 8500}, handler );
+Deno.serve(handler );

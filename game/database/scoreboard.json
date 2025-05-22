@@ -152,7 +152,14 @@
     "username": "dfghkfghj",
     "password": "hgfjkghk",
     "score": 0,
-    "loggedIn": true,
+    "loggedIn": false,
     "id": 22
+  },
+  {
+    "username": "Greasd",
+    "password": "dfsg",
+    "score": 50,
+    "loggedIn": false,
+    "id": 23
   }
 ]
