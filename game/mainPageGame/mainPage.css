@@ -14,8 +14,6 @@ main {
 }
 
 
-
-
 #choicesBox {
     width: 100%;
     height: 445px;
@@ -59,16 +57,35 @@ main {
     width: 100%;
 }
 
-#usernameDisplay {
+#playerInfo {
     background-color: goldenrod;
-    display: inline;
     width: fit-content;
     padding: 10px;
     font-size: 22px;
     font-weight: bold;
     position: absolute;
     top: 20px;
+    display: grid;
+    gap: 10px;
 }
+
+#logOutButton {
+    background-color: goldenrod;
+    border-style: none;
+    outline: none;
+    padding: 10px;
+    margin-top: 10px;
+    width: fit-content;
+    border: 0px solid black;
+    font-size: 14px;
+}
+
+#logOutButton:hover {
+    cursor: pointer;
+    background-color: rgb(193, 146, 26);
+    color: white;
+}
+
 
 #foodTitle {
     display: none;

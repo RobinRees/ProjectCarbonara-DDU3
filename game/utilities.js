@@ -1,3 +1,6 @@
+
+
+
 export function createOptions(status = 200) {
     return {
         status: status,
@@ -26,7 +29,7 @@ export class User {
         this.username = data.username
         this.password = data.password
         this.score = 0;
-
+        this.loggedIn = false;
         const ids = scoreboard.map(user => user.id)
         if (ids.length === 0) {
             this.id = 1
@@ -37,7 +40,6 @@ export class User {
 }
 
 export async function createNewUser(userData) {
-    console.log(userData);
 
     const newUser = new User(userData);
     console.log(newUser, "rad 43");
@@ -81,18 +83,49 @@ export async function retrieveUserByName(loginData) {
 
 
 
-export async function updateUserScore(userInfo) {
+export async function updateUserScore(newScore) {
+    const users = JSON.parse(Deno.readTextFileSync("database/scoreboard.json"))
+    console.log(newScore, "rad 86");
 
-    const id = Number(userInfo.id);
-    const newScore = userInfo.newScore;
+    const user = users.find(u => u.loggedIn == true);
+    console.log(user, "rad 89");
 
-    // Hämta alla användare
+
+    if (newScore > user.score) {
+        user.score = Number(newScore);
+    }
+
+    await Deno.writeTextFile("database/scoreboard.json", JSON.stringify(users, null, 2));
+}
+
+
+
+export async function getLoggedInUser() {
+    const users = JSON.parse(await Deno.readTextFile("database/scoreboard.json"));
+    const loggedInUser = users.find(user => user.loggedIn === true);
+
+    if (!loggedInUser) {
+        console.error("No user is currently logged in.");
+        return null;
+    }
+
+    return loggedInUser;
+}
+
+export async function logInUser(username) {
     const users = JSON.parse(await Deno.readTextFile("database/scoreboard.json"));
 
-    // Uppdatera rätt användares score
-    const user = users.find(u => u.id === id);
-    if (newScore > user.score) {
-        user.score = newScore;
+    for (const user of users) {
+        user.loggedIn = (user.username === username);
+    }
+    await Deno.writeTextFile("database/scoreboard.json", JSON.stringify(users, null, 2));
+}
+
+export async function logOutUser() {
+    const users = JSON.parse(await Deno.readTextFile("database/scoreboard.json"));
+
+    for (const user of users) {
+        user.loggedIn = false;
     }
     await Deno.writeTextFile("database/scoreboard.json", JSON.stringify(users, null, 2));
 }

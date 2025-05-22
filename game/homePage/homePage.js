@@ -1,3 +1,5 @@
+import { logInUser } from "../utilities.js";
+
 const username = document.querySelector("#username");
 const password = document.querySelector("#password");
 const startButton = document.querySelector("#startButton");
@@ -34,8 +36,8 @@ cancelButton.addEventListener("click", () => {
 });
 
 startButton.addEventListener("click", logIn)
-const player = JSON.parse(localStorage.getItem("player"));
 async function logIn() {
+
     console.log("skall addera user");
 
     let usernameInput = username.value
@@ -59,21 +61,12 @@ async function logIn() {
 
 
         if (response.status === 404) {
-            console.log("bad");
-
             alert("User not found")
         }
         if (response.status === 200) {
-            console.log("good");
-
-            // Spara användardata (UTAN LÖSENORD) i localStorage
-            localStorage.setItem("player", JSON.stringify({
-                username: usernameInput,
-                id: loggedInUser.id,
-                score: loggedInUser.score
-            }));
-            await new Promise(resolve => setTimeout(resolve, 100));
+            console.log("Seccessful login");
             window.location.href = "../mainPageGame/mainPage.html"
+
         }
 
     }
@@ -91,7 +84,7 @@ async function createNewProfile() {
     if (usernameInput === "" || passwordInput === "") {
         Alert("Input field cannot be empty")
     } else {
-        let request = new Request("http://localhost:8000/signUp")
+        let request = new Request("/signUp")
         let myOpt = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -105,13 +98,9 @@ async function createNewProfile() {
             alert(newUser.error)
         }
         if (response.status === 200) {
+            console.log("anropar logInUser");
 
-            localStorage.setItem("player", JSON.stringify({
-                username: usernameInput,
-                id: newUser.id,
-                score: newUser.score
-            }));
-            window.location.href = "../mainPageGame/mainPage.html"
+            window.location.href = "/game"
         }
 
     }

@@ -5,7 +5,9 @@ import {
     checkContentType,
     createNewUser,
     updateUserScore,
-    retrieveUserByName
+    retrieveUserByName,
+    logInUser,
+    logOutUser
 } from "./utilities.js";
 
 
@@ -17,31 +19,34 @@ async function handler(request) {
     if (request.method === "OPTIONS") {
         return new Response(null, createOptions())
     }
+    // if (request.method === "GET" && url.pathname === "/randomDish") {
+    //     if (checkContentType(contentType)) {
+    //         const fetchedRecipe = Deno.readTextFileSync("database/test.json");
+    //         console.log(fetchedRecipe);
+
+    //         return new Response(fetchedRecipe, createOptions());
+    //     } else {
+    //         return new Response(JSON.stringify({ error: "Bad Content-Type" }), createOptions(400));
+    //     }
+    // }
 
 
-    if (request.method === "GET" && url.pathname === "/carbonaraGame") {
-        if (checkContentType(contentType)) {
-            const fetchedRecipe = Deno.readTextFileSync("database/test.json");
-            console.log(fetchedRecipe);
+    if (url.pathname === "/user" && request.method === "GET") {
+        const users = await Deno.readTextFile("database/scoreboard.json");
+        return new Response(JSON.stringify(users), createOptions())
 
-            return new Response(fetchedRecipe, createOptions());
-        } else {
-            return new Response(JSON.stringify({ error: "Bad Content-Type" }), createOptions(400));
-        }
     }
 
     if (url.pathname === "/signUp") {
         console.log("request to signUp");
-        const userData = await request.json()
-        console.log(userData);
 
         if (request.method === "POST") {
-            console.log("POST request recieved");
             if (checkContentType(contentType)) {
-
+                const userData = await request.json()
                 const resultNewUser = await createNewUser(userData)
-
-                if (resultNewUser.addedUser) {
+                const newUser = resultNewUser.addedUser;
+                if (newUser) {
+                    await logInUser(newUser.username)
                     return new Response(JSON.stringify(resultNewUser.addedUser), createOptions())
                 }
 
@@ -63,18 +68,13 @@ async function handler(request) {
 
         if (request.method === "POST") {
             if (checkContentType(contentType)) {
-                console.log("HUND");
 
                 const userExists = await checkUserCredentials(loginData);
-                console.log(loginData, "rad 69");
-                console.log(userExists);
-
-
                 const user = await retrieveUserByName(loginData);
-                console.log(user, "rad 70 server");
 
                 if (userExists) {
                     console.log("användaren finns");
+                    await logInUser(user.username)
 
                     return new Response(JSON.stringify(user), createOptions())
                 } else {
@@ -88,18 +88,40 @@ async function handler(request) {
             return new Response(JSON.stringify({ error: "Method not allowed" }), createOptions(400))
         }
     }
-    console.log("ERROR");
 
 
-    if (url.pathname === "/completedGame" && request.method === "POST") {
+    if (url.pathname === "/getLoggedInUser" && request.method === "GET") {
+        const users = JSON.parse(await Deno.readTextFile("database/scoreboard.json"));
+        const loggedInUser = users.find(u => u.loggedIn === true);
+
+        if (loggedInUser) {
+            return new Response(JSON.stringify(loggedInUser), createOptions())
+        } else {
+            return new Response(JSON.stringify({ error: "Ingen användare inloggad" }), createOptions(404));
+        }
+    }
+
+    if (url.pathname === "/logOutUser" && request.method === "POST") {
+        await logOutUser();
+        return new Response(JSON.stringify({ message: "You logged out" }, createOptions()));
+    }
+
+    if (url.pathname === "/updateScore" && request.method === "PATCH") {
         if (checkContentType(contentType)) {
 
-            const userInfo = await request.json();
-            await updateUserScore(userInfo);
+            const { score } = await request.json();
+            await updateUserScore(score);
             return new Response("Score updated", createOptions(200));
+        } else {
+            return new Response(JSON.stringify({ error: "Bad Content-Type" }), createOptions(400));
         }
 
     }
+
+    if (url.pathname === "/game") {
+        return serveFile(request, "./mainPageGame/mainPage.html");
+    }
+
     return await serveDir(request, {
         fsRoot: ".",
         urlRoot: "",       // <- inga prefix krävs i URL

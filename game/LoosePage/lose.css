@@ -11,14 +11,29 @@ main {
     align-items: center;
 }
 
+#playerInfo {
+    background-color: goldenrod;
+    width: fit-content;
+    padding: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    position: absolute;
+    top: 20px;
+    display: grid;
+    gap: 10px;
+}
+
 #randomApiImage {
     width: 250px;
     height: 250px;
     border: 1px solid black;
 
-    display: flex; /* Ta bort dessa tre senare */
-    align-items: center; /* Ta bort dessa tre senare */
-    justify-content: center; /* Ta bort dessa tre senare */
+    display: flex;
+    /* Ta bort dessa tre senare */
+    align-items: center;
+    /* Ta bort dessa tre senare */
+    justify-content: center;
+    /* Ta bort dessa tre senare */
 }
 
 #leaderboard {
@@ -45,18 +60,19 @@ main {
 }
 
 #tabell {
-  display: grid;
-  font-size: 14px;
-  grid-template-columns: 1fr 1fr 1fr;
+    display: grid;
+    font-size: 14px;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
-th, td {
-  border: 1px solid black;
-  padding: 10px 15px;
-  text-align: left;
+th,
+td {
+    border: 1px solid black;
+    padding: 10px 15px;
+    text-align: left;
 }
 
 th {
-  background-color: #f2f2f2;
-  font-weight: bold;
+    background-color: #f2f2f2;
+    font-weight: bold;
 }

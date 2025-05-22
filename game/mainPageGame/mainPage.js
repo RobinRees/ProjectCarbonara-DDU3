@@ -1,7 +1,22 @@
 
+
+let currentPlayer = null;
+
+(async () => {
+    const response = await fetch("/getLoggedInUser", {
+        method: "GET",
+        headers: { "content-type": "application/json" }
+    });
+    if (response.status === 200) {
+        currentPlayer = await response.json();
+        console.log(currentPlayer);
+    }
+    createChoices();
+})();
+
 const foodImageDiv = document.getElementById("foodImage");
 const choicesBox = document.getElementById("choicesBox");
-const showScore = document.getElementById("score");
+const showScore = document.getElementById("showScore");
 let correctGuesses = 0;
 const allCorrect = 3;
 let lives = 9;
@@ -9,16 +24,9 @@ let currentScore = 0;
 showScore.innerHTML = `Current score: ${currentScore}`
 
 
-const player = JSON.parse(localStorage.getItem("player"));
-console.log(player);
-
-console.log(player.username); // "mordor"
-document.getElementById("usernameDisplay").textContent = `Current player: ${player.username}`;
-
-console.log(lives);
-
 async function createChoices() {
-    const player = JSON.parse(localStorage.getItem("player")); // SPELARE SOM SPARAS AV LOGIN/SIGNUP
+    document.getElementById("usernameDisplay").textContent = `Current player: ${currentPlayer.username}`;
+
     const currentMealData = await fetch("https://www.themealdb.com/api/json/v1/1/random.php").then(response => response.json());
     const ingredientsData = await fetch("../database/ingredients.json").then(response => response.json());
 
@@ -31,8 +39,6 @@ async function createChoices() {
 
     const img = document.createElement("img");
     img.src = meal.strMealThumb;
-    console.log(meal.strMealThumb);
-
     img.style.width = "100%";
     img.style.height = "100%";
     img.style.objectFit = "cover";
@@ -111,14 +117,12 @@ async function createChoices() {
                 lives--
                 livesBox.innerHTML = `Life left: ${lives}`;
                 if (lives === 0) {
-                    player.score = currentScore;
-                    await fetch("http://localhost:8000/completedGame", {
-                        method: "POST",
+                    await fetch("http://localhost:8000/updateScore", {
+                        method: "PATCH",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ id: player.id, newScore: player.score })
+                        body: JSON.stringify({ score: currentScore })
                     });
                     window.location.href = "../LoosePage/lose.html"
-
                 }
             }
         });
@@ -155,4 +159,23 @@ document.getElementById("nextButton").addEventListener("click", () => {
 });
 
 
-createChoices()
+const logOutButton = document.getElementById("logOutButton")
+
+logOutButton.addEventListener("click", async () => {
+
+    const response = await fetch("/logOutUser", {
+        method: "POST"
+    });
+
+    if (response.status === 200) {
+        alert("You logged out");
+
+        window.location.href = "../homePage/homePage.html";
+    } else {
+        alert("Något gick fel vid utloggning.");
+    }
+})
+
+
+
+// createChoices()

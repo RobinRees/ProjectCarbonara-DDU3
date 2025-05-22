@@ -12,12 +12,16 @@
     <main>
         <h1>You Lost</h1>
         <div>
+            <div id="playerInfo">
+                <div id="usernameDisplay"></div>
+                <div id="showScore"></div>
+            </div>
             <div id="randomApiImage">
                 <p>Random API gif här?</p>
             </div>
             <div id="scoreBox">
-                <p>Your score: <span id="totalScore"></span></p>
-                <p>Your personal best: <span class="scorePersonalBest"></span></p>
+                <p>Your score: <span id="finalScore"></span></p>
+                <p>Your personal best: <span id="scorePersonalBest"></span></p>
             </div>
             <button id="homeButton" type="button">Home and try again</button>
             <button type="button" id="leaderboardButton">Leaderboard</button>

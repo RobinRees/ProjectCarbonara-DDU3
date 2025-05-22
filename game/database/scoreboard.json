@@ -1,3 +1,9 @@
 [
-  
+  {
+    "username": "sebbe",
+    "password": "kingen",
+    "score": 50,
+    "loggedIn": false,
+    "id": 1
+  }
 ]

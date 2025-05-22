@@ -1,12 +1,41 @@
+// import { getLoggedInUser } from "../utilities.js";
+
+let currentPlayer = null;
+
+(async () => {
+    const response = await fetch("/getLoggedInUser", {
+        method: "GET",
+        headers: { "content-type": "application/json" }
+    });
+    if (response.status === 200) {
+        currentPlayer = await response.json();
+        console.log(currentPlayer);
+    }
+
+
+
+    document.getElementById("finalScore").textContent = `${currentScore}`
+
+    document.getElementById("usernameDisplay").textContent = `Current player: ${currentPlayer.username}`;
+
+    createTopTen()
+})();
+
+
 async function createTopTen() {
 
     const table = document.getElementById("tabell");
     const response = await fetch("../database/scoreboard.json")
     const scoreboard = await response.json();
 
+    const user = scoreboard.find(u => u.loggedIn == true);
+    console.log(user);
+    console.log(user.score);
+    document.getElementById("scorePersonalBest").textContent = `${user.score}`
+
 
     let topPlayers = scoreboard.sort((a, b) => b.score - a.score);
-  
+
     table.innerHTML = ""
     table.innerHTML = `
                     <div id="rankColumn">Rank</div>
@@ -16,7 +45,7 @@ async function createTopTen() {
 
     for (let i = 0; i <= 9; i++) {
         const player = topPlayers[i];
-        
+
         const rankCell = document.createElement("div");
         rankCell.textContent = i + 1;
 
@@ -25,7 +54,7 @@ async function createTopTen() {
         if (player === undefined) {
             nameCell.textContent = "No user"
             scoreCell.textContent = "No user"
-            
+
         } else {
             nameCell.textContent = player.username;
             scoreCell.textContent = player.score;
@@ -44,15 +73,28 @@ const leaderboard = document.getElementById("leaderboard");
 
 leaderboardButton.addEventListener("click", () => {
     leaderboard.style.display = "block";
-
-
-
     createTopTen();
-
-    
 });
 
 const backButton = document.getElementById("backButton");
 backButton.addEventListener("click", () => {
     leaderboard.style.display = "none";
+});
+
+
+const homeButton = document.getElementById("homeButton");
+
+
+homeButton.addEventListener("click", async () => {
+    const response = await fetch("/logOutUser", {
+        method: "POST"
+    });
+
+    if (response.status === 200) {
+        alert("You logged out");
+
+        window.location.href = "../homePage/homePage.html";
+    } else {
+        alert("Något gick fel vid utloggning.");
+    }
 });
