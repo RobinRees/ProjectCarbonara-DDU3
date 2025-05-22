@@ -65,10 +65,9 @@ async function logIn() {
         }
         if (response.status === 200) {
             console.log("Seccessful login");
-            window.location.href = "../mainPageGame/mainPage.html"
+            window.location.href = "/game" // obs måste ändras
 
         }
-
     }
 }
 

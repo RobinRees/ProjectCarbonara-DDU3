@@ -7,7 +7,6 @@ main {
 #bigLeft, #bigRigth {
     display: flex;
     flex-direction: row;
-    
 }
 
 #littleLeft, #littleRight {
@@ -24,6 +23,7 @@ main {
     padding: 10px;
     position: relative;
     border: 2px solid black;
+    height: 10px;
 }
 
 #rulesText {
