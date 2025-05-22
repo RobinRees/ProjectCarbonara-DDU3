@@ -18,17 +18,13 @@ let currentPlayer = null;
     const user = scoreboard.find(u => u.loggedIn == true);
     console.log(user);
     console.log(user.score);
-    console.log(user.roundScore);
+    console.log(user.roundScore); // NÅGOT SOM UPPDATERAR FEL MED POÄNG
     document.getElementById("scorePersonalBest").textContent = `${user.score}`
     if (!user.roundScore) {
         document.getElementById("finalScore").textContent = `${user.score}`
     } else {
         document.getElementById("finalScore").textContent = `${user.roundScore}`
     }
-
-
-
-    document.getElementById("finalScore").textContent = `${currentScore}`
 
     document.getElementById("usernameDisplay").textContent = `Current player: ${currentPlayer.username}`;
 
@@ -44,7 +40,7 @@ async function createTopTen() {
 
 
 
-    
+
 
 
     let topPlayers = scoreboard.sort((a, b) => b.score - a.score);

@@ -48,7 +48,7 @@ nav button {
     font-weight: bold;
     display: flex;
     /* justify-content: space-between; */
-    gap: 10px;
+    gap: 20px;
 }
 
 #playerInfo div {
@@ -95,13 +95,22 @@ main {
 #gameInfo {
     display: flex;
     margin: 16px 0;
+    gap: 20px;
 }
 
 #nextButton {
     margin: 0;
-    height: 200px;
-    width: 200px;
     display: none;
+    margin: 0;
+    display: none;
+    height: fit-content;
+    padding: 10px 50px;
+    background-color: goldenrod;
+    font-weight: bold;
+    border-radius: 50px;
+    font-size: 20px;
+    outline: none;
+    border-style: none;
 }
 
 .choice p {
