@@ -106,7 +106,7 @@ homeButton.addEventListener("click", async () => {
     if (response.status === 200) {
         alert("You logged out");
 
-        window.location.href = "../homePage/homePage.html";
+        window.location.href = "/home";
     } else {
         alert("Något gick fel vid utloggning.");
     }
