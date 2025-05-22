@@ -93,6 +93,8 @@ export async function updateUserScore(newScore) {
 
     if (newScore > user.score) {
         user.score = Number(newScore);
+    } else {
+        user.roundScore = newScore;
     }
 
     await Deno.writeTextFile("database/scoreboard.json", JSON.stringify(users, null, 2));

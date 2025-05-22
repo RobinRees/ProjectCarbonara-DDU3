@@ -12,6 +12,20 @@ let currentPlayer = null;
         console.log(currentPlayer);
     }
 
+    const responseTwo = await fetch("../database/scoreboard.json")
+    const scoreboard = await responseTwo.json();
+
+    const user = scoreboard.find(u => u.loggedIn == true);
+    console.log(user);
+    console.log(user.score);
+    console.log(user.roundScore);
+    document.getElementById("scorePersonalBest").textContent = `${user.score}`
+    if (!user.roundScore) {
+        document.getElementById("finalScore").textContent = `${user.score}`
+    } else {
+        document.getElementById("finalScore").textContent = `${user.roundScore}`
+    }
+
 
 
     document.getElementById("finalScore").textContent = `${currentScore}`
@@ -28,10 +42,9 @@ async function createTopTen() {
     const response = await fetch("../database/scoreboard.json")
     const scoreboard = await response.json();
 
-    const user = scoreboard.find(u => u.loggedIn == true);
-    console.log(user);
-    console.log(user.score);
-    document.getElementById("scorePersonalBest").textContent = `${user.score}`
+
+
+    
 
 
     let topPlayers = scoreboard.sort((a, b) => b.score - a.score);

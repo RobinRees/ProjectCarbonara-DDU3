@@ -122,7 +122,16 @@ async function handler(request) {
         return serveFile(request, "./mainPageGame/mainPage.html");
     }
 
-    return await serveDir(request, {
+    if (url.pathname === "/gameOver") {
+        return serveFile(request, "./LoosePage/lose.html")
+    }
+
+    if (url.pathname === "/" || url.pathname === "/home") {
+        return serveFile(request, "./homePage/homePage.html")
+    }
+
+
+    return serveDir(request, {
         fsRoot: ".",
         urlRoot: "",       // <- inga prefix krävs i URL
         showDirListing: false,
@@ -132,4 +141,4 @@ async function handler(request) {
 
 
 
-Deno.serve(handler);
+Deno.serve({port: 8500}, handler );

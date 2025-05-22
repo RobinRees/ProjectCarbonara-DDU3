@@ -122,7 +122,7 @@ async function createChoices() {
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ score: currentScore })
                     });
-                    window.location.href = "../LoosePage/lose.html"
+                    window.location.href = "../gameOver"
                 }
             }
         });
