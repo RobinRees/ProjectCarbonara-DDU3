@@ -6,6 +6,8 @@ function decodeHTML(html) {
 
 
 async function createTriviaQuestion() {
+    const questionBox = document.getElementById("questionBox")
+    questionBox.style.display = "flex";
     const response = await fetch("https://opentdb.com/api.php?amount=1");
     const data = await response.json();
 
@@ -46,8 +48,26 @@ async function createTriviaQuestion() {
 
             if (choice.isCorrect) {
                 div.style.backgroundColor = "lightGreen";
+                const winText = document.getElementById("winText");
+                winText.style.display = "block";
+                // Life + 1;
+
+                setTimeout(() => {
+                    questionBox.style.display = "none";
+                    winText.style.display = "none";
+                }, 2000)
+                
             } else {
                 div.style.backgroundColor = "tomato";
+                const spanText = document.getElementById("correctAnswer");
+                spanText.textContent = `correct answer was: ${correctAnswer}`;
+                const loseText = document.getElementById("lostText");
+                loseText.style.display = "block";
+
+                setTimeout(() => {
+                    window.location.href = "/gameOver";
+                }, 2000)
+                // redirect - Loosescreen timer? 
             }
         })
     })
