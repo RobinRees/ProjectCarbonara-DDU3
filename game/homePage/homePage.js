@@ -46,7 +46,7 @@ async function logIn() {
     if (usernameInput === "" || passwordInput === "") {
         Alert("Input field cannot be empty")
     } else {
-        let request = new Request("http://localhost:8000/logIn")
+        let request = new Request("/logIn")
         let myOpt = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
