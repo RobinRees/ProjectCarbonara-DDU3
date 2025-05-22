@@ -9,27 +9,38 @@
 </head>
 
 <body>
+    <nav>
+        <h1>Carbonara Game</h1>
+        <div>
+            <button class="menuButton" id="logOutButton" type="button">Log Out</button>
+        </div>
+        <div>
+            <button class="menuButton" id="leaderboard" type="button">Leaderboard</button>
+        </div>
+
+    </nav>
     <main>
-
         <div id="left">
-            <button id="logOutButton" type="button">Log Out</button>
 
-            <div id="playerInfo">
-                <div id="usernameDisplay"></div>
-                <div id="showScore"></div>
-            </div>
+
 
             <div id="recepieBox"></div>
         </div>
         <div id="middle">
             <h1 id="foodTitle"></h1>
-            <div id="foodImage">
+            <div id="foodImage"> </div>
+            <div id="playerInfo">
+                <div id="usernameDisplay"></div>
+                <div id="showScore"></div>
             </div>
-            <div id="livesBox">Life left: 9</div>
+            <div id="gameInfo">
+                <div id="livesBox">Life left: 9</div>
+                <button class="menuButton" id="nextButton">Next</button>
+            </div>
+
             <div id="choicesBox"></div>
         </div>
         <div id="right">
-            <button id="nextButton">Next</button>
         </div>
     </main>
     <div id="pointsAndNex">
