@@ -1,17 +1,19 @@
 body{
     margin: 20px;
-    background-color: aqua;
+    background-image: url("./image\ copy.png");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 main {
     display: flex;
-    flex-direction: row;
-    background-color: azure;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 #bigLeft, #bigRight {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 50vw;
     justify-content: center;
     align-items: center;
@@ -20,33 +22,42 @@ main {
 #littleLeft, #littleRight, #rulesDiv {
     display: flex;
     flex-direction: column;
-    background-color: chocolate;
-    height: 25vw;
-    width: 25vw;
-    border-radius: 50%;
+    height: 15vw;
+    width: 15vw;
+    border-radius: 50px;
     align-items: center;
     justify-content: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#littleLeft:hover, #littleRight:hover, #rulesDiv:hover{
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 #littleLeft h1, #littleRight h1{
     color: white;
     text-align: center;
-    border: 1px solid black;
     height: 5vw;
-    width: 10vw;
+    width: 5vw;
     margin: 0;
     padding: 0;
+    gap: 2px;
 }
 
 body h1{
     color: white;
     text-align: center;
-    border: 1px solid black;
 }
 
 button, input{
     text-align: center;
     height: 5vw;
     width: 10vw;
-    border-radius: 50%;
+    background-color: transparent;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid white;
+    outline: none;
 }
