@@ -1,3 +1,16 @@
 [
-
+  {
+    "username": "hej",
+    "password": "san",
+    "score": 0,
+    "loggedIn": false,
+    "id": 1
+  },
+  {
+    "username": "THEO",
+    "password": "VON",
+    "score": 60,
+    "loggedIn": true,
+    "id": 2
+  }
 ]

@@ -131,3 +131,40 @@ export async function logOutUser() {
     }
     await Deno.writeTextFile("database/scoreboard.json", JSON.stringify(users, null, 2));
 }
+
+
+
+
+
+export async function createTopTen(currentPlayer) {
+
+    // const table = document.getElementById("tabell");
+    const response = await fetch("../database/scoreboard.json")
+    const scoreboard = await response.json();
+
+    const topPlayers = scoreboard.sort((a, b) => b.score - a.score).slice(0, 10);
+    const rows = document.querySelectorAll("table tbody tr");
+
+    topPlayers.forEach((player, i) => {
+        const row = rows[i];
+        row.querySelector(".rank").textContent = i + 1;
+        row.querySelector(".name").textContent = player.username || "No user";
+        row.querySelector(".score").textContent = player?.score ?? "-";
+        if (row.querySelector(".name").textContent == currentPlayer.username) {
+            row.querySelector(".rank").style.backgroundColor = "#4a90e2"
+            row.querySelector(".name").style.backgroundColor = "#4a90e2"
+            row.querySelector(".score").style.backgroundColor = "#4a90e2"
+        }
+    });
+
+
+
+    // Fyll tomma rader om färre än 10 spelare
+    for (let i = topPlayers.length; i < rows.length; i++) {
+        const row = rows[i];
+        row.querySelector(".rank").textContent = i + 1;
+        row.querySelector(".name").textContent = "No user";
+        row.querySelector(".score").textContent = "-";
+    }
+
+}

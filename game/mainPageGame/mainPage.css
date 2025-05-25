@@ -9,7 +9,7 @@ nav {
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
-    background-color: chocolate;
+    background-color: #4a90e2;
     padding: 0 0 0 20px;
 }
 
@@ -18,7 +18,6 @@ h1 {
 }
 
 nav div {
-    width: 180px;
     display: flex;
     place-content: center;
 }
@@ -30,15 +29,14 @@ nav button {
     /* width: 100px; */
     font-size: 14px;
     color: white;
-    background-color: chocolate;
-    width: 50%;
+    background-color: #4a90e2;
 }
 
 
 .menuButton:hover {
     cursor: pointer;
-    background-color: white;
-    color: black;
+    /* background-color: white; */
+    border-bottom: 2px solid white;
 }
 
 #playerInfo {
@@ -53,13 +51,8 @@ nav button {
 
 #playerInfo div {
     padding: 10px;
-    background-color: chocolate;
+    background-color: #4a90e2;
 }
-
-
-
-
-
 
 main {
     display: grid;
@@ -68,8 +61,8 @@ main {
 
 
 #choicesBox {
-    width: 100%;
-    height: 445px;
+    width: 70%;
+    height: 300px;
     border: solid black 3px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -131,8 +124,8 @@ main {
 
 
 #foodImage {
-    width: 350px;
-    height: 350px;
+    width: 280px;
+    height: 280px;
     border: 1px solid black;
     position: relative;
 }
@@ -142,7 +135,6 @@ main {
     width: 400px;
     overflow-y: scroll;
     height: 345px;
-    /* border: 1px solid black; */
     padding: 0 15px;
 }
 
@@ -154,7 +146,6 @@ main {
 #middle {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
 }
 
@@ -185,4 +176,92 @@ main {
     font-weight: bold;
     border-radius: 50px;
     font-size: 20px;
+}
+
+/* LEADERBOARD CSS */
+
+#leaderboard-header img {
+    width: 165px;
+    position: absolute;
+    left: 150px;
+    top: -70px;
+}
+
+#hasMenuScoreBoard {
+    position: relative;
+}
+
+#leaderboard-container {
+    width: 300px;
+    max-width: 450px;
+    background-color: #fff;
+    border-radius: 9px;
+    overflow: visible;
+    position: absolute;
+    right: 115px;
+    top: 120px;
+    display: none;
+    box-shadow: 0px 7px 17px #4a90e2;
+}
+
+
+
+#leaderboard-header {
+    background-color: #4a90e2;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 131px;
+    position: relative;
+}
+
+#backButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    border-style: none;
+    padding: 1px 5px;
+    color: #4a90e2;
+    font-weight: bold;
+}
+
+#leaderboard-header h1 {
+    margin: 0;
+    font-size: 36px;
+    line-height: 36px;
+    position: absolute;
+    top: 60px;
+    right: 132px;
+    z-index: 0;
+    position: absolute;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+table thead {
+    background-color: #e0e7ff;
+    font-weight: bold;
+}
+
+table th,
+table td {
+    padding: 9px;
+    text-align: center;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table * {
+    z-index: 0;
+    position: relative;
 }

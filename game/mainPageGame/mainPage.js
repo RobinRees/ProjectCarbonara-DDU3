@@ -1,4 +1,4 @@
-
+import { createTopTen } from "../utilities.js";
 
 let currentPlayer = null;
 
@@ -12,6 +12,8 @@ let currentPlayer = null;
         console.log(currentPlayer);
     }
     createChoices();
+    createTopTen(currentPlayer);
+
 })();
 
 const foodImageDiv = document.getElementById("foodImage");
@@ -177,5 +179,14 @@ logOutButton.addEventListener("click", async () => {
 })
 
 
+const leaderboardButton = document.getElementById("leaderboardNav");
+const leaderboard = document.getElementById("leaderboard-container");
 
-// createChoices()
+leaderboardButton.addEventListener("click", () => {
+    leaderboard.style.display = "block";
+});
+
+const backButton = document.getElementById("backButton");
+backButton.addEventListener("click", () => {
+    leaderboard.style.display = "none";
+});
