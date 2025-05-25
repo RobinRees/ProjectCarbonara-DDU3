@@ -3,6 +3,8 @@ body {
     width: 100%;
     margin: 0px;
     box-sizing: border-box;
+    background-color: #e0e7ff;
+    font-family: Geneva, Tahoma, sans-serif;
 }
 
 nav {
@@ -13,8 +15,9 @@ nav {
     padding: 0 0 0 20px;
 }
 
-h1 {
+nav h1 {
     color: white;
+
 }
 
 nav div {
@@ -39,56 +42,86 @@ nav button {
     border-bottom: 2px solid white;
 }
 
+#mainInfo {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    flex-direction: column;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
 #playerInfo {
     width: fit-content;
-    /* padding: 10px; */
-    font-size: 20px;
-    font-weight: bold;
+    /* padding: 15px; */
     display: flex;
-    /* justify-content: space-between; */
     gap: 20px;
 }
 
-#playerInfo div {
-    padding: 10px;
-    background-color: #4a90e2;
-}
-
 main {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    justify-content: space-evenly;
 }
 
+#left,
+#right {
+    width: 400px;
+    border-radius: 20px;
+    background-color: white;
+    height: fit-content;
+    padding: 15px;
+    box-shadow: 0 0 10px lightblue;
+}
+
+#hasChoices {
+    background-color: white;
+    padding: 15px;
+    border-radius: 20px;
+    width: 600px;
+}
 
 #choicesBox {
-    width: 70%;
-    height: 300px;
-    border: solid black 3px;
+    height: 250px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 10px;
-    padding: 10px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 15px;
 }
 
 .choice {
     background-color: lightgray;
-    border: 1px solid #333;
     display: flex;
     align-items: center;
     justify-content: end;
+    border-radius: 20px;
+}
+
+.choice p {
+    margin: 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, .5);
+    color: white;
+    width: 100%;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 5px 0;
 }
 
 #foodTitle {
     padding: 0;
-    margin: 0;
+    margin: 0 0 15px 0;
     text-align: center;
 }
 
 #gameInfo {
     display: flex;
-    margin: 16px 0;
+    /* margin: 16px 0; */
     gap: 20px;
+}
+
+#correctGuesses {
+    background-color: limegreen;
 }
 
 #nextButton {
@@ -98,30 +131,31 @@ main {
     display: none;
     height: fit-content;
     padding: 10px 50px;
-    background-color: goldenrod;
+    background-color: gold;
     font-weight: bold;
     border-radius: 50px;
     font-size: 20px;
     outline: none;
     border-style: none;
+    border-bottom: 3px solid goldenrod;
 }
 
-.choice p {
-    margin: 0;
-    text-align: center;
-    background-color: black;
-    font-weight: bold;
-    border: 1px solid black;
-    color: white;
-    width: 100%;
+#nextButton:active {
+    border-bottom: none;
+    margin-bottom: 3px;
 }
-
-
 
 #foodTitle {
     display: none;
 }
 
+.importantRed {
+    padding: 10px 20px;
+    background-color: tomato;
+    font-weight: bold;
+    border-radius: 50px;
+    font-size: 20px;
+}
 
 #foodImage {
     width: 280px;
@@ -130,23 +164,27 @@ main {
     position: relative;
 }
 
+#recipeBox h2 {
+    margin: 15px 0 0 0;
+}
 
-#recepieBox {
-    width: 400px;
-    overflow-y: scroll;
-    height: 345px;
-    padding: 0 15px;
+#recipeBox p {
+    line-height: 1.6;
 }
 
 #left {
     display: flex;
     flex-direction: column;
+    height: fit-content;
 }
 
 #middle {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 15px;
+    background-color: transparent;
+    overflow-x: visible;
 }
 
 #right {
@@ -168,14 +206,6 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-#livesBox {
-    padding: 10px 50px;
-    background-color: goldenrod;
-    font-weight: bold;
-    border-radius: 50px;
-    font-size: 20px;
 }
 
 /* LEADERBOARD CSS */

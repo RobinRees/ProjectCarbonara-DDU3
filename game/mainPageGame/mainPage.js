@@ -19,6 +19,7 @@ let currentPlayer = null;
 const foodImageDiv = document.getElementById("foodImage");
 const choicesBox = document.getElementById("choicesBox");
 const showScore = document.getElementById("showScore");
+const showCorrectGuess = document.getElementById("correctGuesses");
 let correctGuesses = 0;
 const allCorrect = 3;
 let lives = 9;
@@ -39,13 +40,11 @@ async function createChoices() {
 
     const mealRecipie = meal.strInstructions;
 
-    const img = document.createElement("img");
-    img.src = meal.strMealThumb;
-    img.style.width = "100%";
-    img.style.height = "100%";
-    img.style.objectFit = "cover";
-    foodImageDiv.appendChild(img);
+    const img = document.getElementById("foodImage");
 
+    img.style.backgroundImage = `url("${meal.strMealThumb}")`
+    img.style.backgroundRepeat = "no-repeat";
+    img.style.backgroundSize = "cover";
 
     const ingredientsArray = [];
     for (let i = 1; i <= 20; i++) {
@@ -61,7 +60,7 @@ async function createChoices() {
 
     const filteredIngredients = ingredientsData.filter(ingredients => !selectedIngredients.includes(ingredients.name))
 
-    const selectedFakeIngredients = getRandomItem(filteredIngredients, 6);
+    const selectedFakeIngredients = getRandomItem(filteredIngredients, 7);
 
     const allChoices = [
         ...selectedIngredients.map(name => ({
@@ -88,9 +87,11 @@ async function createChoices() {
 
         if (choice.image) {
             div.style.backgroundImage = `url("${choice.image}")`
-            div.style.backgroundSize = "cover";
+            div.style.backgroundSize = "contain";
             div.style.backgroundRepeat = "no-repeat";
+            div.style.backgroundPosition = "center";
             div.style.flexDirection = "column";
+
         }
 
         div.addEventListener("click", async () => {
@@ -101,23 +102,23 @@ async function createChoices() {
                 div.style.backgroundColor = "lightGreen"
 
                 correctGuesses++;
+                showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`
+
                 currentScore = currentScore + 10;
                 showScore.innerHTML = `Current score: ${currentScore}`
                 if (correctGuesses === allCorrect) {
                     document.getElementById("nextButton").style.display = "block";
                     document.getElementById("foodTitle").textContent = mealName;
-                    document.getElementById("recepieBox").innerHTML = `<h2>Insructions for ${mealName}</h2>
-                    <br>
-                    <p>${mealRecipie}</p>
-                    `;
+                    document.getElementById("recipeBox").innerHTML = `<p>${mealRecipie}</p>`;
                     foodTitle.style.display = "block"
+                    showCorrectGuess.style.display = "none";
 
 
                 }
             } else {
                 div.style.backgroundColor = "tomato"
                 lives--
-                livesBox.innerHTML = `Life left: ${lives}`;
+                livesBox.innerHTML = `Lives left: ${lives}`;
                 if (lives === 0) {
                     await fetch("http://localhost:8000/updateScore", {
                         method: "PATCH",
@@ -156,7 +157,9 @@ document.getElementById("nextButton").addEventListener("click", () => {
     correctGuesses = 0;
     choicesBox.innerHTML = "";
     foodImageDiv.innerHTML = "";
-    recepieBox.innerHTML = "";
+    recipeBox.innerHTML = "";
+    showCorrectGuess.style.display = "block";
+
     createChoices();
 });
 

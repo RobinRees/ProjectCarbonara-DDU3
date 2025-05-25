@@ -137,6 +137,9 @@ export async function logOutUser() {
 
 
 export async function createTopTen(currentPlayer) {
+    console.log(currentPlayer);
+
+    console.log("skapar leaderboard");
 
     // const table = document.getElementById("tabell");
     const response = await fetch("../database/scoreboard.json")
@@ -154,6 +157,9 @@ export async function createTopTen(currentPlayer) {
             row.querySelector(".rank").style.backgroundColor = "#4a90e2"
             row.querySelector(".name").style.backgroundColor = "#4a90e2"
             row.querySelector(".score").style.backgroundColor = "#4a90e2"
+            row.querySelector(".name").style.color = "white"
+            row.querySelector(".rank").style.color = "white"
+            row.querySelector(".score").style.color = "white"
         }
     });
 
