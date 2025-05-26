@@ -10,35 +10,110 @@
 
 <body>
     <nav>
-        <h1>Carbonara Game</h1>
         <div>
             <button class="menuButton" id="logOutButton" type="button">Log Out</button>
         </div>
         <div>
-            <button class="menuButton" id="leaderboard" type="button">Leaderboard</button>
+            <h1>Carbonara Game</h1>
         </div>
+        <div id="hasMenuScoreBoard">
+            <button class="menuButton" id="leaderboardNav" type="button">Leaderboard</button>
+            <div id="leaderboard-container">
+                <div id="leaderboard-header">
+                    <button type="button" id="backButton">X</button>
+                    <h1> LEADER BOARD</h1>
+                    <img src="../images/chef.png" alt="">
+                </div>
 
+                <table id="leaderboard">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Total Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 10 rader – statiska -->
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
     </nav>
     <main>
         <div id="left">
+            <h2>INSTRUCTIONS</h2>
 
-
-
-            <div id="recepieBox"></div>
+            <div id="recipeBox"></div>
         </div>
         <div id="middle">
-            <h1 id="foodTitle"></h1>
-            <div id="foodImage"> </div>
-            <div id="playerInfo">
-                <div id="usernameDisplay"></div>
-                <div id="showScore"></div>
+            <div id="mainInfo">
+                <h1 id="foodTitle"></h1>
+                <div id="foodImage"> </div>
+                <div id="playerInfo">
+                    <div id="usernameDisplay"></div>
+                    <div id="showScore"></div>
+                </div>
+                <div id="gameInfo">
+                    <div id="livesBox" class="importantRed">Lives left: 9</div>
+                    <div id="correctGuesses" class="importantRed">Correct: 0/3</div>
+                    <button class="menuButton" id="nextButton">Next</button>
+                </div>
             </div>
-            <div id="gameInfo">
-                <div id="livesBox">Life left: 9</div>
-                <button class="menuButton" id="nextButton">Next</button>
+            <div id="hasChoices">
+                <div id="choicesBox"></div>
             </div>
-
-            <div id="choicesBox"></div>
         </div>
         <div id="right">
         </div>

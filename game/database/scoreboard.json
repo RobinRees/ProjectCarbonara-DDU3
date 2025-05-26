@@ -1,3 +1,31 @@
 [
-
+  {
+    "username": "hej",
+    "password": "san",
+    "score": 0,
+    "loggedIn": false,
+    "id": 1
+  },
+  {
+    "username": "THEO",
+    "password": "VON",
+    "score": 60,
+    "loggedIn": false,
+    "id": 2
+  },
+  {
+    "username": "kaj",
+    "password": "kaj",
+    "score": 40,
+    "loggedIn": false,
+    "id": 3
+  },
+  {
+    "username": "never",
+    "password": "mind",
+    "score": 50,
+    "loggedIn": false,
+    "id": 4,
+    "roundScore": 30
+  }
 ]

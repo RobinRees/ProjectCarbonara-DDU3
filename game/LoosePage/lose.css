@@ -1,7 +1,24 @@
 body {
     margin: 0px;
     display: flex;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+}
+
+nav {
+    display: flex;
     justify-content: center;
+    margin-bottom: 25px;
+    background-color: #4a90e2;
+    padding: 0 0 0 20px;
+    width: 100%;
+    position: relative;
+}
+
+
+h1 {
+    color: white;
 }
 
 main {
@@ -9,6 +26,19 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+
+#scoreBox {
+    display: grid;
+    grid-auto-columns: auto;
+    color: white;
+    background-color: #4a90e2;
+    padding: 10px;
+}
+
+p {
+    margin: 0;
 }
 
 #playerInfo {
@@ -36,43 +66,83 @@ main {
     /* Ta bort dessa tre senare */
 }
 
-#leaderboard {
-    width: 500px;
-    background-color: rgb(43, 226, 98);
-    border: 1px solid black;
-    margin-top: 20px;
+img {
+    width: 165px;
     position: absolute;
+    left: 150px;
+    top: -70px;
+}
+
+#leaderboard-container {
+    width: 300px;
+    max-width: 450px;
+    background-color: #fff;
+    border-radius: 9px;
+    overflow: visible;
+    position: absolute;
+    left: 125px;
+    top: 155px;
     display: none;
 }
 
-#leaderboard h1 {
+
+
+#leaderboard-header {
+    background-color: #4a90e2;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 131px;
+    position: relative;
+}
+
+#backButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    border-style: none;
+    padding: 1px 5px;
+    color: #4a90e2;
+    font-weight: bold;
+}
+
+#leaderboard-header h1 {
+    margin: 0;
+    font-size: 36px;
+    line-height: 36px;
+    position: absolute;
+    top: 60px;
+    right: 132px;
+    z-index: 0;
+    position: absolute;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+table thead {
+    background-color: #e0e7ff;
+    font-weight: bold;
+}
+
+table th,
+table td {
+    padding: 9px;
     text-align: center;
 }
 
-#personalBox {
-    width: 100%;
-    display: flex;
-
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
-#personalBox button {
-    margin-left: auto;
-}
-
-#tabell {
-    display: grid;
-    font-size: 14px;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-th,
-td {
-    border: 1px solid black;
-    padding: 10px 15px;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+#leaderboard * {
+    z-index: 0;
+    position: relative;
 }

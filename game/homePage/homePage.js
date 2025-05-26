@@ -37,7 +37,7 @@ async function logIn() {
         }
         if (response.status === 200) {
             console.log("Seccessful login");
-            window.location.href = "/game" 
+            window.location.href = "/game"
 
         }
     }
@@ -76,3 +76,7 @@ async function createNewProfile() {
 
 startButton.addEventListener("click", logIn)
 createPlayer.addEventListener("click", createNewProfile)
+
+if (window.location.pathname === "/") {
+    window.history.replaceState(null, "", "/home");
+}
