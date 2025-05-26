@@ -182,13 +182,14 @@ logOutButton.addEventListener("click", async () => {
     }
 });
 
-const leaderboardButton = document.getElementById("leaderboardNav");
-const leaderboard = document.getElementById("leaderboard-container");
+// const leaderboardButton = document.getElementById("leaderboardNav");
+// const leaderboard = document.getElementById("leaderboard-container");
 
-leaderboardButton.addEventListener("click", () => {
-    leaderboard.style.display = "block";
-});
+// leaderboardButton.addEventListener("click", () => {
+//     leaderboard.style.display = "block";
+// });
 
+<<<<<<< Updated upstream
 const backButton = document.getElementById("backButton");
 backButton.addEventListener("click", () => {
     leaderboard.style.display = "none";
@@ -329,3 +330,9 @@ const quiz = new FoodTriviaQuiz(
         "Oktoberfest", "street food", "food festival"
     ]
 );
+=======
+// const backButton = document.getElementById("backButton");
+// backButton.addEventListener("click", () => {
+//     // leaderboard.style.display = "none";
+// });
+>>>>>>> Stashed changes

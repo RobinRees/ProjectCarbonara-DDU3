@@ -133,9 +133,6 @@ export async function logOutUser() {
 }
 
 
-
-
-
 export async function createTopTen(currentPlayer) {
     console.log(currentPlayer);
 

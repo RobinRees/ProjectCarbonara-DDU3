@@ -177,6 +177,7 @@ main {
     display: flex;
     flex-direction: column;
     height: fit-content;
+    max-width: 400px;
 }
 
 #middle {
@@ -186,6 +187,7 @@ main {
     gap: 15px;
     background-color: transparent;
     overflow-x: visible;
+    max-width: 580px;
 }
 
 #right {
@@ -228,11 +230,8 @@ main {
     background-color: #fff;
     border-radius: 9px;
     overflow: visible;
-    position: absolute;
     right: 115px;
     top: 120px;
-    display: none;
-    box-shadow: 0px 7px 17px #4a90e2;
 }
 
 
