@@ -50,6 +50,7 @@ nav button {
     display: flex;
     gap: 15px;
     align-items: center;
+    max-width: 500px;
 }
 
 #playerInfo {
@@ -298,15 +299,23 @@ table * {
 
 
 #questionBox {
-    width: 500px;
-    height: 300px;
-    border: 3px solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: absolute;
-    background-color: white;
+    background-color: rgba(0, 0, 0, .7);
     display: none;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#questionText {
+    background-color: white;
+    padding: 20px;
 }
 
 #multipleAnswersBox {
@@ -314,8 +323,9 @@ table * {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    width: 400px;
-    height: 200px;
+    width: 50%;
+    height: 50%;
+
 }
 
 #multipleAnswersBox div {
@@ -323,6 +333,13 @@ table * {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: white;
+    font-weight: bold;
+    font-size: 23px;
+}
+
+#multipleAnsersBox div:hover {
+    cursor: pointer;
 }
 
 #lostText {
@@ -335,10 +352,12 @@ table * {
 }
 
 #winText {
-    background-color: greenyellow;
+    background-color: lightgreen;
     position: absolute;
     font-size: 40px;
     padding: 20px;
     margin-top: 90px;
     display: none;
+    width: 50%;
+    height: 50%;
 }

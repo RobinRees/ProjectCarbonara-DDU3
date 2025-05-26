@@ -105,6 +105,7 @@
     "password": "Stern",
     "score": 70,
     "loggedIn": true,
-    "id": 15
+    "id": 15,
+    "roundScore": 30
   }
 ]
