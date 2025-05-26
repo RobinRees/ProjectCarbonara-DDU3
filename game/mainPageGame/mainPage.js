@@ -5,17 +5,16 @@ let currentPlayer = null;
 const livesBox = document.getElementById("livesBox");
 
 (async () => {
-    const response = await fetch("/getLoggedInUser", {
-        method: "GET",
-        headers: { "content-type": "application/json" }
-    });
-    if (response.status === 200) {
-        currentPlayer = await response.json();
-        console.log(currentPlayer);
-    }
-    createChoices();
-    createTopTen(currentPlayer);
-
+  const response = await fetch("/getLoggedInUser", {
+    method: "GET",
+    headers: { "content-type": "application/json" },
+  });
+  if (response.status === 200) {
+    currentPlayer = await response.json();
+    console.log(currentPlayer);
+  }
+  createChoices();
+  createTopTen(currentPlayer);
 })();
 
 const foodImageDiv = document.getElementById("foodImage");
@@ -26,253 +25,251 @@ let correctGuesses = 0;
 const allCorrect = 3;
 let lives = 9;
 let currentScore = 0;
-showScore.innerHTML = `Current score: ${currentScore}`
-
+showScore.innerHTML = `Current score: ${currentScore}`;
 
 async function createChoices() {
-    document.getElementById("usernameDisplay").textContent = `Current player: ${currentPlayer.username}`;
+  document.getElementById(
+    "usernameDisplay"
+  ).textContent = `Current player: ${currentPlayer.username}`;
 
-    const currentMealData = await fetch("https://www.themealdb.com/api/json/v1/1/random.php").then(response => response.json());
-    const ingredientsData = await fetch("../database/ingredients.json").then(response => response.json());
+  const currentMealData = await fetch(
+    "https://www.themealdb.com/api/json/v1/1/random.php"
+  ).then((response) => response.json());
+  const ingredientsData = await fetch("../database/ingredients.json").then(
+    (response) => response.json()
+  );
 
-    const meal = currentMealData.meals[0];
+  const meal = currentMealData.meals[0];
 
-    const mealName = meal.strMeal;
-    console.log(mealName)
+  const mealName = meal.strMeal;
+  console.log(mealName);
 
-    const mealRecipie = meal.strInstructions;
+  const mealRecipie = meal.strInstructions;
 
-    const img = document.getElementById("foodImage");
+  const img = document.getElementById("foodImage");
 
-    img.style.backgroundImage = `url("${meal.strMealThumb}")`
-    img.style.backgroundRepeat = "no-repeat";
-    img.style.backgroundSize = "cover";
+  img.style.backgroundImage = `url("${meal.strMealThumb}")`;
+  img.style.backgroundRepeat = "no-repeat";
+  img.style.backgroundSize = "cover";
 
-    const ingredientsArray = [];
-    for (let i = 1; i <= 20; i++) {
-        let ingredientName = "strIngredient" + i;
-        let ingredient = meal[ingredientName];
+  const ingredientsArray = [];
+  for (let i = 1; i <= 20; i++) {
+    let ingredientName = "strIngredient" + i;
+    let ingredient = meal[ingredientName];
 
-        if (ingredient && ingredient !== "") {
-            ingredientsArray.push(ingredient)
-        }
+    if (ingredient && ingredient !== "") {
+      ingredientsArray.push(ingredient);
+    }
+  }
+
+  const selectedIngredients = getRandomItem(ingredientsArray, 3);
+
+  const filteredIngredients = ingredientsData.filter(
+    (ingredients) => !selectedIngredients.includes(ingredients.name)
+  );
+
+  const selectedFakeIngredients = getRandomItem(filteredIngredients, 7);
+
+  const allChoices = [
+    ...selectedIngredients.map((name) => ({
+      name,
+      image: `https://www.themealdb.com/images/ingredients/${name}.png`,
+      isCorrect: true,
+    })),
+    ...selectedFakeIngredients.map((item) => ({
+      name: item.name,
+      image: item.image,
+      isCorrect: false,
+    })),
+  ];
+
+  shuffleArray(allChoices);
+
+  allChoices.forEach((choice) => {
+    const div = document.createElement("div");
+    div.classList.add("choice");
+
+    const text = document.createElement("p");
+    text.textContent = choice.name;
+    div.appendChild(text);
+
+    if (choice.image) {
+      div.style.backgroundImage = `url("${choice.image}")`;
+      div.style.backgroundSize = "contain";
+      div.style.backgroundRepeat = "no-repeat";
+      div.style.backgroundPosition = "center";
+      div.style.flexDirection = "column";
     }
 
-    const selectedIngredients = getRandomItem(ingredientsArray, 3);
+    div.addEventListener("click", async () => {
+      if (div.classList.contains("clicked")) return;
+      div.classList.add("clicked");
 
-    const filteredIngredients = ingredientsData.filter(ingredients => !selectedIngredients.includes(ingredients.name))
+      if (choice.isCorrect) {
+        div.style.backgroundColor = "lightGreen";
 
-    const selectedFakeIngredients = getRandomItem(filteredIngredients, 7);
+        correctGuesses++;
+        showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
 
-    const allChoices = [
-        ...selectedIngredients.map(name => ({
-            name,
-            image: `https://www.themealdb.com/images/ingredients/${name}.png`,
-            isCorrect: true
-        })),
-        ...selectedFakeIngredients.map(item => ({
-            name: item.name,
-            image: item.image,
-            isCorrect: false
-        }))
-    ];
-
-    shuffleArray(allChoices);
-
-    allChoices.forEach(choice => {
-        const div = document.createElement("div");
-        div.classList.add("choice");
-
-        const text = document.createElement("p");
-        text.textContent = choice.name;
-        div.appendChild(text);
-
-        if (choice.image) {
-            div.style.backgroundImage = `url("${choice.image}")`
-            div.style.backgroundSize = "contain";
-            div.style.backgroundRepeat = "no-repeat";
-            div.style.backgroundPosition = "center";
-            div.style.flexDirection = "column";
-
+        currentScore = currentScore + 10;
+        showScore.innerHTML = `Current score: ${currentScore}`;
+        if (correctGuesses === allCorrect) {
+          document.getElementById("nextButton").style.display = "block";
+          document.getElementById("foodTitle").textContent = mealName;
+          document.getElementById(
+            "recipeBox"
+          ).innerHTML = `<p>${mealRecipie}</p>`;
+          foodTitle.style.display = "block";
+          showCorrectGuess.style.display = "none";
         }
+      } else {
+        div.style.backgroundColor = "tomato";
+        lives--;
+        livesBox.innerHTML = `Lives left: ${lives}`;
+        if (lives === 0) {
+          document.getElementById("questionBox").style.display = "flex";
+          quiz.loadQuestion();
+        }
+      }
+    });
 
-        div.addEventListener("click", async () => {
-            if (div.classList.contains("clicked")) return;
-            div.classList.add("clicked");
-
-            if (choice.isCorrect) {
-                div.style.backgroundColor = "lightGreen"
-
-                correctGuesses++;
-                showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`
-
-                currentScore = currentScore + 10;
-                showScore.innerHTML = `Current score: ${currentScore}`
-                if (correctGuesses === allCorrect) {
-                    document.getElementById("nextButton").style.display = "block";
-                    document.getElementById("foodTitle").textContent = mealName;
-                    document.getElementById("recipeBox").innerHTML = `<p>${mealRecipie}</p>`;
-                    foodTitle.style.display = "block"
-                    showCorrectGuess.style.display = "none";
-
-
-                }
-            } else {
-                div.style.backgroundColor = "tomato"
-                lives--
-                livesBox.innerHTML = `Lives left: ${lives}`;
-                if (lives === 0) {
-                    document.getElementById("questionBox").style.display = "flex";
-                    quiz.loadQuestion();
-                }
-            }
-        });
-
-        choicesBox.appendChild(div);
-    })
-
+    choicesBox.appendChild(div);
+  });
 }
 
-
 function getRandomItem(array, count) {
-    const result = [];
-    while (result.length < count) {
-        const item = array[Math.floor(Math.random() * array.length)];
-        if (!result.includes(item)) {
-            result.push(item);
-        }
+  const result = [];
+  while (result.length < count) {
+    const item = array[Math.floor(Math.random() * array.length)];
+    if (!result.includes(item)) {
+      result.push(item);
     }
-    return result;
+  }
+  return result;
 }
 
 function shuffleArray(array) {
-    return array.sort(() => Math.random() - 0.5);
+  return array.sort(() => Math.random() - 0.5);
 }
 
 document.getElementById("nextButton").addEventListener("click", () => {
-    document.getElementById("nextButton").style.display = "none";
-    foodTitle.style.display = "none";
-    correctGuesses = 0;
-    choicesBox.innerHTML = "";
-    foodImageDiv.innerHTML = "";
-    recipeBox.innerHTML = "";
-    showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`
+  document.getElementById("nextButton").style.display = "none";
+  foodTitle.style.display = "none";
+  correctGuesses = 0;
+  choicesBox.innerHTML = "";
+  foodImageDiv.innerHTML = "";
+  recipeBox.innerHTML = "";
+  showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
 
-    showCorrectGuess.style.display = "block";
+  showCorrectGuess.style.display = "block";
 
-    createChoices();
+  createChoices();
 });
 
-
-const logOutButton = document.getElementById("logOutButton")
+const logOutButton = document.getElementById("logOutButton");
 
 logOutButton.addEventListener("click", async () => {
+  const response = await fetch("/logOutUser", {
+    method: "POST",
+  });
 
-    const response = await fetch("/logOutUser", {
-        method: "POST"
-    });
+  if (response.status === 200) {
+    alert("You logged out");
 
-    if (response.status === 200) {
-        alert("You logged out");
-
-        window.location.href = "/home";
-    } else {
-        alert("Något gick fel vid utloggning.");
-    }
-})
-
+    window.location.href = "/home";
+  } else {
+    alert("Något gick fel vid utloggning.");
+  }
+});
 
 const leaderboardButton = document.getElementById("leaderboardNav");
 const leaderboard = document.getElementById("leaderboard-container");
 
 leaderboardButton.addEventListener("click", () => {
-    leaderboard.style.display = "block";
+  leaderboard.style.display = "block";
 });
 
 const backButton = document.getElementById("backButton");
 backButton.addEventListener("click", () => {
-    leaderboard.style.display = "none";
+  leaderboard.style.display = "none";
 });
 
 function decodeHTML(html) {
-    const txt = document.createElement("textarea");
-    txt.innerHTML = html;
-    return txt.value;
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
 }
 
-
 async function createTriviaQuestion() {
-    const questionBox = document.getElementById("questionBox")
-    questionBox.style.display = "flex";
-    const response = await fetch("https://opentdb.com/api.php?amount=1");
-    const data = await response.json();
+  const questionBox = document.getElementById("questionBox");
+  questionBox.style.display = "flex";
+  const response = await fetch("https://opentdb.com/api.php?amount=1");
+  const data = await response.json();
 
-    const questionData = data.results[0];
-    const question = questionData.question;
-    const correctAnswer = questionData.correct_answer;
-    const incorrectAnswers = questionData.incorrect_answers;
-    document.getElementById("multipleAnswersBox").innerHTML = "";
+  const questionData = data.results[0];
+  const question = questionData.question;
+  const correctAnswer = questionData.correct_answer;
+  const incorrectAnswers = questionData.incorrect_answers;
+  document.getElementById("multipleAnswersBox").innerHTML = "";
 
+  const allAnswers = [
+    {
+      answer: correctAnswer,
+      isCorrect: true,
+    },
+    ...incorrectAnswers.map((answer) => ({
+      answer: answer,
+      isCorrect: false,
+    })),
+  ];
 
-    const allAnswers = [
-        {
-            answer: correctAnswer,
-            isCorrect: true
-        },
-        ...incorrectAnswers.map(answer => ({
-            answer: answer,
-            isCorrect: false
-        }))
-    ];
+  const shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
 
-    const shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
+  const questionText = document.getElementById("questionText");
+  questionText.textContent = decodeHTML(question);
 
-    const questionText = document.getElementById("questionText");
-    questionText.textContent = decodeHTML(question);
+  shuffledAnswers.forEach((choice) => {
+    const multipleAnswersBox = document.getElementById("multipleAnswersBox");
+    const div = document.createElement("div");
+    div.classList.add("choiceTwo");
 
-    shuffledAnswers.forEach(choice => {
-        const multipleAnswersBox = document.getElementById("multipleAnswersBox")
-        const div = document.createElement("div");
-        div.classList.add("choiceTwo");
+    const text = document.createElement("p");
+    text.textContent = decodeHTML(choice.answer);
+    div.appendChild(text);
+    multipleAnswersBox.appendChild(div);
 
-        const text = document.createElement("p");
-        text.textContent = decodeHTML(choice.answer);
-        div.appendChild(text);
-        multipleAnswersBox.appendChild(div);
+    div.addEventListener("click", async () => {
+      div.classList.add("clicked");
 
-        div.addEventListener("click", async () => {
-            div.classList.add("clicked");
+      if (choice.isCorrect) {
+        div.style.backgroundColor = "lightGreen";
+        const winText = document.getElementById("winText");
+        winText.style.display = "block";
+        // Life + 1;
 
-            if (choice.isCorrect) {
-                div.style.backgroundColor = "lightGreen";
-                const winText = document.getElementById("winText");
-                winText.style.display = "block";
-                // Life + 1;
+        setTimeout(() => {
+          questionBox.style.display = "none";
+          winText.style.display = "none";
+        }, 2000);
+      } else {
+        div.style.backgroundColor = "tomato";
+        const spanText = document.getElementById("correctAnswer");
+        spanText.textContent = `correct answer was: ${correctAnswer}`;
+        const loseText = document.getElementById("lostText");
+        loseText.style.display = "block";
 
-                setTimeout(() => {
-                    questionBox.style.display = "none";
-                    winText.style.display = "none";
-                }, 2000)
-                
-            } else {
-                div.style.backgroundColor = "tomato";
-                const spanText = document.getElementById("correctAnswer");
-                spanText.textContent = `correct answer was: ${correctAnswer}`;
-                const loseText = document.getElementById("lostText");
-                loseText.style.display = "block";
-
-                setTimeout( async () => {
-                        await fetch("http://localhost:8000/updateScore", {
-                        method: "PATCH",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ score: currentScore })
-                    });    
-                    window.location.href = "/gameOver";
-                }, 2000)
-                // redirect - Loosescreen timer? 
-            }
-        })
-    })
+        setTimeout(async () => {
+          await fetch("http://localhost:8000/updateScore", {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ score: currentScore }),
+          });
+          window.location.href = "/gameOver";
+        }, 2000);
+        // redirect - Loosescreen timer?
+      }
+    });
+  });
 }
 
 class FoodTriviaQuiz {
@@ -283,98 +280,97 @@ class FoodTriviaQuiz {
     this.answersElement = document.getElementById("multipleAnswersBox");
   }
 
- async loadQuestion() {
-  let attempts = 0;
-  let filtered = [];
+  async loadQuestion() {
+    let attempts = 0;
+    let filtered = [];
 
-  while (filtered.length === 0 && attempts < 5) {
-    const response = await fetch(this.apiUrl);
-    const data = await response.json();
+    while (filtered.length === 0 && attempts < 5) {
+      const response = await fetch(this.apiUrl);
+      const data = await response.json();
 
-    filtered = data.results.filter(q =>
-      this.isFoodRelated(q.question)
-    );
+      filtered = data.results.filter((q) => this.isFoodRelated(q.question));
 
-    attempts++;
+      attempts++;
+    }
+
+    if (filtered.length === 0) {
+      this.questionElement.textContent =
+        "No food-related questions found after several attempts.";
+      return;
+    }
+
+    const question = filtered[Math.floor(Math.random() * filtered.length)];
+    this.display(question);
   }
-
-  if (filtered.length === 0) {
-    this.questionElement.textContent = "No food-related questions found after several attempts.";
-    return;
-  }
-
-  const question = filtered[Math.floor(Math.random() * filtered.length)];
-  this.display(question);
-}
 
   isFoodRelated(text) {
-    return this.keywords.some(keyword =>
+    return this.keywords.some((keyword) =>
       text.toLowerCase().includes(keyword)
     );
   }
-display(questionObj) {
-  const { question, correct_answer, incorrect_answers } = questionObj;
+  display(questionObj) {
+    const { question, correct_answer, incorrect_answers } = questionObj;
 
-  this.questionElement.innerHTML = this.decodeHTML(question);
-  this.answersElement.innerHTML = "";
+    this.questionElement.innerHTML = this.decodeHTML(question);
+    this.answersElement.innerHTML = "";
 
-  const allAnswers = [
-    {
-      answer: correct_answer,
-      isCorrect: true
-    },
-    ...incorrect_answers.map(answer => ({
-      answer: answer,
-      isCorrect: false
-    }))
-  ];
+    const allAnswers = [
+      {
+        answer: correct_answer,
+        isCorrect: true,
+      },
+      ...incorrect_answers.map((answer) => ({
+        answer: answer,
+        isCorrect: false,
+      })),
+    ];
 
-  const shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
+    const shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
 
-  shuffledAnswers.forEach(choice => {
-    const div = document.createElement("div");
-    div.classList.add("choiceTwo");
+    shuffledAnswers.forEach((choice) => {
+      const div = document.createElement("div");
+      div.classList.add("choiceTwo");
 
-    const text = document.createElement("p");
-    text.textContent = this.decodeHTML(choice.answer);
-    div.appendChild(text);
+      const text = document.createElement("p");
+      text.textContent = this.decodeHTML(choice.answer);
+      div.appendChild(text);
 
-    div.addEventListener("click", async () => {
-      div.classList.add("clicked");
+      div.addEventListener("click", async () => {
+        div.classList.add("clicked");
 
-      if (choice.isCorrect) {
-        div.style.backgroundColor = "lightGreen";
-        const winText = document.getElementById("winText");
-        winText.style.display = "block";
+        if (choice.isCorrect) {
+          div.style.backgroundColor = "lightGreen";
+          const winText = document.getElementById("winText");
+          winText.style.display = "block";
 
-        lives++;
-        livesBox.innerHTML = `Lives left: ${lives}`;
+          lives++;
+          livesBox.innerHTML = `Lives left: ${lives}`;
 
-        setTimeout(() => {
-          document.getElementById("questionBox").style.display = "none";
-          winText.style.display = "none";
-        }, 2000);
-      } else {
-        div.style.backgroundColor = "tomato";
-        const spanText = document.getElementById("correctAnswer");
-        spanText.textContent = `correct answer was: ${correct_answer}`;
-        const loseText = document.getElementById("lostText");
-        loseText.style.display = "block";
+          setTimeout(() => {
+            document.getElementById("questionBox").style.display = "none";
+            winText.style.display = "none";
+          }, 2000);
+        } else {
+          div.style.backgroundColor = "tomato";
+          const spanText = document.getElementById("correctAnswer");
+          spanText.textContent = `correct answer was: ${correct_answer}`;
+          const loseText = document.getElementById("lostText");
+          loseText.style.display = "block";
 
-        setTimeout(async () => {
-          await fetch("http://localhost:8000/updateScore", {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ score: currentScore })
-          });
-          window.location.href = "/gameOver";
-        }, 2000);
-      }
+          setTimeout(async () => {
+            await fetch("http://localhost:8000/updateScore", {
+              method: "PATCH",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ score: currentScore }),
+            });
+            window.location.href = "/gameOver";
+          }, 2000);
+        }
+      });
+
+      this.answersElement.appendChild(div);
     });
-
-    this.answersElement.appendChild(div);
-  });
-}
+  }
 
   decodeHTML(str) {
     const txt = document.createElement("textarea");
@@ -387,10 +383,19 @@ display(questionObj) {
 const quiz = new FoodTriviaQuiz(
   "https://opentdb.com/api.php?amount=50&category=9&type=multiple",
   [
-    "food", "dish", "drink", "ingredient", "cuisine", "pizza", "cheese",
-    "chocolate", "fruit", "vegetable", "cook", "cooking", "meal", "beverage"
+    "food",
+    "dish",
+    "drink",
+    "ingredient",
+    "cuisine",
+    "pizza",
+    "cheese",
+    "chocolate",
+    "fruit",
+    "vegetable",
+    "cook",
+    "cooking",
+    "meal",
+    "beverage",
   ]
 );
-
-
-
