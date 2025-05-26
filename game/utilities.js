@@ -152,7 +152,13 @@ export async function createTopTen(currentPlayer) {
         const row = rows[i];
         row.querySelector(".rank").textContent = i + 1;
         row.querySelector(".name").textContent = player.username || "No user";
-        row.querySelector(".score").textContent = player?.score ?? "-";
+        
+        if (player && player.score != null) {
+          row.querySelector(".score").textContent = player.score;
+        } else {
+          row.querySelector(".score").textContent = "-";
+        }
+        
         if (row.querySelector(".name").textContent == currentPlayer.username) {
             row.querySelector(".rank").style.backgroundColor = "#4a90e2"
             row.querySelector(".name").style.backgroundColor = "#4a90e2"
@@ -163,9 +169,6 @@ export async function createTopTen(currentPlayer) {
         }
     });
 
-
-
-    // Fyll tomma rader om färre än 10 spelare
     for (let i = topPlayers.length; i < rows.length; i++) {
         const row = rows[i];
         row.querySelector(".rank").textContent = i + 1;
