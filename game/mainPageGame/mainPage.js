@@ -393,19 +393,18 @@ class FoodTriviaQuiz {
 const quiz = new FoodTriviaQuiz(
   "https://opentdb.com/api.php?amount=50&category=9&type=multiple",
   [
-    "food",
-    "dish",
-    "drink",
-    "ingredient",
-    "cuisine",
-    "pizza",
-    "cheese",
-    "chocolate",
-    "fruit",
-    "vegetable",
-    "cook",
-    "cooking",
-    "meal",
-    "beverage",
+    "food", "dish", "drink", "ingredient", "cuisine", "meal", "snack",
+    "breakfast", "lunch", "dinner", "dessert", "appetizer", "recipe",
+    "cook", "cooking", "baking", "chef", "kitchen", "oven",
+    "pizza", "cheese", "chocolate", "fruit", "vegetable", "meat",
+    "fish", "seafood", "egg", "bread", "butter", "pasta", "rice",
+    "soup", "stew", "sauce", "jam", "honey", "spice", "herb",
+    "grill", "boil", "fry", "bake", "roast", "steam", "microwave",
+    "coffee", "tea", "juice", "soda", "beer", "wine", "cocktail",
+    "whiskey", "vodka", "rum", "gin", "liqueur", "beverage",
+    "McDonald's", "Burger King", "KFC", "Subway", "Starbucks",
+    "Coca-Cola", "Pepsi", "Nestlé", "Kraft", "Heinz",
+    "Thanksgiving", "Christmas", "Easter", "Hanukkah", "Ramadan",
+    "Oktoberfest", "street food", "food festival"
   ]
 );
