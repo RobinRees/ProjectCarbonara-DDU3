@@ -35,7 +35,7 @@ main {
 }
 
 #littleLeft h1, #littleRight h1{
-    color: white;
+    color: #dfc28b;
     text-align: center;
     height: 5vw;
     width: 5vw;
@@ -45,7 +45,7 @@ main {
 }
 
 body h1{
-    color: white;
+    color: #dfc28b;
     text-align: center;
 }
 
@@ -60,4 +60,8 @@ button, input{
     border-right: none;
     border-bottom: 1px solid white;
     outline: none;
+}
+
+h3 {
+    color: #dfc28b;
 }
