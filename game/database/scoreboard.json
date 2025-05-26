@@ -77,5 +77,20 @@
     "loggedIn": false,
     "id": 11,
     "roundScore": 60
+  },
+  {
+    "username": "Casee",
+    "password": "Casee",
+    "score": 30,
+    "loggedIn": false,
+    "id": 12
+  },
+  {
+    "username": "Didrik",
+    "password": "Didrik",
+    "score": 100,
+    "loggedIn": true,
+    "id": 13,
+    "roundScore": 30
   }
 ]

@@ -239,6 +239,7 @@ async function createTriviaQuestion() {
     multipleAnswersBox.appendChild(div);
 
     div.addEventListener("click", async () => {
+      if (div.classList.contains("clicked")) return;
       div.classList.add("clicked");
 
       if (choice.isCorrect) {
@@ -349,6 +350,8 @@ class FoodTriviaQuiz {
           setTimeout(() => {
             document.getElementById("questionBox").style.display = "none";
             winText.style.display = "none";
+            this.questionElement.innerHTML = "";
+            this.answersElement.innerHTML = "";
           }, 2000);
         } else {
           div.style.backgroundColor = "tomato";
@@ -358,11 +361,18 @@ class FoodTriviaQuiz {
           loseText.style.display = "block";
 
           setTimeout(async () => {
-            await fetch("http://localhost:8000/updateScore", {
-              method: "PATCH",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ score: currentScore }),
-            });
+            console.log("sending score", currentScore);
+            try {
+                await fetch("http://localhost:8000/updateScore", {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ score: currentScore }),
+                });
+            } catch (error) {
+                console.error("score update failed", error);
+                window.location.href = "/gameOver";
+            }
+
             window.location.href = "/gameOver";
           }, 2000);
         }
