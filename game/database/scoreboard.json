@@ -89,8 +89,22 @@
     "username": "Didrik",
     "password": "Didrik",
     "score": 100,
-    "loggedIn": true,
+    "loggedIn": false,
     "id": 13,
     "roundScore": 60
+  },
+  {
+    "username": "Keso",
+    "password": "Keso",
+    "score": 110,
+    "loggedIn": false,
+    "id": 14
+  },
+  {
+    "username": "Stern",
+    "password": "Stern",
+    "score": 70,
+    "loggedIn": true,
+    "id": 15
   }
 ]
