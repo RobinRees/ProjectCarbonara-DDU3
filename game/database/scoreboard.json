@@ -27,5 +27,33 @@
     "loggedIn": false,
     "id": 4,
     "roundScore": 30
+  },
+  {
+    "username": "Sett",
+    "password": "Sett",
+    "score": 60,
+    "loggedIn": false,
+    "id": 5
+  },
+  {
+    "username": "Asd",
+    "password": "asd",
+    "score": 0,
+    "loggedIn": false,
+    "id": 6
+  },
+  {
+    "username": "sdfg",
+    "password": "dsf",
+    "score": 0,
+    "loggedIn": false,
+    "id": 7
+  },
+  {
+    "username": "Sad",
+    "password": "Sad",
+    "score": 0,
+    "loggedIn": true,
+    "id": 8
   }
 ]
