@@ -122,7 +122,8 @@ async function createChoices() {
                 lives--
                 livesBox.innerHTML = `Lives left: ${lives}`;
                 if (lives === 0) {
-                    createTriviaQuestion()
+                    document.getElementById("questionBox").style.display = "flex";
+                    quiz.loadQuestion();
                 }
             }
         });
@@ -260,7 +261,12 @@ async function createTriviaQuestion() {
                 const loseText = document.getElementById("lostText");
                 loseText.style.display = "block";
 
-                setTimeout(() => {
+                setTimeout( async () => {
+                        await fetch("http://localhost:8000/updateScore", {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ score: currentScore })
+                    });    
                     window.location.href = "/gameOver";
                 }, 2000)
                 // redirect - Loosescreen timer? 
@@ -268,3 +274,123 @@ async function createTriviaQuestion() {
         })
     })
 }
+
+class FoodTriviaQuiz {
+  constructor(apiUrl, keywords) {
+    this.apiUrl = apiUrl;
+    this.keywords = keywords;
+    this.questionElement = document.getElementById("questionText");
+    this.answersElement = document.getElementById("multipleAnswersBox");
+  }
+
+ async loadQuestion() {
+  let attempts = 0;
+  let filtered = [];
+
+  while (filtered.length === 0 && attempts < 5) {
+    const response = await fetch(this.apiUrl);
+    const data = await response.json();
+
+    filtered = data.results.filter(q =>
+      this.isFoodRelated(q.question)
+    );
+
+    attempts++;
+  }
+
+  if (filtered.length === 0) {
+    this.questionElement.textContent = "No food-related questions found after several attempts.";
+    return;
+  }
+
+  const question = filtered[Math.floor(Math.random() * filtered.length)];
+  this.display(question);
+}
+
+  isFoodRelated(text) {
+    return this.keywords.some(keyword =>
+      text.toLowerCase().includes(keyword)
+    );
+  }
+display(questionObj) {
+  const { question, correct_answer, incorrect_answers } = questionObj;
+
+  this.questionElement.innerHTML = this.decodeHTML(question);
+  this.answersElement.innerHTML = "";
+
+  const allAnswers = [
+    {
+      answer: correct_answer,
+      isCorrect: true
+    },
+    ...incorrect_answers.map(answer => ({
+      answer: answer,
+      isCorrect: false
+    }))
+  ];
+
+  const shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
+
+  shuffledAnswers.forEach(choice => {
+    const div = document.createElement("div");
+    div.classList.add("choiceTwo");
+
+    const text = document.createElement("p");
+    text.textContent = this.decodeHTML(choice.answer);
+    div.appendChild(text);
+
+    div.addEventListener("click", async () => {
+      div.classList.add("clicked");
+
+      if (choice.isCorrect) {
+        div.style.backgroundColor = "lightGreen";
+        const winText = document.getElementById("winText");
+        winText.style.display = "block";
+
+        lives++;
+        livesBox.innerHTML = `Lives left: ${lives}`;
+
+        setTimeout(() => {
+          document.getElementById("questionBox").style.display = "none";
+          winText.style.display = "none";
+        }, 2000);
+      } else {
+        div.style.backgroundColor = "tomato";
+        const spanText = document.getElementById("correctAnswer");
+        spanText.textContent = `correct answer was: ${correct_answer}`;
+        const loseText = document.getElementById("lostText");
+        loseText.style.display = "block";
+
+        setTimeout(async () => {
+          await fetch("http://localhost:8000/updateScore", {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ score: currentScore })
+          });
+          window.location.href = "/gameOver";
+        }, 2000);
+      }
+    });
+
+    this.answersElement.appendChild(div);
+  });
+}
+
+  decodeHTML(str) {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = str;
+    return txt.value;
+  }
+}
+
+// ----- Initiering -----
+const quiz = new FoodTriviaQuiz(
+  "https://opentdb.com/api.php?amount=50&category=9&type=multiple",
+  [
+    "food", "dish", "drink", "ingredient", "cuisine", "pizza", "cheese",
+    "chocolate", "fruit", "vegetable", "cook", "cooking", "meal", "beverage"
+  ]
+);
+
+
+
