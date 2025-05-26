@@ -104,8 +104,30 @@
     "username": "Stern",
     "password": "Stern",
     "score": 70,
-    "loggedIn": true,
+    "loggedIn": false,
     "id": 15,
     "roundScore": 30
+  },
+  {
+    "username": "arg",
+    "password": "arg",
+    "score": 80,
+    "loggedIn": false,
+    "id": 16,
+    "roundScore": 50
+  },
+  {
+    "username": "fel",
+    "password": "test",
+    "score": 30,
+    "loggedIn": false,
+    "id": 17
+  },
+  {
+    "username": "robinson",
+    "password": "olson",
+    "score": 0,
+    "loggedIn": true,
+    "id": 18
   }
 ]

@@ -9,116 +9,97 @@
 </head>
 
 <body>
-    <div id="leaderboard-container">
-        <div id="leaderboard-header">
-            <button type="button" id="backButton">X</button>
-            <h1> LEADER BOARD</h1>
-            <img src="../images/chef.png" alt="">
-        </div>
 
-        <table id="leaderboard">
-            <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Name</th>
-                    <th>Total Score</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 10 rader – statiska -->
-                <tr>
-                    <td class="rank"></td>
-                    <td class="name"></td>
-                    <td class="score"></td>
-                </tr>
-                <tr>
-                    <td class="rank"></td>
-                    <td class="name"></td>
-                    <td class="score"></td>
-                </tr>
-                <tr>
-                    <td class="rank"></td>
-                    <td class="name"></td>
-                    <td class="score"></td>
-                </tr>
-                <tr>
-                    <td class="rank"></td>
-                    <td class="name"></td>
-                    <td class="score"></td>
-                </tr>
-                <tr>
-                    <td class="rank"></td>
-                    <td class="name"></td>
-                    <td class="score"></td>
-                </tr>
-                <tr>
-                    <td class="rank"></td>
-                    <td class="name"></td>
-                    <td class="score"></td>
-                </tr>
-                <tr>
-                    <td class="rank"></td>
-                    <td class="name"></td>
-                    <td class="score"></td>
-                </tr>
-                <tr>
-                    <td class="rank"></td>
-                    <td class="name"></td>
-                    <td class="score"></td>
-                </tr>
-                <tr>
-                    <td class="rank"></td>
-                    <td class="name"></td>
-                    <td class="score"></td>
-                </tr>
-                <tr>
-                    <td class="rank"></td>
-                    <td class="name"></td>
-                    <td class="score"></td>
-                </tr>
-            </tbody>
-        </table>
-
-    </div>
     <nav>
         <div>
             <h1>You Lost</h1>
         </div>
     </nav>
     <main>
-        <div>
-            <div id="randomApiImage">
-                <p>Random API gif här?</p>
+        <div id="leaderboard-container">
+            <div id="leaderboard-header">
+                <button type="button" id="backButton">X</button>
+                <h1> LEADER BOARD</h1>
+                <img src="../images/chef.png" alt="">
             </div>
-            <div id="scoreBox">
-                <div id="usernameDisplay"></div>
 
-                <p>Your score: <span id="finalScore"></span></p>
-                <p>Your personal best: <span id="scorePersonalBest"></span></p>
-            </div>
-            <div id="hasLeaderBoard">
-                <button type="button" id="leaderboardButton">Leaderboard</button>
+            <table id="leaderboard">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Total Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 10 rader – statiska -->
+                    <tr>
+                        <td class="rank"></td>
+                        <td class="name"></td>
+                        <td class="score"></td>
+                    </tr>
+                    <tr>
+                        <td class="rank"></td>
+                        <td class="name"></td>
+                        <td class="score"></td>
+                    </tr>
+                    <tr>
+                        <td class="rank"></td>
+                        <td class="name"></td>
+                        <td class="score"></td>
+                    </tr>
+                    <tr>
+                        <td class="rank"></td>
+                        <td class="name"></td>
+                        <td class="score"></td>
+                    </tr>
+                    <tr>
+                        <td class="rank"></td>
+                        <td class="name"></td>
+                        <td class="score"></td>
+                    </tr>
+                    <tr>
+                        <td class="rank"></td>
+                        <td class="name"></td>
+                        <td class="score"></td>
+                    </tr>
+                    <tr>
+                        <td class="rank"></td>
+                        <td class="name"></td>
+                        <td class="score"></td>
+                    </tr>
+                    <tr>
+                        <td class="rank"></td>
+                        <td class="name"></td>
+                        <td class="score"></td>
+                    </tr>
+                    <tr>
+                        <td class="rank"></td>
+                        <td class="name"></td>
+                        <td class="score"></td>
+                    </tr>
+                    <tr>
+                        <td class="rank"></td>
+                        <td class="name"></td>
+                        <td class="score"></td>
+                    </tr>
+                </tbody>
+            </table>
 
-
-            </div>
-            <button id="homeButton" type="button">Home and try again</button>
+        </div>
+        <div id="scoreBox">
+            <div>Personal stats:</div>
+            <div>Your score: <span id="finalScore"></span></div>
+            <div>Your personal best: <span id="scorePersonalBest"></span></div>
+        </div>
+        <div id="menuButtons">
+            <button type="button" id="leaderboardButton">Leaderboard</button>
+            <button type="button" id="playAgain">Play Again</button>
+            <button id="homeButton" type="button">Logout</button>
         </div>
 
-        <!-- <div id="personalBox">
-            <p>Your PB is <span class="scorePersonalBest">__</span> and you are nr <span id="personalSpot">__</span>
-                on the leaderboard</p>
-        </div> -->
     </main>
     <script type="module" src="./LoosePage/lose.js"></script>
 </body>
 
 </html>
-
-<!-- <div id="leaderboard">
-    <h1>Leaderboard</h1>
-    <div id="tabellBox">
-        <div id="tabell">
-        </div>
-    </div>
-    
-</div> -->

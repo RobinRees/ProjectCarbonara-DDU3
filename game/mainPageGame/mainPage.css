@@ -146,6 +146,8 @@ main {
     margin-bottom: 3px;
 }
 
+
+
 #foodTitle {
     display: none;
 }
@@ -165,8 +167,8 @@ main {
     position: relative;
 }
 
-#recipeBox h2 {
-    margin: 15px 0 0 0;
+h2 {
+    text-align: center;
 }
 
 #recipeBox p {

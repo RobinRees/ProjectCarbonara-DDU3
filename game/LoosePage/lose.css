@@ -4,14 +4,15 @@ body {
     align-items: center;
     position: relative;
     flex-direction: column;
+    background-color: #e0e7ff;
 }
 
 nav {
+    height: 80px;
+    margin-bottom: 85px;
     display: flex;
     justify-content: center;
-    margin-bottom: 25px;
     background-color: #4a90e2;
-    padding: 0 0 0 20px;
     width: 100%;
     position: relative;
 }
@@ -26,19 +27,60 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 30px;
+    margin-top: 50px;
 }
 
 
 #scoreBox {
-    display: grid;
-    grid-auto-columns: auto;
-    color: white;
-    background-color: #4a90e2;
-    padding: 10px;
+    background-color: white;
+    padding: 15px;
+    gap: 15px;
+    border-radius: 20px;
 }
+
+/* #scoreBox div {
+    border-radius: 20px;
+} */
+
 
 p {
     margin: 0;
+}
+
+#menuButtons {
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+button {
+    margin: 0;
+    width: 100%;
+    height: fit-content;
+    padding: 10px 50px;
+    background-color: gold;
+    font-weight: bold;
+    border-radius: 50px;
+    font-size: 20px;
+    outline: none;
+    border-style: none;
+    border-bottom: 3px solid goldenrod;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    border-bottom: none;
+    margin-bottom: 3px;
+    transform: translateY(5px);
+
 }
 
 #playerInfo {
@@ -79,10 +121,11 @@ img {
     background-color: #fff;
     border-radius: 9px;
     overflow: visible;
-    position: absolute;
-    left: 125px;
-    top: 155px;
     display: none;
+    position: absolute;
+    top: 175px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 
@@ -92,8 +135,8 @@ img {
     color: white;
     text-align: center;
     padding: 12px;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     height: 131px;
     position: relative;
 }
@@ -107,6 +150,7 @@ img {
     padding: 1px 5px;
     color: #4a90e2;
     font-weight: bold;
+    width: fit-content;
 }
 
 #leaderboard-header h1 {
