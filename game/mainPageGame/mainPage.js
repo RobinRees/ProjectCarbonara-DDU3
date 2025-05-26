@@ -158,6 +158,8 @@ document.getElementById("nextButton").addEventListener("click", () => {
     choicesBox.innerHTML = "";
     foodImageDiv.innerHTML = "";
     recipeBox.innerHTML = "";
+    showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`
+
     showCorrectGuess.style.display = "block";
 
     createChoices();
