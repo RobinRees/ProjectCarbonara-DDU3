@@ -198,11 +198,18 @@ logOutButton.addEventListener("click", async () => {
   }
 });
 
-const leaderboardButton = document.getElementById("leaderboardNav");
-const leaderboard = document.getElementById("leaderboard-container");
+document.getElementById("nextButton").addEventListener("click", () => {
+  document.getElementById("nextButton").style.display = "none";
+  foodTitle.style.display = "none";
+  correctGuesses = 0;
+  choicesBox.innerHTML = "";
+  foodImageDiv.innerHTML = "";
+  recipeBox.innerHTML = "";
+  showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
 
-leaderboardButton.addEventListener("click", () => {
-  leaderboard.style.display = "block";
+  showCorrectGuess.style.display = "block";
+
+  createChoices();
 });
 
 const backButton = document.getElementById("backButton");
