@@ -79,62 +79,11 @@
     "roundScore": 60
   },
   {
-    "username": "Casee",
-    "password": "Casee",
+    "username": "Pelle",
+    "password": "Pella",
     "score": 30,
-    "loggedIn": false,
-    "id": 12
-  },
-  {
-    "username": "Didrik",
-    "password": "Didrik",
-    "score": 100,
-    "loggedIn": false,
-    "id": 13,
-    "roundScore": 60
-  },
-  {
-    "username": "Keso",
-    "password": "Keso",
-    "score": 110,
-    "loggedIn": false,
-    "id": 14
-  },
-  {
-    "username": "Stern",
-    "password": "Stern",
-    "score": 70,
-    "loggedIn": false,
-    "id": 15,
-    "roundScore": 30
-  },
-  {
-    "username": "Ladok",
-    "password": "Ladok",
-    "score": 50,
-    "loggedIn": false,
-    "id": 16
-  },
-  {
-    "username": "Paul",
-    "password": "Paul",
-    "score": 50,
-    "loggedIn": false,
-    "id": 17
-  },
-  {
-    "username": "Albin",
-    "password": "Albin",
-    "score": 60,
-    "loggedIn": false,
-    "id": 18
-  },
-  {
-    "username": "Palle",
-    "password": "Palle",
-    "score": 70,
     "loggedIn": true,
-    "id": 19,
-    "roundScore": 70
+    "id": 12,
+    "roundScore": 30
   }
 ]
