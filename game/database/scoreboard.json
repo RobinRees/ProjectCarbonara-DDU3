@@ -109,32 +109,26 @@
     "roundScore": 30
   },
   {
-    "username": "Ladok",
-    "password": "Ladok",
-    "score": 50,
+    "username": "balle",
+    "password": "balle",
+    "score": 60,
     "loggedIn": false,
-    "id": 16
+    "id": 16,
+    "roundScore": 40
   },
   {
-    "username": "Paul",
-    "password": "Paul",
-    "score": 50,
+    "username": "baj",
+    "password": "san",
+    "score": 60,
     "loggedIn": false,
     "id": 17
   },
   {
-    "username": "Albin",
-    "password": "Albin",
+    "username": "p",
+    "password": "p",
     "score": 60,
-    "loggedIn": false,
-    "id": 18
-  },
-  {
-    "username": "Palle",
-    "password": "Palle",
-    "score": 70,
     "loggedIn": true,
-    "id": 19,
-    "roundScore": 70
+    "id": 18,
+    "roundScore": 30
   }
 ]
