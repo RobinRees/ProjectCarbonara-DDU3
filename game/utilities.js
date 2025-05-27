@@ -144,6 +144,16 @@ export async function createTopTen(currentPlayer) {
 
     const topPlayers = scoreboard.sort((a, b) => b.score - a.score).slice(0, 10);
     const rows = document.querySelectorAll("table tbody tr");
+    rows.forEach(row => {
+        row.querySelector(".rank").style.backgroundColor = "initial";
+        row.querySelector(".name").style.backgroundColor = "initial";
+        row.querySelector(".score").style.backgroundColor = "initial";
+        row.querySelector(".name").style.color = "initial";
+        row.querySelector(".rank").style.color = "initial";
+        row.querySelector(".score").style.color = "initial";
+});
+
+
 
     topPlayers.forEach((player, i) => {
         const row = rows[i];
@@ -156,6 +166,8 @@ export async function createTopTen(currentPlayer) {
           row.querySelector(".score").textContent = "-";
         }
         
+
+
         if (row.querySelector(".name").textContent == currentPlayer.username) {
             row.querySelector(".rank").style.backgroundColor = "#4a90e2"
             row.querySelector(".name").style.backgroundColor = "#4a90e2"
