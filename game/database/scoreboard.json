@@ -108,5 +108,13 @@
     "loggedIn": false,
     "id": 15,
     "roundScore": 40
+  },
+  {
+    "username": "erik",
+    "password": "pinne",
+    "score": 60,
+    "loggedIn": false,
+    "id": 16,
+    "roundScore": 30
   }
 ]

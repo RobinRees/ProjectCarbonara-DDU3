@@ -11,8 +11,6 @@
 <body>
     <nav>
         <div>
-        </div>
-        <div>
             <img src="../images/carbonaraGameLogo.png" alt="">
         </div>
         <div>
@@ -21,22 +19,17 @@
     </nav>
     <main>
         <div id="left">
-            <h2>RECIPE:</h2>
-
-            <div id="recipeBox"></div>
+            <div id="usernameDisplay"></div>
+            <div id="showScore"></div>
         </div>
         <div id="middle">
             <div id="mainInfo">
                 <h1 id="foodTitle"></h1>
                 <div id="foodImage"> </div>
-                <div id="playerInfo">
-                    <div id="usernameDisplay"></div>
-                    <div id="showScore"></div>
-                </div>
+
                 <div id="gameInfo">
                     <div id="livesBox" class="importantRed">Lives left: 9</div>
                     <div id="correctGuesses" class="importantRed">Correct: 0/3</div>
-                    <button class="menuButton" id="nextButton">Next</button>
                 </div>
             </div>
             <div id="hasChoices">
@@ -116,10 +109,15 @@
             </div>
         </div>
     </main>
-    <div id="pointsAndNex">
-        <button id="nextButton">Next</button>
+    <div id="nextPopUp">
+        <div id="recipeBox">
+            <h2></h2>
+            <p></p>
+            <button id="nextButton">Next</button>
+        </div>
     </div>
-    <div id="popUpBackground">
+
+    <div id="triviaPopUp">
         <div id="questionBox">
             <h2>Guess correct for an extra life!</h2>
             <p id="questionText">Question here</p>

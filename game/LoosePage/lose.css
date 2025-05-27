@@ -37,7 +37,7 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 30px;
-    margin-top: 50px;
+    margin: 80px;
 }
 
 
@@ -64,7 +64,8 @@ p {
     gap: 15px;
     align-items: center;
     position: absolute;
-    top: 380px;
+    top: 400px;
+    box-shadow: 0 0 2px gray;
 }
 
 button {
@@ -72,7 +73,7 @@ button {
     width: 100%;
     height: fit-content;
     padding: 10px 50px;
-    background-color: gold;
+    background-color: #FFD700;
     font-weight: bold;
     border-radius: 50px;
     font-size: 20px;
@@ -83,26 +84,18 @@ button {
 
 button:hover {
     cursor: pointer;
+    background-color: rgba(255, 215, 0, 0.6);
 }
 
 button:active {
     border-bottom: none;
     margin-bottom: 3px;
     transform: translateY(5px);
+    background-color: rgba(255, 215, 0, 1);
+
 
 }
 
-#playerInfo {
-    background-color: goldenrod;
-    width: fit-content;
-    padding: 10px;
-    font-size: 22px;
-    font-weight: bold;
-    position: absolute;
-    top: 20px;
-    display: grid;
-    gap: 10px;
-}
 
 #randomApiImage {
     width: 250px;
@@ -117,28 +110,29 @@ button:active {
     /* Ta bort dessa tre senare */
 }
 
+
+
+#leaderboard-container {
+    width: 300px;
+    max-width: 450px;
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: visible;
+    display: none;
+    position: absolute;
+    top: 160px;
+    z-index: 20;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 0 5px #4a90e2;
+}
+
 #leaderboard-container img {
     width: 165px;
     position: absolute;
     left: 148px;
     top: -64px;
 }
-
-#leaderboard-container {
-    width: 300px;
-    max-width: 450px;
-    background-color: #fff;
-    border-radius: 9px;
-    overflow: visible;
-    display: none;
-    position: absolute;
-    top: 185px;
-    z-index: 20;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-
-
 
 #leaderboard-header {
     background-color: #4a90e2;
@@ -150,6 +144,14 @@ button:active {
     height: 131px;
     position: relative;
 }
+
+#leaderboard-footer {
+    height: 30px;
+    background-color: #4a90e2;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
 
 #backButton {
     position: absolute;
