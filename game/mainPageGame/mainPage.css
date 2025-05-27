@@ -67,7 +67,7 @@ main {
 
 #left,
 #right {
-    width: 400px;
+    width: 300px;
     border-radius: 20px;
     background-color: white;
     height: fit-content;
@@ -96,6 +96,12 @@ main {
     align-items: center;
     justify-content: end;
     border-radius: 20px;
+}
+
+.choice:hover,
+.choiceTwo:hover {
+    cursor: pointer;
+    box-shadow: 0 0 8px #4a90e2;
 }
 
 .choice p {
@@ -311,40 +317,43 @@ table * {
     position: absolute;
     background-color: rgba(0, 0, 0, .7);
     display: none;
-    width: 100vw;
-    height: 100vh;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    margin: auto;
 }
 
 #questionBox {
-    background-color: white;
+    background-color: #e0e7ff;
     padding: 30px;
-
+    border-radius: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+    box-shadow: 0 0 24px #FFD700;
 }
 
+
+
 #questionText {
-    background-color: white;
-    padding: 20px;
+    /* padding: 20px; */
+    font-weight: bold;
 }
 
 #multipleAnswersBox {
-    border: solid blue 1px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
+    gap: 15px;
 }
 
 #multipleAnswersBox div {
     border: 1px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: white;
     font-weight: bold;
     font-size: 23px;
+    padding: 0 15px;
+    text-align: center;
 }
 
 #multipleAnsersBox div:hover {
@@ -366,7 +375,18 @@ table * {
     font-size: 40px;
     padding: 20px;
     margin-top: 90px;
-    display: none;
+    display: block;
     width: 50%;
     height: 50%;
+}
+
+#popUptext {
+    padding: 15px;
+    margin-top: 15px;
+    text-align: center;
+    display: none;
+}
+
+#popUptext span {
+    font-weight: bold;
 }

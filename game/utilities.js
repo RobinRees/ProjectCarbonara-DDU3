@@ -151,7 +151,10 @@ export async function createTopTen(currentPlayer) {
         row.querySelector(".name").style.color = "initial";
         row.querySelector(".rank").style.color = "initial";
         row.querySelector(".score").style.color = "initial";
-});
+        row.querySelector(".name").style.fontWeight = "initial";
+        row.querySelector(".rank").style.fontWeight = "initial";
+        row.querySelector(".score").style.fontWeight = "initial";
+    });
 
 
 
@@ -159,13 +162,13 @@ export async function createTopTen(currentPlayer) {
         const row = rows[i];
         row.querySelector(".rank").textContent = i + 1;
         row.querySelector(".name").textContent = player.username || "No user";
-        
+
         if (player && player.score != null) {
-          row.querySelector(".score").textContent = player.score;
+            row.querySelector(".score").textContent = player.score;
         } else {
-          row.querySelector(".score").textContent = "-";
+            row.querySelector(".score").textContent = "-";
         }
-        
+
 
 
         if (row.querySelector(".name").textContent == currentPlayer.username) {
@@ -175,6 +178,9 @@ export async function createTopTen(currentPlayer) {
             row.querySelector(".name").style.color = "white"
             row.querySelector(".rank").style.color = "white"
             row.querySelector(".score").style.color = "white"
+            row.querySelector(".name").style.fontWeight = "bold"
+            row.querySelector(".rank").style.fontWeight = "bold"
+            row.querySelector(".score").style.fontWeight = "bold"
         }
     });
 
