@@ -6,17 +6,17 @@ const livesBox = document.getElementById("livesBox");
 
 (async () => {
 
-  const response = await fetch("/getLoggedInUser", {
-    method: "GET",
-    headers: { "content-type": "application/json" },
-  });
-  if (response.status === 200) {
-  currentPlayer = await response.json();
-  console.log(currentPlayer);
-  showCurrentPlayer();  
-  createChoices();
-  createTopTen(currentPlayer);
-  } 
+    const response = await fetch("/getLoggedInUser", {
+        method: "GET",
+        headers: { "content-type": "application/json" },
+    });
+    if (response.status === 200) {
+        currentPlayer = await response.json();
+        console.log(currentPlayer);
+        showCurrentPlayer();
+        createChoices();
+        createTopTen(currentPlayer);
+    }
 
 })();
 
@@ -30,12 +30,12 @@ let lives = 9;
 let currentScore = 0;
 showScore.innerHTML = `Current score: ${currentScore}`;
 
-async function createChoices (){
+async function createChoices() {
     showCurrentPlayer();
 
     const meal = await fetchRandomMeal();
     const localIngredients = await fetchIngredientsData();
-   
+
     showBigMealImg(meal);
 
     const realIngredients = getRealIngriedients(meal, 3);
@@ -54,23 +54,23 @@ async function fetchRandomMeal() {
 }
 
 async function fetchIngredientsData() {
-    const localJson = await fetch("../database/ingredients.json") ;// inte denoRead?
+    const localJson = await fetch("../database/ingredients.json");// inte denoRead?
     return await localJson.json();
 }
 
 function showCurrentPlayer() {
-  document.getElementById("usernameDisplay").textContent =
-    `Current player: ${currentPlayer.username}`;
+    document.getElementById("usernameDisplay").textContent =
+        `Current player: ${currentPlayer.username}`;
 }
 
 async function showBigMealImg(meal) {
     foodImageDiv.style.backgroundImage = `url("${meal.strMealThumb}")`;
 }
 
-function getRealIngriedients (meal, count){
+function getRealIngriedients(meal, count) {
     let arrayOfIngredients = [];
-   
-    for (let i = 1; i < 21; i++){
+
+    for (let i = 1; i < 21; i++) {
         let findIngridient = meal[`strIngredient${i}`];
         if (findIngridient) {
             let ingredient = findIngridient.toLowerCase();
@@ -82,106 +82,106 @@ function getRealIngriedients (meal, count){
 }
 
 function getFakeIndgriedients(ourIngr, realIngr, count) {
-  const mealIngrLower = realIngr.map(item => item.toLowerCase());
+    const mealIngrLower = realIngr.map(item => item.toLowerCase());
 
-  const arrayOfFakeIngredients = ourIngr.filter(item => {
-    return !mealIngrLower.includes(item.name.toLowerCase());
-  });
+    const arrayOfFakeIngredients = ourIngr.filter(item => {
+        return !mealIngrLower.includes(item.name.toLowerCase());
+    });
 
-  return getRandomItem(arrayOfFakeIngredients, count);
+    return getRandomItem(arrayOfFakeIngredients, count);
 }
 
 function getRandomItem(array, count) {
-  const result = [];
-  while (result.length < count) {
-    const item = array[Math.floor(Math.random() * array.length)];
-    if (!result.includes(item)) {
-      result.push(item);
+    const result = [];
+    while (result.length < count) {
+        const item = array[Math.floor(Math.random() * array.length)];
+        if (!result.includes(item)) {
+            result.push(item);
+        }
     }
-  }
-  return result;
+    return result;
 }
 
 function shuffleChoices(real, fake) {
-  const allChoices = [];
+    const allChoices = [];
 
-  for (let i = 0; i < real.length; i++) {
-    const name = real[i];
-    allChoices.push({
-      name: name,
-      image: `https://www.themealdb.com/images/ingredients/${name}.png`,
-      isCorrect: true,
-    });
-  }
+    for (let i = 0; i < real.length; i++) {
+        const name = real[i];
+        allChoices.push({
+            name: name,
+            image: `https://www.themealdb.com/images/ingredients/${name}.png`,
+            isCorrect: true,
+        });
+    }
 
-  for (let i = 0; i < fake.length; i++) {
-    const item = fake[i];
-    allChoices.push({
-      name: item.name,
-      image: item.image,
-      isCorrect: false,
-    });
-  }
+    for (let i = 0; i < fake.length; i++) {
+        const item = fake[i];
+        allChoices.push({
+            name: item.name,
+            image: item.image,
+            isCorrect: false,
+        });
+    }
 
-  shuffleArray(allChoices);
-  return allChoices;
+    shuffleArray(allChoices);
+    return allChoices;
 }
 
-function shuffleArray(array){
-  return array.sort(() => Math.random() - 0.5)
+function shuffleArray(array) {
+    return array.sort(() => Math.random() - 0.5)
 }
 
 function renderChoices(choices, meal) {
-  choicesBox.innerHTML = "";
-  choices.forEach((choice) => {
-    const div = document.createElement("div");
-    div.classList.add("choice");
+    choicesBox.innerHTML = "";
+    choices.forEach((choice) => {
+        const div = document.createElement("div");
+        div.classList.add("choice");
 
-    const text = document.createElement("p");
-    text.textContent = choice.name;
-    div.appendChild(text);
+        const text = document.createElement("p");
+        text.textContent = choice.name;
+        div.appendChild(text);
 
-    if (choice.image) {
-      div.style.backgroundImage = `url("${choice.image}")`;
-      div.style.backgroundSize = "contain";
-      div.style.backgroundRepeat = "no-repeat";
-      div.style.backgroundPosition = "center";
-      div.style.flexDirection = "column";
-    }
+        if (choice.image) {
+            div.style.backgroundImage = `url("${choice.image}")`;
+            div.style.backgroundSize = "contain";
+            div.style.backgroundRepeat = "no-repeat";
+            div.style.backgroundPosition = "center";
+            div.style.flexDirection = "column";
+        }
 
-    div.addEventListener("click", () => handleChoiceClick(div, choice, meal));
+        div.addEventListener("click", () => handleChoiceClick(div, choice, meal));
 
-    choicesBox.appendChild(div);
-  });
+        choicesBox.appendChild(div);
+    });
 }
 
 function handleChoiceClick(div, choice, meal) {
-  if (div.classList.contains("clicked")) return;
-  div.classList.add("clicked");
+    if (div.classList.contains("clicked")) return;
+    div.classList.add("clicked");
 
-  if (choice.isCorrect) {
-    div.style.backgroundColor = "lightGreen";
-    correctGuesses++;
-    showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
-    currentScore += 10;
-    showScore.innerHTML = `Current score: ${currentScore}`;
+    if (choice.isCorrect) {
+        div.style.backgroundColor = "lightGreen";
+        correctGuesses++;
+        showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
+        currentScore += 10;
+        showScore.innerHTML = `Current score: ${currentScore}`;
 
-    if (correctGuesses === allCorrect) {
-      document.getElementById("nextButton").style.display = "block";
-      document.getElementById("foodTitle").textContent = meal.strMeal;
-      document.getElementById("recipeBox").innerHTML = `<p>${meal.strInstructions}</p>`;
-      foodTitle.style.display = "block";
-      showCorrectGuess.style.display = "none";
+        if (correctGuesses === allCorrect) {
+            document.getElementById("nextButton").style.display = "block";
+            document.getElementById("foodTitle").textContent = meal.strMeal;
+            document.getElementById("recipeBox").innerHTML = `<p>${meal.strInstructions}</p>`;
+            foodTitle.style.display = "block";
+            showCorrectGuess.style.display = "none";
+        }
+    } else {
+        div.style.backgroundColor = "tomato";
+        lives--;
+        livesBox.innerHTML = `Lives left: ${lives}`;
+        if (lives === 0) {
+            document.getElementById("popUpBackground").style.display = "flex";
+            quiz.loadQuestion();
+        }
     }
-  } else {
-    div.style.backgroundColor = "tomato";
-    lives--;
-    livesBox.innerHTML = `Lives left: ${lives}`;
-    if (lives === 0) {
-      document.getElementById("questionBox").style.display = "flex";
-      quiz.loadQuestion();
-    }
-  }
 }
 
 const logOutButton = document.getElementById("logOutButton");
@@ -201,17 +201,17 @@ logOutButton.addEventListener("click", async () => {
 });
 
 document.getElementById("nextButton").addEventListener("click", () => {
-  document.getElementById("nextButton").style.display = "none";
-  foodTitle.style.display = "none";
-  correctGuesses = 0;
-  choicesBox.innerHTML = "";
-  foodImageDiv.innerHTML = "";
-  recipeBox.innerHTML = "";
-  showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
+    document.getElementById("nextButton").style.display = "none";
+    foodTitle.style.display = "none";
+    correctGuesses = 0;
+    choicesBox.innerHTML = "";
+    foodImageDiv.innerHTML = "";
+    recipeBox.innerHTML = "";
+    showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
 
-  showCorrectGuess.style.display = "block";
+    showCorrectGuess.style.display = "block";
 
-  createChoices();
+    createChoices();
 });
 
 const backButton = document.getElementById("backButton");
@@ -337,20 +337,20 @@ class FoodTriviaQuiz {
 }
 
 const quiz = new FoodTriviaQuiz(
-  "https://opentdb.com/api.php?amount=50&category=9&type=multiple",
-  [
-    "food", "dish", "drink", "ingredient", "cuisine", "meal", "snack",
-    "breakfast", "lunch", "dinner", "dessert", "appetizer", "recipe",
-    "cook", "cooking", "baking", "chef", "kitchen", "oven",
-    "pizza", "cheese", "chocolate", "fruit", "vegetable", "meat",
-    "fish", "seafood", "egg", "bread", "butter", "pasta", "rice",
-    "soup", "stew", "sauce", "jam", "honey", "spice", "herb",
-    "grill", "boil", "fry", "bake", "roast", "steam", "microwave",
-    "coffee", "tea", "juice", "soda", "beer", "wine", "cocktail",
-    "whiskey", "vodka", "rum", "gin", "liqueur", "beverage",
-    "McDonald's", "Burger King", "KFC", "Subway", "Starbucks",
-    "Coca-Cola", "Pepsi", "Nestlé", "Kraft", "Heinz",
-    "Thanksgiving", "Christmas", "Easter", "Hanukkah", "Ramadan",
-    "Oktoberfest", "street food", "food festival"
-  ]
+    "https://opentdb.com/api.php?amount=50&category=9&type=multiple",
+    [
+        "food", "dish", "drink", "ingredient", "cuisine", "meal", "snack",
+        "breakfast", "lunch", "dinner", "dessert", "appetizer", "recipe",
+        "cook", "cooking", "baking", "chef", "kitchen", "oven",
+        "pizza", "cheese", "chocolate", "fruit", "vegetable", "meat",
+        "fish", "seafood", "egg", "bread", "butter", "pasta", "rice",
+        "soup", "stew", "sauce", "jam", "honey", "spice", "herb",
+        "grill", "boil", "fry", "bake", "roast", "steam", "microwave",
+        "coffee", "tea", "juice", "soda", "beer", "wine", "cocktail",
+        "whiskey", "vodka", "rum", "gin", "liqueur", "beverage",
+        "McDonald's", "Burger King", "KFC", "Subway", "Starbucks",
+        "Coca-Cola", "Pepsi", "Nestlé", "Kraft", "Heinz",
+        "Thanksgiving", "Christmas", "Easter", "Hanukkah", "Ramadan",
+        "Oktoberfest", "street food", "food festival"
+    ]
 );
