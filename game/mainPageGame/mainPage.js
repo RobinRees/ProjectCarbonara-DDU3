@@ -10,11 +10,12 @@ const livesBox = document.getElementById("livesBox");
     headers: { "content-type": "application/json" },
   });
   if (response.status === 200) {
-    currentPlayer = await response.json();
-    console.log(currentPlayer);
-  }
+  currentPlayer = await response.json();
+  console.log(currentPlayer);
+  showCurrentPlayer();  
   createChoices();
   createTopTen(currentPlayer);
+  } 
 })();
 
 const foodImageDiv = document.getElementById("foodImage");
@@ -27,65 +28,110 @@ let lives = 9;
 let currentScore = 0;
 showScore.innerHTML = `Current score: ${currentScore}`;
 
-async function createChoices() {
-  document.getElementById(
-    "usernameDisplay"
-  ).textContent = `Current player: ${currentPlayer.username}`;
+async function createChoices (){
+    showCurrentPlayer();
 
-  const currentMealData = await fetch(
-    "https://www.themealdb.com/api/json/v1/1/random.php"
-  ).then((response) => response.json());
-  const ingredientsData = await fetch("../database/ingredients.json").then(
-    (response) => response.json()
-  );
+    const meal = await fetchRandomMeal();
+    const localIngredients = await fetchIngredientsData();
+   
+    showBigMealImg(meal);
 
-  const meal = currentMealData.meals[0];
+    const realIngredients = getRealIngriedients(meal, 3);
+    const fakeIngredients = getFakeIndgriedients(localIngredients, realIngredients, 7)
+    const allChoices = shuffleChoices(realIngredients, fakeIngredients);
 
-  const mealName = meal.strMeal;
-  console.log(mealName);
+    renderChoices(allChoices, meal);
 
-  const mealRecipie = meal.strInstructions;
+}
 
-  const img = document.getElementById("foodImage");
+async function fetchRandomMeal() {
+    const response = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
+    const foods = await response.json();
 
-  img.style.backgroundImage = `url("${meal.strMealThumb}")`;
-  img.style.backgroundRepeat = "no-repeat";
-  img.style.backgroundSize = "cover";
+    return foods.meals[0];
+}
 
-  const ingredientsArray = [];
-  for (let i = 1; i <= 20; i++) {
-    let ingredientName = "strIngredient" + i;
-    let ingredient = meal[ingredientName];
+async function fetchIngredientsData() {
+    const localJson = await fetch("../database/ingredients.json") ;// inte denoRead?
+    return await localJson.json();
+}
 
-    if (ingredient && ingredient !== "") {
-      ingredientsArray.push(ingredient);
+function showCurrentPlayer() {
+  document.getElementById("usernameDisplay").textContent =
+    `Current player: ${currentPlayer.username}`;
+}
+
+async function showBigMealImg(meal) {
+    foodImageDiv.style.backgroundImage = `url("${meal.strMealThumb}")`;
+}
+
+function getRealIngriedients (meal, count){
+    let arrayOfIngredients = [];
+   
+    for (let i = 1; i < 21; i++){
+        let findIngridient = meal[`strIngredient${i}`];
+        if (findIngridient) {
+            let ingredient = findIngridient.toLowerCase();
+            arrayOfIngredients.push(ingredient);
+        }
+    }
+
+    return getRandomItem(arrayOfIngredients, count);
+}
+
+function getFakeIndgriedients(ourIngr, realIngr, count) {
+  const mealIngrLower = realIngr.map(item => item.toLowerCase());
+
+  const arrayOfFakeIngredients = ourIngr.filter(item => {
+    return !mealIngrLower.includes(item.name.toLowerCase());
+  });
+
+  return getRandomItem(arrayOfFakeIngredients, count);
+}
+
+function getRandomItem(array, count) {
+  const result = [];
+  while (result.length < count) {
+    const item = array[Math.floor(Math.random() * array.length)];
+    if (!result.includes(item)) {
+      result.push(item);
     }
   }
+  return result;
+}
 
-  const selectedIngredients = getRandomItem(ingredientsArray, 3);
+function shuffleChoices(real, fake) {
+  const allChoices = [];
 
-  const filteredIngredients = ingredientsData.filter(
-    (ingredients) => !selectedIngredients.includes(ingredients.name)
-  );
-
-  const selectedFakeIngredients = getRandomItem(filteredIngredients, 7);
-
-  const allChoices = [
-    ...selectedIngredients.map((name) => ({
-      name,
+  for (let i = 0; i < real.length; i++) {
+    const name = real[i];
+    allChoices.push({
+      name: name,
       image: `https://www.themealdb.com/images/ingredients/${name}.png`,
       isCorrect: true,
-    })),
-    ...selectedFakeIngredients.map((item) => ({
+    });
+  }
+
+  for (let i = 0; i < fake.length; i++) {
+    const item = fake[i];
+    allChoices.push({
       name: item.name,
       image: item.image,
       isCorrect: false,
-    })),
-  ];
+    });
+  }
 
   shuffleArray(allChoices);
+  return allChoices;
+}
 
-  allChoices.forEach((choice) => {
+function shuffleArray(array){
+  return array.sort(() => Math.random() - 0.5)
+}
+
+function renderChoices(choices, meal) {
+  choicesBox.innerHTML = "";
+  choices.forEach((choice) => {
     const div = document.createElement("div");
     div.classList.add("choice");
 
@@ -101,70 +147,40 @@ async function createChoices() {
       div.style.flexDirection = "column";
     }
 
-    div.addEventListener("click", async () => {
-      if (div.classList.contains("clicked")) return;
-      div.classList.add("clicked");
-
-      if (choice.isCorrect) {
-        div.style.backgroundColor = "lightGreen";
-
-        correctGuesses++;
-        showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
-
-        currentScore = currentScore + 10;
-        showScore.innerHTML = `Current score: ${currentScore}`;
-        if (correctGuesses === allCorrect) {
-          document.getElementById("nextButton").style.display = "block";
-          document.getElementById("foodTitle").textContent = mealName;
-          document.getElementById(
-            "recipeBox"
-          ).innerHTML = `<p>${mealRecipie}</p>`;
-          foodTitle.style.display = "block";
-          showCorrectGuess.style.display = "none";
-        }
-      } else {
-        div.style.backgroundColor = "tomato";
-        lives--;
-        livesBox.innerHTML = `Lives left: ${lives}`;
-        if (lives === 0) {
-          document.getElementById("questionBox").style.display = "flex";
-          quiz.loadQuestion();
-        }
-      }
-    });
+    div.addEventListener("click", () => handleChoiceClick(div, choice, meal));
 
     choicesBox.appendChild(div);
   });
 }
 
-function getRandomItem(array, count) {
-  const result = [];
-  while (result.length < count) {
-    const item = array[Math.floor(Math.random() * array.length)];
-    if (!result.includes(item)) {
-      result.push(item);
+function handleChoiceClick(div, choice, meal) {
+  if (div.classList.contains("clicked")) return;
+  div.classList.add("clicked");
+
+  if (choice.isCorrect) {
+    div.style.backgroundColor = "lightGreen";
+    correctGuesses++;
+    showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
+    currentScore += 10;
+    showScore.innerHTML = `Current score: ${currentScore}`;
+
+    if (correctGuesses === allCorrect) {
+      document.getElementById("nextButton").style.display = "block";
+      document.getElementById("foodTitle").textContent = meal.strMeal;
+      document.getElementById("recipeBox").innerHTML = `<p>${meal.strInstructions}</p>`;
+      foodTitle.style.display = "block";
+      showCorrectGuess.style.display = "none";
+    }
+  } else {
+    div.style.backgroundColor = "tomato";
+    lives--;
+    livesBox.innerHTML = `Lives left: ${lives}`;
+    if (lives === 0) {
+      document.getElementById("questionBox").style.display = "flex";
+      quiz.loadQuestion();
     }
   }
-  return result;
 }
-
-function shuffleArray(array) {
-  return array.sort(() => Math.random() - 0.5);
-}
-
-document.getElementById("nextButton").addEventListener("click", () => {
-  document.getElementById("nextButton").style.display = "none";
-  foodTitle.style.display = "none";
-  correctGuesses = 0;
-  choicesBox.innerHTML = "";
-  foodImageDiv.innerHTML = "";
-  recipeBox.innerHTML = "";
-  showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
-
-  showCorrectGuess.style.display = "block";
-
-  createChoices();
-});
 
 const logOutButton = document.getElementById("logOutButton");
 
