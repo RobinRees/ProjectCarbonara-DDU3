@@ -34,8 +34,6 @@ main {
 
 #scoreBox {
     background-color: white;
-    padding: 15px;
-    gap: 15px;
     border-radius: 20px;
 }
 
@@ -56,6 +54,8 @@ p {
     flex-direction: column;
     gap: 15px;
     align-items: center;
+    position: absolute;
+    top: 320px;
 }
 
 button {
@@ -124,6 +124,7 @@ img {
     display: none;
     position: absolute;
     top: 100px;
+    z-index: 20;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 }
@@ -189,4 +190,15 @@ table tbody tr:nth-child(even) {
 #leaderboard * {
     z-index: 0;
     position: relative;
+}
+
+#imgBox {
+    width: 280px;
+    height: 280px;
+    background-image: url(gameOver.png);
+    background-position: center;
+    background-size: contain;
+    position: absolute;
+    z-index: -1;
+    top: 70px
 }
