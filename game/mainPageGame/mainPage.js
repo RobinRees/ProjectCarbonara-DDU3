@@ -28,6 +28,9 @@ let lives = 9;
 let currentScore = 0;
 showScore.innerHTML = `Current score: ${currentScore}`;
 
+let triviaCounter = 0;
+console.log(triviaCounter);
+
 async function createChoices() {
     showCurrentPlayer();
 
@@ -190,13 +193,16 @@ async function handleChoiceClick(div, choice, meal) {
         div.style.backgroundColor = "tomato";
         lives--;
         livesBox.innerHTML = `Lives left: ${lives}`;
-        if (lives === 0) {
+        if (lives === 0 && triviaCounter === 0) {
             document.getElementById("popUpBackground").style.display = "flex";
             quiz.loadQuestion();
+            triviaCounter++;
+        } else if (lives === 0 && triviaCounter === 1) {
+            console.log(triviaCounter);
+            window.location.href = "/gameOver";
         }
     }
 }
-
 const logOutButton = document.getElementById("logOutButton");
 
 logOutButton.addEventListener("click", async () => {
@@ -305,6 +311,7 @@ class FoodTriviaQuiz {
                     livesBox.innerHTML = `Lives left: ${lives}`;
 
                     setTimeout(() => {
+                        popUpText.style.display = "none";
                         document.getElementById("popUpBackground").style.display = "none";
                         this.questionElement.innerHTML = "";
                         this.answersElement.innerHTML = "";
@@ -345,6 +352,7 @@ class FoodTriviaQuiz {
         return txt.value;
     }
 }
+
 
 const quiz = new FoodTriviaQuiz(
     "https://opentdb.com/api.php?amount=50&category=9&type=multiple",

@@ -82,8 +82,31 @@
     "username": "Pelle",
     "password": "Pella",
     "score": 60,
-    "loggedIn": true,
+    "loggedIn": false,
     "id": 12,
     "roundScore": 50
+  },
+  {
+    "username": "os",
+    "password": "os",
+    "score": 60,
+    "loggedIn": false,
+    "id": 13,
+    "roundScore": 30
+  },
+  {
+    "username": "try",
+    "password": "again",
+    "score": 30,
+    "loggedIn": false,
+    "id": 14
+  },
+  {
+    "username": "sara",
+    "password": "arg",
+    "score": 50,
+    "loggedIn": false,
+    "id": 15,
+    "roundScore": 40
   }
 ]

@@ -12,12 +12,16 @@ nav {
     justify-content: space-between;
     margin-bottom: 25px;
     background-color: #4a90e2;
-    padding: 0 0 0 20px;
+    padding: 5px 0;
 }
 
 nav h1 {
     color: white;
 
+}
+
+img {
+    width: 160px;
 }
 
 nav div {
@@ -33,6 +37,9 @@ nav button {
     font-size: 14px;
     color: white;
     background-color: #4a90e2;
+    position: absolute;
+    right: 25px;
+    top: 30px;
 }
 
 
