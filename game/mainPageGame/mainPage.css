@@ -109,6 +109,11 @@ main {
     padding: 5px 0;
 }
 
+#foodImage {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 #foodTitle {
     padding: 0;
     margin: 0 0 15px 0;
