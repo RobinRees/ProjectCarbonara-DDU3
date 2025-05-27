@@ -127,7 +127,14 @@
     "username": "robinson",
     "password": "olson",
     "score": 0,
-    "loggedIn": true,
+    "loggedIn": false,
     "id": 18
+  },
+  {
+    "username": "hejhej",
+    "password": "kalla",
+    "score": 0,
+    "loggedIn": true,
+    "id": 19
   }
 ]
