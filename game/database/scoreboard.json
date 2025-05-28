@@ -104,9 +104,10 @@
   {
     "username": "justin",
     "password": "justin",
-    "score": 30,
+    "score": 70,
     "loggedIn": false,
-    "id": 15
+    "id": 15,
+    "roundScore": 50
   },
   {
     "username": "alice",
@@ -115,36 +116,5 @@
     "loggedIn": false,
     "id": 16,
     "roundScore": 150
-  },
-  {
-    "username": "OKIMgfdd",
-    "password": "dfgjh",
-    "score": 60,
-    "loggedIn": false,
-    "id": 17,
-    "roundScore": 60
-  },
-  {
-    "username": "Test34",
-    "password": "Test34",
-    "score": 10,
-    "loggedIn": false,
-    "id": 18,
-    "roundScore": 10
-  },
-  {
-    "username": "Tressa",
-    "password": "Tressa",
-    "score": 0,
-    "loggedIn": false,
-    "id": 19
-  },
-  {
-    "username": "Ieas",
-    "password": "Ieas",
-    "score": 80,
-    "loggedIn": true,
-    "id": 20,
-    "roundScore": 20
   }
 ]
