@@ -310,11 +310,11 @@ class FoodTriviaQuiz {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ score: currentScore }),
                 });
-            } catch (err) {
-                console.error("Score update failed:", err);
+            } catch (error) {
+                console.error("Score update failed:", error);
             }
 
-            window.location.href = "/gameOver";
+            
         }
 
         popUpText.style.display = "block";
@@ -325,7 +325,9 @@ class FoodTriviaQuiz {
                 if (document.getElementById("triviaPopUp").style.display === "flex") {
                     this.questionElement.innerHTML = "";
                     this.answersElement.innerHTML = "";
+                    
                 }
+            window.location.href = "/gameOver";
         }, 3000);
     }
 

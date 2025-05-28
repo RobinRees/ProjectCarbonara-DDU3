@@ -105,7 +105,7 @@
     "username": "justin",
     "password": "justin",
     "score": 70,
-    "loggedIn": true,
+    "loggedIn": false,
     "id": 15,
     "roundScore": 50
   },
@@ -116,5 +116,21 @@
     "loggedIn": false,
     "id": 16,
     "roundScore": 150
+  },
+  {
+    "username": "Testio",
+    "password": "Testio",
+    "score": 80,
+    "loggedIn": false,
+    "id": 17,
+    "roundScore": 80
+  },
+  {
+    "username": "MoreTest",
+    "password": "MoreTest",
+    "score": 40,
+    "loggedIn": true,
+    "id": 18,
+    "roundScore": 40
   }
 ]
