@@ -60,7 +60,7 @@ async function fetchRandomMeal() {
 }
 
 async function fetchIngredientsData() {
-    const localJson = await fetch("../database/ingredients.json"); // inte denoRead?
+    const localJson = await fetch("../database/ingredients.json");
     return await localJson.json();
 }
 
@@ -235,61 +235,46 @@ document.getElementById("nextButton").addEventListener("click", () => {
 });
 
 class FoodTriviaQuiz {
-    constructor(apiUrl, keywords) {
+    constructor(apiUrl) {
         this.apiUrl = apiUrl;
-        this.keywords = keywords;
+
         this.questionElement = document.getElementById("questionText");
         this.answersElement = document.getElementById("multipleAnswersBox");
     }
 
     async loadQuestion() {
-        let attempts = 0;
-        let filtered = [];
-
-        while (filtered.length === 0 && attempts < 5) {
+        try {
             const response = await fetch(this.apiUrl);
             const data = await response.json();
 
-            filtered = data.results.filter((q) => this.isFoodRelated(q.question));
+            if (!data.length) {
+                this.questionElement.textContent = "No questions found.";
+                return;
+            }
 
-            attempts++;
+            const randomQuestion = data[Math.floor(Math.random() * data.length)];
+            this.display(randomQuestion);
+
+        } catch (error) {
+            console.error("Failed to fetch trivia question:", error);
+            this.questionElement.textContent = "Failed to load question.";
         }
-
-        if (filtered.length === 0) {
-            this.questionElement.textContent =
-                "No food-related questions found after several attempts.";
-            return;
-        }
-
-        const question = filtered[Math.floor(Math.random() * filtered.length)];
-        this.display(question);
     }
 
-    isFoodRelated(text) {
-        return this.keywords.some((keyword) =>
-            text.toLowerCase().includes(keyword)
-        );
-    }
     display(questionObj) {
-        const { question, correct_answer, incorrect_answers } = questionObj;
+        const { question, correctAnswer, incorrectAnswers } = questionObj;
 
         this.questionElement.innerHTML = this.decodeHTML(question);
         this.answersElement.innerHTML = "";
 
         const allAnswers = [
-            {
-                answer: correct_answer,
-                isCorrect: true,
-            },
-            ...incorrect_answers.map((answer) => ({
-                answer: answer,
-                isCorrect: false,
-            })),
+            { answer: correctAnswer, isCorrect: true },
+            ...incorrectAnswers.map(ans => ({ answer: ans, isCorrect: false }))
         ];
 
-        const shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
+        const shuffled = allAnswers.sort(() => Math.random() - 0.5);
 
-        shuffledAnswers.forEach((choice) => {
+        shuffled.forEach(choice => {
             const div = document.createElement("div");
             div.classList.add("choiceTwo");
 
@@ -297,54 +282,51 @@ class FoodTriviaQuiz {
             text.textContent = this.decodeHTML(choice.answer);
             div.appendChild(text);
 
-            div.addEventListener("click", async () => {
-                if (div.classList.contains("clicked")) return;
-                div.classList.add("clicked");
-                const popUpText = document.getElementById("popUptext");
-
-                if (choice.isCorrect) {
-                    div.style.backgroundColor = "lightGreen";
-                    popUpText.textContent = "Correct! +1 Extra life!"
-                    popUpText.style.display = "block";
-                    popUpText.style.backgroundColor = "lightGreen";
-
-                    lives++;
-                    livesBox.innerHTML = `Lives left: ${lives}`;
-
-                    setTimeout(() => {
-                        popUpText.style.display = "none";
-                        document.getElementById("triviaPopUp").style.display = "none";
-                        this.questionElement.innerHTML = "";
-                        this.answersElement.innerHTML = "";
-                    }, 3000);
-                } else {
-                    div.style.backgroundColor = "tomato";
-                    popUpText.style.display = "block";
-                    popUpText.style.backgroundColor = "tomato";
-
-                    popUpText.innerHTML = `Unlucky! Correct answer was: <span>${correct_answer}</span> `
-
-
-                    setTimeout(async () => {
-                        console.log("sending score", currentScore);
-                        try {
-                            await fetch("http://localhost:8000/updateScore", {
-                                method: "PATCH",
-                                headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify({ score: currentScore }),
-                            });
-                        } catch (error) {
-                            console.error("score update failed", error);
-                            window.location.href = "/gameOver";
-                        }
-
-                        window.location.href = "/gameOver";
-                    }, 3000);
-                }
-            });
-
+            div.addEventListener("click", () => this.handleClick(div, choice, correctAnswer));
             this.answersElement.appendChild(div);
         });
+    }
+
+    async handleClick(div, choice, correctAnswer) {
+        if (div.classList.contains("clicked")) return;
+        div.classList.add("clicked");
+
+        const popUpText = document.getElementById("popUptext");
+
+        if (choice.isCorrect) {
+            div.style.backgroundColor = "lightGreen";
+            popUpText.textContent = "Correct! +1 Extra life!";
+            popUpText.style.backgroundColor = "lightGreen";
+            lives++;
+            livesBox.innerHTML = `Lives left: ${lives}`;
+        } else {
+            div.style.backgroundColor = "tomato";
+            popUpText.innerHTML = `Wrong! Correct answer: <span>${correctAnswer}</span>`;
+            popUpText.style.backgroundColor = "tomato";
+
+            try {
+                await fetch("/updateScore", {
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ score: currentScore }),
+                });
+            } catch (err) {
+                console.error("Score update failed:", err);
+            }
+
+            window.location.href = "/gameOver";
+        }
+
+        popUpText.style.display = "block";
+        
+        setTimeout(() => {
+            popUpText.style.display = "none";
+            document.getElementById("triviaPopUp").style.display = "none";
+                if (document.getElementById("triviaPopUp").style.display === "flex") {
+                    this.questionElement.innerHTML = "";
+                    this.answersElement.innerHTML = "";
+                }
+        }, 3000);
     }
 
     decodeHTML(str) {
@@ -354,86 +336,5 @@ class FoodTriviaQuiz {
     }
 }
 
-
-const quiz = new FoodTriviaQuiz(
-    "https://opentdb.com/api.php?amount=50&category=9&type=multiple",
-    [
-        "food",
-        "dish",
-        "drink",
-        "ingredient",
-        "cuisine",
-        "meal",
-        "snack",
-        "breakfast",
-        "lunch",
-        "dinner",
-        "dessert",
-        "appetizer",
-        "recipe",
-        "cook",
-        "cooking",
-        "baking",
-        "chef",
-        "kitchen",
-        "oven",
-        "pizza",
-        "cheese",
-        "chocolate",
-        "fruit",
-        "vegetable",
-        "meat",
-        "fish",
-        "seafood",
-        "egg",
-        "bread",
-        "butter",
-        "pasta",
-        "rice",
-        "soup",
-        "stew",
-        "sauce",
-        "jam",
-        "honey",
-        "spice",
-        "herb",
-        "grill",
-        "boil",
-        "fry",
-        "bake",
-        "roast",
-        "steam",
-        "microwave",
-        "coffee",
-        "tea",
-        "juice",
-        "soda",
-        "beer",
-        "wine",
-        "cocktail",
-        "whiskey",
-        "vodka",
-        "rum",
-        "gin",
-        "liqueur",
-        "beverage",
-        "McDonald's",
-        "Burger King",
-        "KFC",
-        "Subway",
-        "Starbucks",
-        "Coca-Cola",
-        "Pepsi",
-        "Nestlé",
-        "Kraft",
-        "Heinz",
-        "Thanksgiving",
-        "Christmas",
-        "Easter",
-        "Hanukkah",
-        "Ramadan",
-        "Oktoberfest",
-        "street food",
-        "food festival",
-    ]
-);
+const apiUrl = "https://the-trivia-api.com/api/questions?categories=food_and_drink&limit=10&difficulty=easy";
+const quiz = new FoodTriviaQuiz(apiUrl);
