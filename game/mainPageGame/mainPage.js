@@ -181,15 +181,13 @@ async function handleChoiceClick(div, choice, meal) {
         createTopTen(currentPlayer)
 
         if (correctGuesses === allCorrect) {
-            document.getElementById("nextButton").style.display = "block";
+            document.getElementById("nextPopUp").style.display = "flex";
             document.getElementById("foodTitle").textContent = meal.strMeal;
             document.querySelector("#recipeBox p").textContent = meal.strInstructions;
-            document.getElementById("nextPopUp").style.display = "flex";
-
             document.querySelector("#nextPopUp h2").innerHTML = `Recipe for ${meal.strMeal}`;
+            document.getElementById("nextButton").style.display = "block";
 
             foodTitle.style.display = "block";
-            showCorrectGuess.style.display = "none";
         }
     } else {
         div.style.backgroundColor = "tomato";
@@ -229,7 +227,7 @@ document.getElementById("nextButton").addEventListener("click", () => {
     correctGuesses = 0;
     choicesBox.innerHTML = "";
     foodImageDiv.innerHTML = "";
-    recipeBox.innerHTML = "";
+    // recipeBox.innerHTML = "";
     showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
     showCorrectGuess.style.display = "block";
 

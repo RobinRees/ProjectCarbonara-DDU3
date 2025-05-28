@@ -193,6 +193,8 @@ h2 {
     margin-top: auto;
     margin-bottom: auto;
     max-width: 620px;
+    max-height: 600px;
+    overflow-y: scroll;
 }
 
 

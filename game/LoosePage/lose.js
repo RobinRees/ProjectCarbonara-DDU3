@@ -25,9 +25,6 @@ let currentPlayer = null;
     } else {
         document.getElementById("finalScore").textContent = `${user.roundScore}`
     }
-
-    document.getElementById("usernameDisplay").textContent = currentPlayer.username;
-
     createTopTen(currentPlayer)
 })();
 
@@ -49,7 +46,7 @@ const homeButton = document.getElementById("homeButton");
 const playAgain = document.getElementById("playAgain")
 
 
-playAgain.addEventListener("click",  async () => {
+playAgain.addEventListener("click", async () => {
     console.log("navigating to /game");
     window.location.href = "/game"
 });
