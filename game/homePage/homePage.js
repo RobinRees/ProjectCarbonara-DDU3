@@ -49,6 +49,11 @@ async function logIn() {
         if (response.status === 404) {
             alert("User not found")
         }
+
+        if(response.status === 403){
+            alert("Username or password is incorrect")
+        }
+
         if (response.status === 200) {
             console.log("Seccessful login");
             window.location.href = "/game"
