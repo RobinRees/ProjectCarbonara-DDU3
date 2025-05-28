@@ -96,6 +96,22 @@ async function createNewProfile() {
 startButton.addEventListener("click", logIn)
 createPlayer.addEventListener("click", createNewProfile)
 
+logInDiv.style.display = "flex";
+signInDiv.style.display = "none";
+
+const goToSignUp = document.querySelector("#goToSignUp");
+const goToLogin = document.querySelector("#goToLogin");
+
+goToSignUp.addEventListener("click", () => {
+    logInDiv.style.display = "none";
+    signInDiv.style.display = "flex";
+});
+
+goToLogin.addEventListener("click", () => {
+    logInDiv.style.display = "flex";
+    signInDiv.style.display = "none";
+});
+
 if (window.location.pathname === "/") {
     window.history.replaceState(null, "", "/home");
 }

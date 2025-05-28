@@ -116,5 +116,12 @@
     "loggedIn": false,
     "id": 16,
     "roundScore": 150
+  },
+  {
+    "username": "Settd",
+    "password": "Sett",
+    "score": 80,
+    "loggedIn": false,
+    "id": 17
   }
 ]
