@@ -26,7 +26,7 @@ let correctGuesses = 0;
 const allCorrect = 3;
 let lives = 9;
 let currentScore = 0;
-showScore.innerHTML = `Current score: ${currentScore}`;
+showScore.innerHTML = `Your score: ${currentScore}`;
 
 let triviaCounter = 0;
 console.log(triviaCounter);
@@ -65,9 +65,11 @@ async function fetchIngredientsData() {
 }
 
 function showCurrentPlayer() {
-  document.getElementById(
-    "usernameDisplay"
-  ).textContent = `Current player: ${currentPlayer.username}`;
+
+    document.getElementById(
+        "usernameDisplay"
+    ).textContent = `${currentPlayer.username}`;
+
 }
 
 async function showBigMealImg(meal) {

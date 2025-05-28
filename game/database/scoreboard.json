@@ -116,29 +116,5 @@
     "loggedIn": false,
     "id": 16,
     "roundScore": 150
-  },
-  {
-    "username": "Testio",
-    "password": "Testio",
-    "score": 80,
-    "loggedIn": false,
-    "id": 17,
-    "roundScore": 80
-  },
-  {
-    "username": "MoreTest",
-    "password": "MoreTest",
-    "score": 40,
-    "loggedIn": false,
-    "id": 18,
-    "roundScore": 40
-  },
-  {
-    "username": "oisdfj",
-    "password": "dfsogjs",
-    "score": 30,
-    "loggedIn": true,
-    "id": 19,
-    "roundScore": 30
   }
 ]
