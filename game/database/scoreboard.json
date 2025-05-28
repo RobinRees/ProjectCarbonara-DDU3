@@ -101,5 +101,11 @@
     "loggedIn": false,
     "id": 14
   },
-
+  {
+    "username": "keso",
+    "password": "peso",
+    "score": 0,
+    "loggedIn": false,
+    "id": 15
+  }
 ]
