@@ -20,6 +20,9 @@ header{
 
 p {
     color: white; 
+    font-size: 15px;
+    font-weight: 600;
+    font-family: monospace;
 }
 
 #headerDivLeft:hover, #headerDivRight:hover{
@@ -37,8 +40,29 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 30px;
+    padding: 30px;
+    margin-top: 20px;
 }
 
+input {
+    background-color: white;
+    margin: 2px;
+    border: 2px solid black;
+    padding: 5px;
+    border-radius: 10px;
+    font-family: monospace;
+    font-weight: 400;
+}
 
+h1 {
+    color: white; 
+    font-weight: 600;
+    font-family: monospace;
+}
 
-
+button {
+    font-family: monospace;
+    font-weight: 600;
+}

@@ -21,12 +21,6 @@ headerDivRight.addEventListener("click", ()=>{
     signInDiv.style.display = "flex"
 })
 
-/*
-.addEventListener("click", ()=>{
-    logInDiv.style.display = "none"
-    signInDiv.style.display = "none"
-})
-    */
 
 async function logIn() {
 
