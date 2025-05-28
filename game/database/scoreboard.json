@@ -128,8 +128,23 @@
     "username": "Test34",
     "password": "Test34",
     "score": 10,
-    "loggedIn": true,
+    "loggedIn": false,
     "id": 18,
     "roundScore": 10
+  },
+  {
+    "username": "Tressa",
+    "password": "Tressa",
+    "score": 0,
+    "loggedIn": false,
+    "id": 19
+  },
+  {
+    "username": "Ieas",
+    "password": "Ieas",
+    "score": 80,
+    "loggedIn": true,
+    "id": 20,
+    "roundScore": 20
   }
 ]
