@@ -63,24 +63,23 @@ export async function createNewUser(userData) {
 
 export async function checkUserCredentials(loginData) {
     const JSONusers = Deno.readTextFileSync("database/scoreboard.json");
-    let users = JSON.parse(JSONusers);
+    const users = JSON.parse(JSONusers);
     console.log(users);
 
-    return users.some(x => {
-        return x.username === loginData.username &&
-            x.password === loginData.password
-    });
+
+    const user = users.find(x => x.username === loginData.username);
+    console.log(user, "util rad71");
+
+    if (!user) {
+        return { status: "no user" };
+    }
+
+    if (user.password !== loginData.password) {
+        return { status: "wrong password" };
+    }
+
+    return { status: "success", user }; // Logga in OK
 }
-
-export async function retrieveUserByName(loginData) {
-    console.log(loginData, "rad 72 utilities");
-    console.log(loginData.username);
-
-    const JSONusers = Deno.readTextFileSync("database/scoreboard.json");
-    let users = JSON.parse(JSONusers);
-    return users.find(x => x.username === loginData.username);
-}
-
 
 
 export async function updateUserScore(newScore) {

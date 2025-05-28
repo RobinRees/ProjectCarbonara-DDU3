@@ -1,6 +1,7 @@
 body {
     display: flex;
     justify-content: center;
+    background-color: #f6edde;
 }
 
 main {
@@ -8,6 +9,19 @@ main {
     display: grid;
     grid-template-columns: 500px;
     gap: 45px;
+    height: 700px;
+    overflow-y: scroll;
+
+}
+
+h2 {
+    text-align: center;
+}
+
+img {
+    width: 200px;
+    display: block;
+    margin: auto;
 }
 
 button {

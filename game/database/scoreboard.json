@@ -1,104 +1,16 @@
 [
   {
-    "username": "hej",
-    "password": "san",
+    "username": "johannes",
+    "password": "test123",
     "score": 0,
-    "loggedIn": false,
+    "loggedIn": true,
     "id": 1
   },
   {
-    "username": "THEO",
-    "password": "VON",
-    "score": 60,
+    "username": "pelle",
+    "password": "carbonara69",
+    "score": 0,
     "loggedIn": false,
     "id": 2
-  },
-  {
-    "username": "kaj",
-    "password": "kaj",
-    "score": 40,
-    "loggedIn": false,
-    "id": 3
-  },
-  {
-    "username": "never",
-    "password": "mind",
-    "score": 50,
-    "loggedIn": false,
-    "id": 4,
-    "roundScore": 30
-  },
-  {
-    "username": "Sett",
-    "password": "Sett",
-    "score": 60,
-    "loggedIn": false,
-    "id": 5
-  },
-  {
-    "username": "Asd",
-    "password": "asd",
-    "score": 0,
-    "loggedIn": false,
-    "id": 6
-  },
-  {
-    "username": "sdfg",
-    "password": "dsf",
-    "score": 0,
-    "loggedIn": false,
-    "id": 7
-  },
-  {
-    "username": "Sad",
-    "password": "Sad",
-    "score": 0,
-    "loggedIn": false,
-    "id": 8
-  },
-  {
-    "username": "sdgh",
-    "password": "dfh",
-    "score": 0,
-    "loggedIn": false,
-    "id": 9
-  },
-  {
-    "username": "dfhkodfgj",
-    "password": "fgkhpofh",
-    "score": 30,
-    "loggedIn": false,
-    "id": 10
-  },
-  {
-    "username": "dsfphojdfsh",
-    "password": "dsfgpdskof",
-    "score": 60,
-    "loggedIn": false,
-    "id": 11,
-    "roundScore": 60
-  },
-  {
-    "username": "Pelle",
-    "password": "Pella",
-    "score": 60,
-    "loggedIn": false,
-    "id": 12,
-    "roundScore": 50
-  },
-  {
-    "username": "os",
-    "password": "os",
-    "score": 60,
-    "loggedIn": false,
-    "id": 13,
-    "roundScore": 30
-  },
-  {
-    "username": "try",
-    "password": "again",
-    "score": 30,
-    "loggedIn": false,
-    "id": 14
   }
 ]

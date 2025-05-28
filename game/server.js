@@ -5,7 +5,6 @@ import {
     checkContentType,
     createNewUser,
     updateUserScore,
-    retrieveUserByName,
     logInUser,
     logOutUser
 } from "./utilities.js";
@@ -20,11 +19,9 @@ async function handler(request) {
         return new Response(null, createOptions())
     }
 
-
     if (url.pathname === "/user" && request.method === "GET") {
         const users = await Deno.readTextFile("database/scoreboard.json");
         return new Response(JSON.stringify(users), createOptions())
-
     }
 
     if (url.pathname === "/signUp") {
@@ -54,22 +51,25 @@ async function handler(request) {
 
     if (url.pathname === "/logIn") {
         console.log("request to log in page");
-        const loginData = await request.json()
-
+        const loginData = await request.json();
+        console.log(loginData);
         if (request.method === "POST") {
             if (checkContentType(contentType)) {
+                const verifyUser = await checkUserCredentials(loginData);
+                console.log(verifyUser.user);
 
-                const userExists = await checkUserCredentials(loginData);
-                const user = await retrieveUserByName(loginData);
-
-                if (userExists) {
+                if (verifyUser.status === "success") {
                     console.log("användaren finns");
-                    await logInUser(user.username)
+                    await logInUser(verifyUser.user.username)
+                    return new Response(JSON.stringify(verifyUser.user), createOptions())
+                }
+                if (verifyUser.status === "wrong password") {
+                    console.log("wrong password");
 
-                    return new Response(JSON.stringify(user), createOptions())
-                } else {
-                    console.log("användaren finns EJ");
-                    return new Response(JSON.stringify({ error: "User does not exist" }), createOptions(404))
+                    return new Response(JSON.stringify({ error: "Incorrect password" }), createOptions(401));
+                }
+                if (verifyUser.status === "no user") {
+                    return new Response(JSON.stringify({ error: "User does not exist" }), createOptions(404));
                 }
             } else {
                 return new Response(JSON.stringify({ error: "Bad Content-Type" }), createOptions(400));
@@ -87,7 +87,7 @@ async function handler(request) {
         if (loggedInUser) {
             return new Response(JSON.stringify(loggedInUser), createOptions())
         } else {
-            return new Response(JSON.stringify({ error: "Ingen användare inloggad" }), createOptions(404));
+            return new Response(JSON.stringify({ error: "No logged in user yet" }), createOptions(404));
         }
     }
 
@@ -119,7 +119,6 @@ async function handler(request) {
     if (url.pathname === "/" || url.pathname === "/home") {
         return serveFile(request, "./homePage/homePage.html")
     }
-
 
     return serveDir(request, {
         fsRoot: ".",
