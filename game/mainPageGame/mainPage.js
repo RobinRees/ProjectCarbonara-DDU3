@@ -238,8 +238,8 @@ class FoodTriviaQuiz {
     constructor(apiUrl) {
         this.apiUrl = apiUrl;
 
-        this.questionElement = document.getElementById("questionText");
-        this.answersElement = document.getElementById("multipleAnswersBox");
+        this.questionText = document.getElementById("questionText");
+        this.multipleAnswersBox = document.getElementById("multipleAnswersBox");
     }
 
     async loadQuestion() {
@@ -248,7 +248,7 @@ class FoodTriviaQuiz {
             const data = await response.json();
 
             if (!data.length) {
-                this.questionElement.textContent = "No questions found.";
+                this.questionText.textContent = "No questions found.";
                 return;
             }
 
@@ -257,15 +257,15 @@ class FoodTriviaQuiz {
 
         } catch (error) {
             console.error("Failed to fetch trivia question:", error);
-            this.questionElement.textContent = "Failed to load question.";
+            this.questionText.textContent = "Failed to load question.";
         }
     }
 
     display(questionObj) {
         const { question, correctAnswer, incorrectAnswers } = questionObj;
 
-        this.questionElement.innerHTML = this.decodeHTML(question);
-        this.answersElement.innerHTML = "";
+        this.questionText.innerHTML = this.decodeHTML(question);
+        this.multipleAnswersBox.innerHTML = "";
 
         const allAnswers = [
             { answer: correctAnswer, isCorrect: true },
@@ -283,7 +283,7 @@ class FoodTriviaQuiz {
             div.appendChild(text);
 
             div.addEventListener("click", () => this.handleClick(div, choice, correctAnswer));
-            this.answersElement.appendChild(div);
+            this.multipleAnswersBox.appendChild(div);
         });
     }
 
@@ -323,8 +323,8 @@ class FoodTriviaQuiz {
             popUpText.style.display = "none";
             document.getElementById("triviaPopUp").style.display = "none";
                 if (document.getElementById("triviaPopUp").style.display === "flex") {
-                    this.questionElement.innerHTML = "";
-                    this.answersElement.innerHTML = "";
+                    this.questionText.innerHTML = "";
+                    this.multipleAnswersBox.innerHTML = "";
                     
                 }
             window.location.href = "/gameOver";

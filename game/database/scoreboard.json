@@ -129,8 +129,16 @@
     "username": "MoreTest",
     "password": "MoreTest",
     "score": 40,
-    "loggedIn": true,
+    "loggedIn": false,
     "id": 18,
     "roundScore": 40
+  },
+  {
+    "username": "oisdfj",
+    "password": "dfsogjs",
+    "score": 30,
+    "loggedIn": true,
+    "id": 19,
+    "roundScore": 30
   }
 ]
