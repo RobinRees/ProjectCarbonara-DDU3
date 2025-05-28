@@ -183,9 +183,11 @@ async function handleChoiceClick(div, choice, meal) {
         if (correctGuesses === allCorrect) {
             document.getElementById("nextButton").style.display = "block";
             document.getElementById("foodTitle").textContent = meal.strMeal;
-            document.getElementById(
-                "recipeBox"
-            ).innerHTML = `<p>${meal.strInstructions}</p>`;
+            document.querySelector("#recipeBox p").textContent = meal.strInstructions;
+            document.getElementById("nextPopUp").style.display = "flex";
+
+            document.querySelector("#nextPopUp h2").innerHTML = `Recipe for ${meal.strMeal}`;
+
             foodTitle.style.display = "block";
             showCorrectGuess.style.display = "none";
         }
@@ -194,7 +196,7 @@ async function handleChoiceClick(div, choice, meal) {
         lives--;
         livesBox.innerHTML = `Lives left: ${lives}`;
         if (lives === 0 && triviaCounter === 0) {
-            document.getElementById("popUpBackground").style.display = "flex";
+            document.getElementById("triviaPopUp").style.display = "flex";
             quiz.loadQuestion();
             triviaCounter++;
         } else if (lives === 0 && triviaCounter === 1) {
@@ -221,13 +223,14 @@ logOutButton.addEventListener("click", async () => {
 
 document.getElementById("nextButton").addEventListener("click", () => {
     document.getElementById("nextButton").style.display = "none";
+    document.getElementById("nextPopUp").style.display = "none";
+
     foodTitle.style.display = "none";
     correctGuesses = 0;
     choicesBox.innerHTML = "";
     foodImageDiv.innerHTML = "";
     recipeBox.innerHTML = "";
     showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
-
     showCorrectGuess.style.display = "block";
 
     createChoices();
@@ -312,7 +315,7 @@ class FoodTriviaQuiz {
 
                     setTimeout(() => {
                         popUpText.style.display = "none";
-                        document.getElementById("popUpBackground").style.display = "none";
+                        document.getElementById("triviaPopUp").style.display = "none";
                         this.questionElement.innerHTML = "";
                         this.answersElement.innerHTML = "";
                     }, 3000);

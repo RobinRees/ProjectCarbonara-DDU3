@@ -9,7 +9,7 @@ body {
 
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 25px;
     background-color: #4a90e2;
     padding: 5px 0;
@@ -44,7 +44,6 @@ nav button {
 
 
 .menuButton:hover {
-    cursor: pointer;
     /* background-color: white; */
     border-bottom: 2px solid white;
 }
@@ -58,13 +57,6 @@ nav button {
     gap: 15px;
     align-items: center;
     max-width: 500px;
-}
-
-#playerInfo {
-    width: fit-content;
-    /* padding: 15px; */
-    display: flex;
-    gap: 20px;
 }
 
 main {
@@ -107,7 +99,6 @@ main {
 
 .choice:hover,
 .choiceTwo:hover {
-    cursor: pointer;
     box-shadow: 0 0 8px #4a90e2;
 }
 
@@ -144,13 +135,11 @@ main {
 }
 
 #nextButton {
-    margin: 0;
-    display: none;
-    margin: 0;
+    margin: auto;
     display: none;
     height: fit-content;
     padding: 10px 50px;
-    background-color: gold;
+    background-color: #FFD700;
     font-weight: bold;
     border-radius: 50px;
     font-size: 20px;
@@ -159,9 +148,18 @@ main {
     border-bottom: 3px solid goldenrod;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 #nextButton:active {
     border-bottom: none;
     margin-bottom: 3px;
+    transform: translateY(3px);
+}
+
+#nextButton:hover {
+    background-color: rgba(255, 215, 0, 0.6);
 }
 
 
@@ -189,6 +187,15 @@ h2 {
     text-align: center;
 }
 
+#recipeBox {
+    min-width: 35%;
+    padding: 15px;
+    margin-top: auto;
+    margin-bottom: auto;
+    max-width: 620px;
+}
+
+
 #recipeBox p {
     line-height: 1.6;
 }
@@ -198,6 +205,7 @@ h2 {
     flex-direction: column;
     height: fit-content;
     max-width: 400px;
+    flex-wrap: wrap;
 }
 
 #middle {
@@ -205,8 +213,6 @@ h2 {
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    background-color: transparent;
-    overflow-x: visible;
     max-width: 580px;
 }
 
@@ -267,16 +273,7 @@ h2 {
     position: relative;
 }
 
-#backButton {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: white;
-    border-style: none;
-    padding: 1px 5px;
-    color: #4a90e2;
-    font-weight: bold;
-}
+
 
 #leaderboard-header h1 {
     margin: 0;
@@ -317,13 +314,33 @@ table * {
 }
 
 
-#popUpBackground {
-    display: flex;
+/* .popUpBackground {} */
+
+#nextPopUp {
+    display: none;
     flex-direction: column;
     align-items: center;
-    position: absolute;
+    position: fixed;
     background-color: rgba(0, 0, 0, .7);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+
+
+#nextPopUp>div {
+    background-color: #e0e7ff;
+}
+
+#triviaPopUp {
     display: none;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    background-color: rgba(0, 0, 0, .7);
     top: 0;
     left: 0;
     right: 0;
@@ -365,26 +382,6 @@ table * {
 
 #multipleAnsersBox div:hover {
     cursor: pointer;
-}
-
-#lostText {
-    background-color: yellow;
-    position: absolute;
-    font-size: 40px;
-    padding: 20px;
-    margin-top: 90px;
-    display: none;
-}
-
-#winText {
-    background-color: lightgreen;
-    position: absolute;
-    font-size: 40px;
-    padding: 20px;
-    margin-top: 90px;
-    display: block;
-    width: 50%;
-    height: 50%;
 }
 
 #popUptext {

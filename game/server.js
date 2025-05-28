@@ -19,16 +19,6 @@ async function handler(request) {
     if (request.method === "OPTIONS") {
         return new Response(null, createOptions())
     }
-    // if (request.method === "GET" && url.pathname === "/randomDish") {
-    //     if (checkContentType(contentType)) {
-    //         const fetchedRecipe = Deno.readTextFileSync("database/test.json");
-    //         console.log(fetchedRecipe);
-
-    //         return new Response(fetchedRecipe, createOptions());
-    //     } else {
-    //         return new Response(JSON.stringify({ error: "Bad Content-Type" }), createOptions(400));
-    //     }
-    // }
 
 
     if (url.pathname === "/user" && request.method === "GET") {
@@ -141,4 +131,4 @@ async function handler(request) {
 
 
 
-Deno.serve(handler );
+Deno.serve(handler);
