@@ -100,5 +100,20 @@
     "score": 30,
     "loggedIn": false,
     "id": 14
+  },
+  {
+    "username": "justin",
+    "password": "justin",
+    "score": 30,
+    "loggedIn": false,
+    "id": 15
+  },
+  {
+    "username": "alice",
+    "password": "alice",
+    "score": 190,
+    "loggedIn": true,
+    "id": 16,
+    "roundScore": 150
   }
 ]
