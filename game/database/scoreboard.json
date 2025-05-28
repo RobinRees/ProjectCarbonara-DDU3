@@ -112,8 +112,24 @@
     "username": "alice",
     "password": "alice",
     "score": 190,
-    "loggedIn": true,
+    "loggedIn": false,
     "id": 16,
     "roundScore": 150
+  },
+  {
+    "username": "OKIMgfdd",
+    "password": "dfgjh",
+    "score": 60,
+    "loggedIn": false,
+    "id": 17,
+    "roundScore": 60
+  },
+  {
+    "username": "Test34",
+    "password": "Test34",
+    "score": 10,
+    "loggedIn": true,
+    "id": 18,
+    "roundScore": 10
   }
 ]

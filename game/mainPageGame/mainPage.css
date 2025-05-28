@@ -1,398 +1,433 @@
 body {
-    height: 100%;
-    width: 100%;
-    margin: 0px;
-    box-sizing: border-box;
-    background-color: #e0e7ff;
-    font-family: Geneva, Tahoma, sans-serif;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  box-sizing: border-box;
+  background-color: #e0e7ff;
+  font-family: Geneva, Tahoma, sans-serif;
 }
 
 nav {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 25px;
-    background-color: #4a90e2;
-    padding: 5px 0;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  background-color: #4a90e2;
+  padding: 5px 0;
 }
 
 nav h1 {
-    color: white;
-
+  color: white;
 }
 
 img {
-    width: 160px;
+  width: 160px;
 }
 
 nav div {
-    display: flex;
-    place-content: center;
+  display: flex;
+  place-content: center;
 }
 
 nav button {
-    border-style: none;
-    outline: none;
-    /* padding: 10px; */
-    /* width: 100px; */
-    font-size: 14px;
-    color: white;
-    background-color: #4a90e2;
-    position: absolute;
-    right: 25px;
-    top: 30px;
+  border-style: none;
+  outline: none;
+  /* padding: 10px; */
+  /* width: 100px; */
+  font-size: 14px;
+  color: white;
+  background-color: #4a90e2;
+  position: absolute;
+  right: 25px;
+  top: 30px;
 }
 
-
 .menuButton:hover {
-    /* background-color: white; */
-    border-bottom: 2px solid white;
+  /* background-color: white; */
+  border-bottom: 2px solid white;
 }
 
 #mainInfo {
-    background-color: white;
-    padding: 20px;
-    border-radius: 20px;
-    flex-direction: column;
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    max-width: 500px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  flex-direction: column;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  max-width: 500px;
 }
 
 main {
-    display: flex;
-    justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 #left,
 #right {
-    width: 300px;
-    border-radius: 20px;
-    background-color: white;
-    height: fit-content;
-    padding: 15px;
-    box-shadow: 0 0 10px lightblue;
+  width: 300px;
+  border-radius: 20px;
+  background-color: white;
+  height: fit-content;
+  padding: 15px;
+  box-shadow: 0 0 10px lightblue;
 }
 
+/* Scorebox css --- mellan detta   */
+#icon {
+  background-color: #e8f0fe;
+  padding: 10px;
+  font-size: 24px;
+  color: #007bff;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#playerBox {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  background: white;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+  width: 260px;
+}
+
+#player {
+  font-size: 12px;
+  color: #777;
+  text-align: center;
+}
+
+#usernameDisplay {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 2px;
+  text-align: center;
+}
+
+#showScore {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2ecc71;
+  margin-top: 4px;
+  text-align: center;
+}
+
+/* Och detta */
 #hasChoices {
-    background-color: white;
-    padding: 15px;
-    border-radius: 20px;
-    width: 600px;
+  background-color: white;
+  padding: 15px;
+  border-radius: 20px;
+  width: 600px;
 }
 
 #choicesBox {
-    height: 250px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 15px;
+  height: 250px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 15px;
 }
 
 .choice {
-    background-color: lightgray;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    border-radius: 20px;
+  background-color: lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  border-radius: 20px;
 }
 
 .choice:hover,
 .choiceTwo:hover {
-    box-shadow: 0 0 8px #4a90e2;
+  box-shadow: 0 0 8px #4a90e2;
 }
 
 .choice p {
-    margin: 0;
-    text-align: center;
-    background-color: rgba(0, 0, 0, .5);
-    color: white;
-    width: 100%;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    padding: 5px 0;
+  margin: 0;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 100%;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 5px 0;
 }
 
 #foodImage {
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #foodTitle {
-    padding: 0;
-    margin: 0 0 15px 0;
-    text-align: center;
+  padding: 0;
+  margin: 0 0 15px 0;
+  text-align: center;
 }
 
 #gameInfo {
-    display: flex;
-    /* margin: 16px 0; */
-    gap: 20px;
+  display: flex;
+  /* margin: 16px 0; */
+  gap: 20px;
 }
 
 #correctGuesses {
-    background-color: limegreen;
+  background-color: limegreen;
 }
 
 #nextButton {
-    margin: auto;
-    display: none;
-    height: fit-content;
-    padding: 10px 50px;
-    background-color: #FFD700;
-    font-weight: bold;
-    border-radius: 50px;
-    font-size: 20px;
-    outline: none;
-    border-style: none;
-    border-bottom: 3px solid goldenrod;
+  margin: auto;
+  display: none;
+  height: fit-content;
+  padding: 10px 50px;
+  background-color: #ffd700;
+  font-weight: bold;
+  border-radius: 50px;
+  font-size: 20px;
+  outline: none;
+  border-style: none;
+  border-bottom: 3px solid goldenrod;
 }
 
 button:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #nextButton:active {
-    border-bottom: none;
-    margin-bottom: 3px;
-    transform: translateY(3px);
+  border-bottom: none;
+  margin-bottom: 3px;
+  transform: translateY(3px);
 }
 
 #nextButton:hover {
-    background-color: rgba(255, 215, 0, 0.6);
+  background-color: rgba(255, 215, 0, 0.6);
 }
 
-
-
 #foodTitle {
-    display: none;
+  display: none;
 }
 
 .importantRed {
-    padding: 10px 20px;
-    background-color: tomato;
-    font-weight: bold;
-    border-radius: 50px;
-    font-size: 20px;
+  padding: 10px 20px;
+  background-color: tomato;
+  font-weight: bold;
+  border-radius: 50px;
+  font-size: 20px;
 }
 
 #foodImage {
-    width: 280px;
-    height: 280px;
-    border: 1px solid black;
-    position: relative;
+  width: 280px;
+  height: 280px;
+  border: 1px solid black;
+  position: relative;
 }
 
 h2 {
-    text-align: center;
+  text-align: center;
 }
 
 #recipeBox {
-    min-width: 35%;
-    padding: 15px;
-    margin-top: auto;
-    margin-bottom: auto;
-    max-width: 620px;
-    max-height: 600px;
-    overflow-y: scroll;
+  min-width: 35%;
+  padding: 15px;
+  margin-top: auto;
+  margin-bottom: auto;
+  max-width: 620px;
+  max-height: 600px;
+  overflow-y: scroll;
 }
 
-
 #recipeBox p {
-    line-height: 1.6;
+  line-height: 1.6;
 }
 
 #left {
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-    max-width: 400px;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  max-width: 400px;
+  flex-wrap: wrap;
 }
 
 #middle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  max-width: 580px;
 }
 
 #right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #looseScreen {
-    display: none;
-    width: 700px;
-    height: 500px;
-    background-color: aquamarine;
-    position: absolute;
-    border: 5px blue solid;
-    border-radius: 10%;
+  display: none;
+  width: 700px;
+  height: 500px;
+  background-color: aquamarine;
+  position: absolute;
+  border: 5px blue solid;
+  border-radius: 10%;
 
-
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* LEADERBOARD CSS */
 
 #leaderboard-header img {
-    width: 165px;
-    position: absolute;
-    left: 150px;
-    top: -70px;
+  width: 165px;
+  position: absolute;
+  left: 150px;
+  top: -70px;
 }
 
 #hasMenuScoreBoard {
-    position: relative;
+  position: relative;
 }
 
 #leaderboard-container {
-    width: 300px;
-    max-width: 450px;
-    background-color: #fff;
-    border-radius: 9px;
-    overflow: visible;
-    right: 115px;
-    top: 120px;
+  width: 300px;
+  max-width: 450px;
+  background-color: #fff;
+  border-radius: 9px;
+  overflow: visible;
+  right: 115px;
+  top: 120px;
 }
-
-
 
 #leaderboard-header {
-    background-color: #4a90e2;
-    color: white;
-    text-align: center;
-    padding: 12px;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    height: 131px;
-    position: relative;
+  background-color: #4a90e2;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  height: 131px;
+  position: relative;
 }
 
-
-
 #leaderboard-header h1 {
-    margin: 0;
-    font-size: 36px;
-    line-height: 36px;
-    position: absolute;
-    top: 60px;
-    right: 132px;
-    z-index: 0;
-    position: absolute;
+  margin: 0;
+  font-size: 36px;
+  line-height: 36px;
+  position: absolute;
+  top: 60px;
+  right: 132px;
+  z-index: 0;
+  position: absolute;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
+  width: 100%;
+  border-collapse: collapse;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 table thead {
-    background-color: #e0e7ff;
-    font-weight: bold;
+  background-color: #e0e7ff;
+  font-weight: bold;
 }
 
 table th,
 table td {
-    padding: 9px;
-    text-align: center;
+  padding: 9px;
+  text-align: center;
 }
 
 table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
 table * {
-    z-index: 0;
-    position: relative;
+  z-index: 0;
+  position: relative;
 }
-
 
 /* .popUpBackground {} */
 
 #nextPopUp {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    position: fixed;
-    background-color: rgba(0, 0, 0, .7);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 }
 
-
-
-#nextPopUp>div {
-    background-color: #e0e7ff;
+#nextPopUp > div {
+  background-color: #e0e7ff;
 }
 
 #triviaPopUp {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    position: fixed;
-    background-color: rgba(0, 0, 0, .7);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 }
 
 #questionBox {
-    background-color: #e0e7ff;
-    padding: 30px;
-    border-radius: 20px;
-    margin-top: auto;
-    margin-bottom: auto;
-    box-shadow: 0 0 24px #FFD700;
+  background-color: #e0e7ff;
+  padding: 30px;
+  border-radius: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+  box-shadow: 0 0 24px #ffd700;
 }
 
-
-
 #questionText {
-    /* padding: 20px; */
-    font-weight: bold;
+  /* padding: 20px; */
+  font-weight: bold;
 }
 
 #multipleAnswersBox {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 15px;
 }
 
 #multipleAnswersBox div {
-    border: 1px solid black;
-    background-color: white;
-    font-weight: bold;
-    font-size: 23px;
-    padding: 0 15px;
-    text-align: center;
+  border: 1px solid black;
+  background-color: white;
+  font-weight: bold;
+  font-size: 23px;
+  padding: 0 15px;
+  text-align: center;
 }
 
 #multipleAnsersBox div:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #popUptext {
-    padding: 15px;
-    margin-top: 15px;
-    text-align: center;
-    display: none;
+  padding: 15px;
+  margin-top: 15px;
+  text-align: center;
+  display: none;
 }
 
 #popUptext span {
-    font-weight: bold;
+  font-weight: bold;
 }
