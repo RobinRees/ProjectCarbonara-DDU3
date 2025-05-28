@@ -17,6 +17,15 @@ nav {
     position: relative;
 }
 
+nav>div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+}
 
 h1 {
     color: white;
@@ -34,8 +43,6 @@ main {
 
 #scoreBox {
     background-color: white;
-    padding: 15px;
-    gap: 15px;
     border-radius: 20px;
 }
 
@@ -56,6 +63,8 @@ p {
     flex-direction: column;
     gap: 15px;
     align-items: center;
+    position: absolute;
+    top: 380px;
 }
 
 button {
@@ -108,11 +117,11 @@ button:active {
     /* Ta bort dessa tre senare */
 }
 
-img {
+#leaderboard-container img {
     width: 165px;
     position: absolute;
-    left: 150px;
-    top: -70px;
+    left: 148px;
+    top: -64px;
 }
 
 #leaderboard-container {
@@ -123,7 +132,8 @@ img {
     overflow: visible;
     display: none;
     position: absolute;
-    top: 175px;
+    top: 185px;
+    z-index: 20;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 }
@@ -189,4 +199,16 @@ table tbody tr:nth-child(even) {
 #leaderboard * {
     z-index: 0;
     position: relative;
+}
+
+#imgBox {
+    width: 280px;
+    height: 280px;
+    background-image: url(gameOver.png);
+    background-position: center;
+    background-size: contain;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    bottom: 200px;
 }

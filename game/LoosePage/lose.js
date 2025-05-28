@@ -35,6 +35,7 @@ const leaderboardButton = document.getElementById("leaderboardButton");
 const leaderboard = document.getElementById("leaderboard-container");
 
 leaderboardButton.addEventListener("click", () => {
+    createTopTen(currentPlayer)
     leaderboard.style.display = "block";
 });
 
@@ -45,6 +46,13 @@ backButton.addEventListener("click", () => {
 
 
 const homeButton = document.getElementById("homeButton");
+const playAgain = document.getElementById("playAgain")
+
+
+playAgain.addEventListener("click",  async () => {
+    console.log("navigating to /game");
+    window.location.href = "/game"
+});
 
 
 homeButton.addEventListener("click", async () => {
