@@ -9,27 +9,26 @@
 </head>
 
 <body>
-    <h1>Spelets namn</h1>
+    <header>
+        <div id="headerDivLeft">
+            <p>Log In</p>
+        </div>
+        <div id="headerDivRight"><div >
+            <p>Sign Up</p>
+        </div>
+    </header>
     <main>
-        <div id="bigLeft">
-            <div id="littleLeft">
-                <h1>Log In:</h1>
-                <input type="text" id="username" placeholder="Username">
-                <input type="password" id="password" placeholder="Password">
-                <button type="button" id="startButton">Start</button>
-            </div>
+        <div id="logInDiv">
+            <h1>LOG IN</h1>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button type="button" id="startButton">Start</button>
         </div>
-        <div id="rulesDiv">
-            <h3>How to play</h3>
-            <p></p>
-        </div>
-        <div id="bigRight">
-            <div id="littleRight">
-                <h1>Sign Up:</h1>
-                <input type="text" id="signUp" placeholder="Username">
-                <input type="password" id="createPassword" placeholder="Password">
-                <button type="button" id="createPlayer">Create Acc</button>
-            </div>
+        <div id="signInDiv">
+            <h1>SIGN UP</h1>
+            <input type="text" id="signUp" placeholder="Username">
+            <input type="password" id="createPassword" placeholder="Password">
+            <button type="button" id="createPlayer">Create Account</button>
         </div>
     </main>
     <script type="module" src="./homePage/homePage.js" defer></script>

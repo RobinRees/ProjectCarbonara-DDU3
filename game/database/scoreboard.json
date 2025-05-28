@@ -101,12 +101,5 @@
     "loggedIn": false,
     "id": 14
   },
-  {
-    "username": "sara",
-    "password": "arg",
-    "score": 50,
-    "loggedIn": false,
-    "id": 15,
-    "roundScore": 40
-  }
+
 ]
