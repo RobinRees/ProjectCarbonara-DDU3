@@ -103,19 +103,6 @@ export function updateUserScore(newScore) {
 }
 
 
-
-// export async function getLoggedInUser() {
-//     const users = JSON.parse(await Deno.readTextFile("database/scoreboard.json"));
-//     const loggedInUser = users.find(user => user.loggedIn);
-
-//     if (!loggedInUser) {
-//         console.error("No user is currently logged in.");
-//         return null;
-//     }
-
-//     return loggedInUser;
-// }
-
 export function logInUser(username) {
     const users = JSON.parse(Deno.readTextFileSync("database/scoreboard.json"));
 
@@ -141,12 +128,12 @@ export function logOutUser() {
 }
 
 
-export function createTopTen(currentPlayer) {
+export async function createTopTen(currentPlayer) {
     console.log(currentPlayer);
 
-    const scoreboard = JSON.parse(Deno.readTextFileSync("database/scoreboard.json"));
+    const response = await fetch("/getTopTen");
+    const topPlayers = await response.json();
 
-    const topPlayers = scoreboard.sort((a, b) => b.score - a.score).slice(0, 10);
     const rows = document.querySelectorAll("table tbody tr");
     rows.forEach(row => {
         row.querySelector(".rank").style.backgroundColor = "initial";

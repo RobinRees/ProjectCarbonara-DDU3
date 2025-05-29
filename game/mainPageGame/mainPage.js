@@ -5,13 +5,9 @@ let currentPlayer = null;
 const livesBox = document.getElementById("livesBox");
 
 (async () => {
-    const response = await fetch("/getLoggedInUser", {
-        method: "GET",
-        headers: { "content-type": "application/json" },
-    });
+    const response = await fetch("/getLoggedInUser");
     if (response.status === 200) {
         currentPlayer = await response.json();
-        console.log(currentPlayer);
         showCurrentPlayer();
         createChoices();
         createTopTen(currentPlayer);

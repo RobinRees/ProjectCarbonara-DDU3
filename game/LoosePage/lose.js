@@ -3,29 +3,22 @@ import { createTopTen } from "../utilities.js";
 let currentPlayer = null;
 
 (async () => {
-    const response = await fetch("/getLoggedInUser", {
-        method: "GET",
-        headers: { "content-type": "application/json" }
-    });
+    const response = await fetch("/getLoggedInUser");
     if (response.status === 200) {
         currentPlayer = await response.json();
         console.log(currentPlayer);
     }
-
-    const responseTwo = await fetch("../database/scoreboard.json")
-    const scoreboard = await responseTwo.json();
-
-    const user = scoreboard.find(u => u.loggedIn == true);
-    console.log(user);
-    console.log(user.score);
-    console.log(user.roundScore); // NÅGOT SOM UPPDATERAR FEL MED POÄNG
-    document.getElementById("scorePersonalBest").textContent = `${user.score}`
-    if (!user.roundScore) {
-        document.getElementById("finalScore").textContent = `${user.score}`
+    console.log(currentPlayer);
+    console.log(currentPlayer.score);
+    console.log(currentPlayer.roundScore);
+    document.getElementById("scorePersonalBest").textContent = `${currentPlayer.score}`
+    if (!currentPlayer.roundScore) {
+        document.getElementById("finalScore").textContent = `${currentPlayer.score}`
     } else {
-        document.getElementById("finalScore").textContent = `${user.roundScore}`
+        document.getElementById("finalScore").textContent = `${currentPlayer.roundScore}`
     }
     createTopTen(currentPlayer)
+
 })();
 
 const leaderboardButton = document.getElementById("leaderboardButton");

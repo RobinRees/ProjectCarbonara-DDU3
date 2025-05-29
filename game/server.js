@@ -25,8 +25,8 @@ async function handler(request) {
             if (checkContentType(contentType)) {
                 const userData = await request.json()
 
-                if (userData.username.length < 4 || userData.username.length === "") {
-                    return new Response(JSON.stringify({ error: "Username must be at least 4 characters" }), createOptions(400));
+                if (userData.username.length < 3 || userData.username.length === "") {
+                    return new Response(JSON.stringify({ error: "Username must be at least 3 characters" }), createOptions(400));
                 }
 
                 if (userData.password.length < 5 || !isValidPassword(userData.password)) {
@@ -112,6 +112,13 @@ async function handler(request) {
             return new Response(JSON.stringify({ error: "Bad Content-Type" }), createOptions(400));
         }
     }
+
+    if (url.pathname === "/getTopTen" && request.method === "GET") {
+        const scoreboard = JSON.parse(Deno.readTextFileSync("database/scoreboard.json"));
+        const topPlayers = scoreboard.sort((a, b) => b.score - a.score).slice(0, 10);
+        return new Response(JSON.stringify(topPlayers), createOptions());
+    }
+
 
     if (url.pathname === "/game") {
         return serveFile(request, "./mainPageGame/mainPage.html");

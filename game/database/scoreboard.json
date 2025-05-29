@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "username": "dog",
+    "password": "fudge123",
+    "score": 90,
+    "loggedIn": false,
+    "id": 1,
+    "roundScore": 60
+  },
+  {
+    "username": "nyuser",
+    "password": "tester55",
+    "score": 0,
+    "loggedIn": false,
+    "id": 2
+  }
+]
