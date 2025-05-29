@@ -6,7 +6,8 @@ import {
     createNewUser,
     updateUserScore,
     logInUser,
-    logOutUser
+    logOutUser,
+    isValidPassword
 } from "./utilities.js";
 
 
@@ -19,21 +20,24 @@ async function handler(request) {
         return new Response(null, createOptions())
     }
 
-    if (url.pathname === "/user" && request.method === "GET") {
-        const users = await Deno.readTextFile("database/scoreboard.json");
-        return new Response(JSON.stringify(users), createOptions())
-    }
-
     if (url.pathname === "/signUp") {
-        console.log("request to signUp");
-
         if (request.method === "POST") {
             if (checkContentType(contentType)) {
                 const userData = await request.json()
-                const resultNewUser = await createNewUser(userData)
+
+                if (userData.username.length < 4 || userData.username.length === "") {
+                    return new Response(JSON.stringify({ error: "Username must be at least 4 characters" }), createOptions(400));
+                }
+
+                if (userData.password.length < 5 || !isValidPassword(userData.password)) {
+                    return new Response(JSON.stringify({ error: "Password must be at least 5 characters and include a number" }), createOptions(400));
+                }
+
+                const resultNewUser = createNewUser(userData)
                 const newUser = resultNewUser.addedUser;
+
                 if (newUser) {
-                    await logInUser(newUser.username)
+                    logInUser(newUser.username)
                     return new Response(JSON.stringify(resultNewUser.addedUser), createOptions())
                 }
 
@@ -55,20 +59,20 @@ async function handler(request) {
         console.log(loginData);
         if (request.method === "POST") {
             if (checkContentType(contentType)) {
-                const verifyUser = await checkUserCredentials(loginData);
-                console.log(verifyUser.user);
+                const verifiedUser = await checkUserCredentials(loginData);
+                console.log(verifiedUser.user);
 
-                if (verifyUser.status === "success") {
+                if (verifiedUser.status === "success") {
                     console.log("användaren finns");
-                    await logInUser(verifyUser.user.username)
-                    return new Response(JSON.stringify(verifyUser.user), createOptions())
+                    await logInUser(verifiedUser.user.username)
+                    return new Response(JSON.stringify(verifiedUser.user), createOptions())
                 }
-                if (verifyUser.status === "wrong password") {
+                if (verifiedUser.status === "wrong password") {
                     console.log("wrong password");
 
                     return new Response(JSON.stringify({ error: "Incorrect password" }), createOptions(401));
                 }
-                if (verifyUser.status === "no user") {
+                if (verifiedUser.status === "no user") {
                     return new Response(JSON.stringify({ error: "User does not exist" }), createOptions(404));
                 }
             } else {
@@ -82,7 +86,7 @@ async function handler(request) {
 
     if (url.pathname === "/getLoggedInUser" && request.method === "GET") {
         const users = JSON.parse(await Deno.readTextFile("database/scoreboard.json"));
-        const loggedInUser = users.find(u => u.loggedIn === true);
+        const loggedInUser = users.find(u => u.loggedIn);
 
         if (loggedInUser) {
             return new Response(JSON.stringify(loggedInUser), createOptions())
@@ -92,20 +96,21 @@ async function handler(request) {
     }
 
     if (url.pathname === "/logOutUser" && request.method === "POST") {
-        await logOutUser();
-        return new Response(JSON.stringify({ message: "You logged out" }, createOptions()));
+        const loggedOutUser = logOutUser();
+        console.log(loggedOutUser, "server105");
+
+        return new Response(JSON.stringify({ message: "You logged out", user: loggedOutUser }), createOptions());
     }
 
     if (url.pathname === "/updateScore" && request.method === "PATCH") {
         if (checkContentType(contentType)) {
 
             const { score } = await request.json();
-            await updateUserScore(score);
-            return new Response("Score updated", createOptions(200));
+            updateUserScore(score);
+            return new Response(JSON.stringify({ message: "Score updated" }), createOptions());
         } else {
             return new Response(JSON.stringify({ error: "Bad Content-Type" }), createOptions(400));
         }
-
     }
 
     if (url.pathname === "/game") {

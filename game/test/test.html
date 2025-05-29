@@ -53,7 +53,6 @@
             <p id="dataResponse4"></p>
         </button>
 
-        <!-- Tidigare test4 → nu test5 -->
         <button type="button" id="test5">
             <h1>TEST5</h1>
             <h2>Testar ogiltig Content-Type</h2>
@@ -62,7 +61,6 @@
             <p id="dataResponse5"></p>
         </button>
 
-        <!-- Tidigare test5 → nu test6 -->
         <button type="button" id="test6">
             <h1>TEST6</h1>
             <h2>Testar ogiltig metod</h2>
@@ -72,10 +70,6 @@
         </button>
 
         <h2>TESTS FOR LOGIN</h2>
-
-
-
-
         <button type="button" id="test7">
             <h1>TEST7</h1>
             <h2>POST-förfrågan till /logIn</h2>
@@ -123,15 +117,82 @@
 
         <button type="button" id="test12">
             <h1>TEST12</h1>
-            <h2>DELETE-förfrågan till /logIn</h2>
+            <h2>DELETE-förfrågan till /signUp</h2>
             <h3>Testar felaktig metod</h3>
             <p>Förväntad status: 404</p>
             <p id="statusResponse12"></p>
             <p id="dataResponse12"></p>
         </button>
+        <button type="button" id="test13">
+            <h1>TEST13</h1>
+            <h2>POST-förfrågan till /signUp</h2>
+            <h3>Testar ogiltigt username</h3>
+            <p>Förväntad status: 400</p>
+            <p id="statusResponse13"></p>
+            <p id="dataResponse13"></p>
+        </button>
+        <button type="button" id="test14">
+            <h1>TEST14</h1>
+            <h2>POST-förfrågan till /signUp</h2>
+            <h3>Testar ogiltigt password</h3>
+            <p>Förväntad status: 400</p>
+            <p id="statusResponse14"></p>
+            <p id="dataResponse14"></p>
+        </button>
 
+        <button type="button" id="test15">
+            <h1>TEST15</h1>
+            <h2>PATCH-förfrågan till /updateScore</h2>
+            <h3>Test för uppdatering av score</h3>
+            <p>Förväntad status: 200</p>
+            <p id="statusResponse15"></p>
+            <p id="dataResponse15"></p>
+        </button>
 
+        <button type="button" id="test16">
+            <h1>TEST16</h1>
+            <h2>POST-förfrågan till /logOutUser</h2>
+            <h3>Test för utloggning av användare</h3>
+            <p>Förväntad status: 200</p>
+            <p id="statusResponse16"></p>
+            <p id="dataResponse16"></p>
+        </button>
 
+        <button type="button" id="test17">
+            <h1>TEST17</h1>
+            <h2>GET-förfrågan till /game</h2>
+            <h3>Test för byte av sida</h3>
+            <p>Förväntad status: 200</p>
+            <p id="statusResponse17"></p>
+            <p id="dataResponse17"></p>
+        </button>
+
+        <button type="button" id="test18">
+            <h1>TEST18</h1>
+            <h2>GET-förfrågan till /gameOver</h2>
+            <h3>Test för byte av sida</h3>
+            <p>Förväntad status: 200</p>
+            <p id="statusResponse18"></p>
+            <p id="dataResponse18"></p>
+        </button>
+
+        <button type="button" id="test19">
+            <h1>TEST19</h1>
+            <h2>GET-förfrågan till /</h2>
+            <h3>Test för byte av sida</h3>
+            <p>Förväntad status: 200</p>
+            <p id="statusResponse19"></p>
+            <p id="dataResponse19"></p>
+        </button>
+
+        <button type="button" id="test20">
+            <h1>TEST20</h1>
+            <h2>GET-förfrågan till /home</h2>
+            <h3>Test för byte av sida</h3>
+            <p>Förväntad status: 200</p>
+            <p id="statusResponse20"></p>
+            <p id="dataResponse20"></p>
+        </button>
     </main>
     <script src="test.js"></script>
 </body>

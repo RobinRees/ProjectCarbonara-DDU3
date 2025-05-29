@@ -1,27 +1,24 @@
 
-// const url = new URL("http://localhost:8000")
 const main = document.querySelector("main");
-const test1BTN = document.getElementById("test1")
-const test2BTN = document.getElementById("test2")
-const test3BTN = document.getElementById("test3")
-const test4BTN = document.getElementById("test4")
-const test5BTN = document.getElementById("test5")
-const test6BTN = document.getElementById("test6")
-const test7BTN = document.getElementById("test7")
-const test8BTN = document.getElementById("test8")
-const test9BTN = document.getElementById("test9")
-const test10BTN = document.getElementById("test10")
-const test11BTN = document.getElementById("test11")
-const test12BTN = document.getElementById("test12")
+const test1BTN = document.getElementById("test1");
+const test2BTN = document.getElementById("test2");
+const test3BTN = document.getElementById("test3");
+const test4BTN = document.getElementById("test4");
+const test5BTN = document.getElementById("test5");
+const test6BTN = document.getElementById("test6");
+const test7BTN = document.getElementById("test7");
+const test8BTN = document.getElementById("test8");
+const test9BTN = document.getElementById("test9");
+const test10BTN = document.getElementById("test10");
+const test11BTN = document.getElementById("test11");
+const test12BTN = document.getElementById("test12");
+const test13BTN = document.getElementById("test13");
+const test14BTN = document.getElementById("test14");
 
 
 
 async function test1() {
-    const response = await fetch("http://localhost:8000/getLoggedInUser", {
-        headers: {
-            "Content-Type": "application/json"
-        },
-    });
+    const response = await fetch("http://localhost:8000/getLoggedInUser");
     const data = await response.json();
     console.log(data);
 
@@ -234,7 +231,6 @@ async function test9() {
     test10()
 }
 
-// Tidigare test8 → nu test10
 async function test10() {
     const response = await fetch("http://localhost:8000/logIn", {
         method: "POST",
@@ -258,7 +254,6 @@ async function test10() {
     test11();
 }
 
-// Tidigare test9 → nu test11
 async function test11() {
     const response = await fetch("http://localhost:8000/logIn", {
         method: "DELETE",
@@ -282,14 +277,13 @@ async function test11() {
     test12();
 }
 
-// Tidigare test10 → nu test12
 async function test12() {
     const response = await fetch("http://localhost:8000/logIn", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username: "example", password: "test123" })
+        body: JSON.stringify({ username: "example", password: "tester123" })
     });
     const data = await response.json();
     console.log(data);
@@ -307,9 +301,170 @@ async function test12() {
 }
 
 
+async function test13() {
+    const response = await fetch("http://localhost:8000/signUp", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username: "wow", password: "testing123" })
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    statusResponse13.textContent = `Status: ${response.status}`;
+    const expectedStatus = 400;
+    if (response.status === expectedStatus) {
+        document.getElementById("test13").classList.add("testOK");
+        dataResponse13.textContent = `${data.error}`;
+    } else {
+        document.getElementById("test13").classList.add("testFAIL");
+        dataResponse13.textContent = `Error: ${data}`;
+    }
+    test14();
+}
+async function test14() {
+    const response = await fetch("http://localhost:8000/signUp", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username: "Bowser", password: "cake" })
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    statusResponse14.textContent = `Status: ${response.status}`;
+    const expectedStatus = 400;
+    if (response.status === expectedStatus) {
+        document.getElementById("test14").classList.add("testOK");
+        dataResponse14.textContent = `${data.error}`;
+    } else {
+        document.getElementById("test14").classList.add("testFAIL");
+        dataResponse14.textContent = `Error: ${data}`;
+    }
+    test15();
+}
+async function test15() {
+    const response = await fetch("http://localhost:8000/updateScore", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ score: 100 })
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    statusResponse15.textContent = `Status: ${response.status}`;
+    const expectedStatus = 200;
+    if (response.status === expectedStatus) {
+        document.getElementById("test15").classList.add("testOK");
+        console.log(data.message);
+
+        dataResponse15.textContent = `${data.message}`;
+    } else {
+        document.getElementById("test15").classList.add("testFAIL");
+        dataResponse15.textContent = `Error: ${data}`;
+    }
+    test16();
+}
+
+async function test16() {
+    const response = await fetch("http://localhost:8000/logOutUser", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    statusResponse16.textContent = `Status: ${response.status}`;
+    const expectedStatus = 200;
+    if (response.status === expectedStatus) {
+        document.getElementById("test16").classList.add("testOK");
+        console.log(data.message);
+        console.log(data.user);
 
 
+        dataResponse16.innerHTML = `${data.message} <br> ${JSON.stringify(data.user)}`;
+    } else {
+        document.getElementById("test16").classList.add("testFAIL");
+        dataResponse16.textContent = `Error: ${data}`;
+    }
+    test17();
+}
 
+async function test17() {
+    const response = await fetch("http://localhost:8000/game");
+
+    const data = await response.text();
+
+    statusResponse17.textContent = `Status: ${response.status}`;
+    const expectedStatus = 200;
+    if (response.status === expectedStatus) {
+        document.getElementById("test17").classList.add("testOK");
+        console.log(data.message);
+        console.log(data.user);
+
+
+        dataResponse17.textContent = "HTML page loaded correctly";
+    } else {
+        document.getElementById("test17").classList.add("testFAIL");
+        dataResponse17.textContent = `Error: ${data}`;
+    }
+    test18();
+}
+
+async function test18() {
+    const response = await fetch("http://localhost:8000/gameOver");
+
+    const data = await response.text();
+
+    statusResponse18.textContent = `Status: ${response.status}`;
+    const expectedStatus = 200;
+    if (response.status === expectedStatus) {
+        document.getElementById("test18").classList.add("testOK");
+
+        dataResponse18.textContent = "HTML page loaded correctly";
+    } else {
+        document.getElementById("test18").classList.add("testFAIL");
+        dataResponse18.textContent = `Error: ${data}`;
+    }
+    test19();
+}
+async function test19() {
+    const response = await fetch("http://localhost:8000/");
+    const data = await response.text();
+
+    statusResponse19.textContent = `Status: ${response.status}`;
+    const expectedStatus = 200;
+    if (response.status === expectedStatus) {
+        document.getElementById("test19").classList.add("testOK");
+
+        dataResponse19.textContent = "HTML page loaded correctly";
+    } else {
+        document.getElementById("test19").classList.add("testFAIL");
+        dataResponse19.textContent = `Error: ${data}`;
+    }
+    test20();
+}
+async function test20() {
+    const response = await fetch("http://localhost:8000/home");
+    const data = await response.text();
+
+    statusResponse20.textContent = `Status: ${response.status}`;
+    const expectedStatus = 200;
+    if (response.status === expectedStatus) {
+        document.getElementById("test20").classList.add("testOK");
+
+        dataResponse20.textContent = "HTML page loaded correctly";
+    } else {
+        document.getElementById("test20").classList.add("testFAIL");
+        dataRespons20.textContent = `Error: ${data}`;
+    }
+}
 
 
 test1BTN.addEventListener("click", test1);
@@ -324,3 +479,5 @@ test9BTN.addEventListener("click", test9);
 test10BTN.addEventListener("click", test10);
 test11BTN.addEventListener("click", test11);
 test12BTN.addEventListener("click", test12);
+test13BTN.addEventListener("click", test13);
+test14BTN.addEventListener("click", test14);

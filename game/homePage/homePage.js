@@ -54,31 +54,29 @@ async function logIn() {
     }
 }
 
+
 async function createNewProfile() {
     let usernameInput = signUp.value
     let passwordInput = createPassword.value
 
-    if (usernameInput === "" || passwordInput === "") {
-        Alert("Input field cannot be empty")
-    } else {
-        let request = new Request("/signUp")
-        let myOpt = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ "username": usernameInput, "password": passwordInput })
-        }
+    let request = new Request("/signUp")
+    let myOpt = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ "username": usernameInput, "password": passwordInput })
+    }
 
-        let response = await fetch(request, myOpt)
-        let newUser = await response.json()
+    let response = await fetch(request, myOpt)
+    let newUser = await response.json()
 
-        if (response.status === 409) {
-            alert(newUser.error)
-        }
-        if (response.status === 200) {
-
-            window.location.href = "/game"
-        }
-
+    if (response.status === 409) {
+        alert(newUser.error)
+    }
+    if (response.status === 400) {
+        alert(newUser.error)
+    }
+    if (response.status === 200) {
+        window.location.href = "/game"
     }
 }
 

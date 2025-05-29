@@ -1,17 +1,16 @@
 body {
     display: flex;
-    justify-content: center;
+    align-items: center;
     background-color: #f6edde;
 }
 
 main {
-    width: auto;
+    width: fit-content;
     display: grid;
     grid-template-columns: 500px;
     gap: 45px;
-    height: 700px;
-    overflow-y: scroll;
-
+    margin: auto;
+    place-items: center;
 }
 
 h2 {
@@ -25,8 +24,7 @@ img {
 }
 
 button {
-    width: 100%;
-
+    width: fit-content;
     padding: 20px;
     border: 1px solid black;
     border-radius: 25px;
