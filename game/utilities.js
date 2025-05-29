@@ -17,15 +17,19 @@ export function checkContentType(contentType) {
 }
 
 
+export function isValidPassword(password) {
+    for (let char of password) {
+        if (!isNaN(char)) return true;
+    }
+    return false;
+}
+
+
 export class User {
     constructor(data) {
         const JSONscoreboard = Deno.readTextFileSync("database/scoreboard.json");
         let scoreboard = JSON.parse(JSONscoreboard);
 
-
-        if (typeof data.username !== "string") {
-            alert("Username must be at least 3 characters")
-        }
         this.username = data.username
         this.password = data.password
         this.score = 0;
@@ -39,7 +43,7 @@ export class User {
     }
 }
 
-export async function createNewUser(userData) {
+export function createNewUser(userData) {
 
     const newUser = new User(userData);
     console.log(newUser, "rad 43");
@@ -48,7 +52,7 @@ export async function createNewUser(userData) {
 
     let scoreboard = JSON.parse(JSONscoreboard);
 
-    const nameTaken = scoreboard.some(x => x.username === newUser.username) // Kollar om 1 användre redan har det namnet, true elelr false
+    const nameTaken = scoreboard.some(x => x.username === newUser.username);
 
     if (nameTaken) {
         console.log("Username already exists");
@@ -57,33 +61,31 @@ export async function createNewUser(userData) {
         scoreboard.push(newUser)
         Deno.writeTextFileSync("database/scoreboard.json", JSON.stringify(scoreboard, null, 2))
         return { addedUser: newUser };
-
     }
 }
 
-export async function checkUserCredentials(loginData) {
+export function checkUserCredentials(loginData) {
     const JSONusers = Deno.readTextFileSync("database/scoreboard.json");
-    let users = JSON.parse(JSONusers);
+    const users = JSON.parse(JSONusers);
     console.log(users);
 
-    return users.some(x => {
-        return x.username === loginData.username &&
-            x.password === loginData.password
-    });
+
+    const user = users.find(x => x.username === loginData.username);
+    console.log(user);
+
+    if (!user) {
+        return { status: "no user" };
+    }
+
+    if (user.password !== loginData.password) {
+        return { status: "wrong password" };
+    }
+
+    return { status: "success", user }; // Logga in OK
 }
 
-export async function retrieveUserByName(loginData) {
-    console.log(loginData, "rad 72 utilities");
-    console.log(loginData.username);
 
-    const JSONusers = Deno.readTextFileSync("database/scoreboard.json");
-    let users = JSON.parse(JSONusers);
-    return users.find(x => x.username === loginData.username);
-}
-
-
-
-export async function updateUserScore(newScore) {
+export function updateUserScore(newScore) {
     const users = JSON.parse(Deno.readTextFileSync("database/scoreboard.json"))
     console.log(newScore, "rad 86");
 
@@ -97,50 +99,52 @@ export async function updateUserScore(newScore) {
         user.roundScore = newScore;
     }
 
-    await Deno.writeTextFile("database/scoreboard.json", JSON.stringify(users, null, 2));
+    Deno.writeTextFileSync("database/scoreboard.json", JSON.stringify(users, null, 2));
 }
 
 
 
-export async function getLoggedInUser() {
-    const users = JSON.parse(await Deno.readTextFile("database/scoreboard.json"));
-    const loggedInUser = users.find(user => user.loggedIn === true);
+// export async function getLoggedInUser() {
+//     const users = JSON.parse(await Deno.readTextFile("database/scoreboard.json"));
+//     const loggedInUser = users.find(user => user.loggedIn);
 
-    if (!loggedInUser) {
-        console.error("No user is currently logged in.");
-        return null;
-    }
+//     if (!loggedInUser) {
+//         console.error("No user is currently logged in.");
+//         return null;
+//     }
 
-    return loggedInUser;
-}
+//     return loggedInUser;
+// }
 
-export async function logInUser(username) {
-    const users = JSON.parse(await Deno.readTextFile("database/scoreboard.json"));
+export function logInUser(username) {
+    const users = JSON.parse(Deno.readTextFileSync("database/scoreboard.json"));
 
     for (const user of users) {
         user.loggedIn = (user.username === username);
     }
-    await Deno.writeTextFile("database/scoreboard.json", JSON.stringify(users, null, 2));
+    Deno.writeTextFileSync("database/scoreboard.json", JSON.stringify(users, null, 2));
 }
 
-export async function logOutUser() {
-    const users = JSON.parse(await Deno.readTextFile("database/scoreboard.json"));
+export function logOutUser() {
+    const users = JSON.parse(Deno.readTextFileSync("database/scoreboard.json"));
 
-    for (const user of users) {
-        user.loggedIn = false;
+    const loggedOutUser = users.find(user => user.loggedIn);
+    console.log(loggedOutUser, "132");
+
+    if (loggedOutUser) {
+        loggedOutUser.loggedIn = false;
     }
-    await Deno.writeTextFile("database/scoreboard.json", JSON.stringify(users, null, 2));
+    Deno.writeTextFileSync("database/scoreboard.json", JSON.stringify(users, null, 2));
+    console.log(loggedOutUser, "138");
+
+    return loggedOutUser;
 }
 
 
-export async function createTopTen(currentPlayer) {
+export function createTopTen(currentPlayer) {
     console.log(currentPlayer);
 
-    console.log("skapar leaderboard");
-
-    // const table = document.getElementById("tabell");
-    const response = await fetch("../database/scoreboard.json")
-    const scoreboard = await response.json();
+    const scoreboard = JSON.parse(Deno.readTextFileSync("database/scoreboard.json"));
 
     const topPlayers = scoreboard.sort((a, b) => b.score - a.score).slice(0, 10);
     const rows = document.querySelectorAll("table tbody tr");
@@ -168,8 +172,6 @@ export async function createTopTen(currentPlayer) {
         } else {
             row.querySelector(".score").textContent = "-";
         }
-
-
 
         if (row.querySelector(".name").textContent == currentPlayer.username) {
             row.querySelector(".rank").style.backgroundColor = "#4a90e2"
