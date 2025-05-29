@@ -348,3 +348,20 @@ class FoodTriviaQuiz {
 const apiUrl =
   "https://the-trivia-api.com/api/questions?categories=food_and_drink&limit=10&difficulty=easy";
 const quiz = new FoodTriviaQuiz(apiUrl);
+
+
+setTimeout(() => {
+  const adBox = document.getElementById("footerAdBox");
+  if (adBox) {
+    adBox.classList.add("show");
+    console.log("Ad shown");
+  } else {
+    console.warn("AdBox not found");
+  }
+}, 5000);
+
+document.getElementById("closeAdBox").addEventListener("click", () => {
+  const adBox = document.getElementById("footerAdBox");
+  console.log("Clicking")
+  adBox.style.display = "none"
+});
