@@ -184,8 +184,14 @@ main {
   gap: 20px;
 }
 
-#correctGuesses {
-  background-color: limegreen;
+.choice.correct {
+  background-color: lightgreen;
+  border: 2px solid green;
+}
+
+.choice.wrong {
+  background-color: tomato;
+  border: 2px solid red;
 }
 
 #nextButton {

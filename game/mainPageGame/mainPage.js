@@ -1,3 +1,4 @@
+//import { startTransition } from "react";
 import { createTopTen } from "../utilities.js";
 
 let currentPlayer = null;
@@ -168,40 +169,43 @@ async function handleChoiceClick(div, choice, meal) {
   if (div.classList.contains("clicked")) return;
   div.classList.add("clicked");
 
+  RightAnswer.showFeedbackForGame(div, choice.isCorrect);
+
   if (choice.isCorrect) {
-    div.style.backgroundColor = "lightGreen";
     correctGuesses++;
     showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
     currentScore += 10;
     showScore.innerHTML = `Current score: ${currentScore}`;
+
     await fetch("http://localhost:8000/updateScore", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ score: currentScore }),
     });
+
     createTopTen(currentPlayer);
 
     if (correctGuesses === allCorrect) {
       document.getElementById("nextPopUp").style.display = "flex";
       document.getElementById("foodTitle").textContent = meal.strMeal;
       document.querySelector("#recipeBox p").textContent = meal.strInstructions;
-      document.querySelector(
-        "#nextPopUp h2"
-      ).innerHTML = `Recipe for ${meal.strMeal}`;
+      document.querySelector("#nextPopUp h2").innerHTML = `Recipe for ${meal.strMeal}`;
       document.getElementById("nextButton").style.display = "block";
-
       foodTitle.style.display = "block";
     }
   } else {
-    div.style.backgroundColor = "tomato";
     lives--;
     livesBox.innerHTML = `Lives left: ${lives}`;
+
     if (lives === 0 && triviaCounter === 0) {
       document.getElementById("triviaPopUp").style.display = "flex";
-      quiz.loadQuestion();
+      const result = await trivia();
       triviaCounter++;
+
+      if (!result) {
+        window.location.href = "/gameOver";
+      }
     } else if (lives === 0 && triviaCounter === 1) {
-      console.log(triviaCounter);
       window.location.href = "/gameOver";
     }
   }
@@ -237,114 +241,110 @@ document.getElementById("nextButton").addEventListener("click", () => {
   createChoices();
 });
 
-class FoodTriviaQuiz {
-  constructor(apiUrl) {
-    this.apiUrl = apiUrl;
+async function trivia() {
+    const response = await fetch("https://the-trivia-api.com/api/questions?categories=food_and_drink&limit=10&difficulty=easy")
+    const remakeJson = await response.json()
 
-    this.questionText = document.getElementById("questionText");
-    this.multipleAnswersBox = document.getElementById("multipleAnswersBox");
-  }
-
-  async loadQuestion() {
-    try {
-      const response = await fetch(this.apiUrl);
-      const data = await response.json();
-
-      if (!data.length) {
-        this.questionText.textContent = "No questions found.";
-        return;
-      }
-
-      const randomQuestion = data[Math.floor(Math.random() * data.length)];
-      this.display(randomQuestion);
-    } catch (error) {
-      console.error("Failed to fetch trivia question:", error);
-      this.questionText.textContent = "Failed to load question.";
-    }
-  }
-
-  display(questionObj) {
-    const { question, correctAnswer, incorrectAnswers } = questionObj;
-
-    this.questionText.innerHTML = this.decodeHTML(question);
-    this.multipleAnswersBox.innerHTML = "";
-
-    const allAnswers = [
-      { answer: correctAnswer, isCorrect: true },
-      ...incorrectAnswers.map((ans) => ({ answer: ans, isCorrect: false })),
-    ];
-
-    const shuffled = allAnswers.sort(() => Math.random() - 0.5);
-
-    shuffled.forEach((choice) => {
-      const div = document.createElement("div");
-      div.classList.add("choiceTwo");
-
-      const text = document.createElement("p");
-      text.textContent = this.decodeHTML(choice.answer);
-      div.appendChild(text);
-
-      div.addEventListener("click", () =>
-        this.handleClick(div, choice, correctAnswer)
-      );
-      this.multipleAnswersBox.appendChild(div);
-    });
-  }
-
-  async handleClick(div, choice, correctAnswer) {
-    if (div.classList.contains("clicked")) return;
-    div.classList.add("clicked");
-
-    const popUpText = document.getElementById("popUptext");
-
-    if (choice.isCorrect) {
-      div.style.backgroundColor = "lightGreen";
-      popUpText.textContent = "Correct! +1 Extra life!";
-      popUpText.style.backgroundColor = "lightGreen";
-      lives++;
-      livesBox.innerHTML = `Lives left: ${lives}`;
-      popUpText.style.display = "block";
-
-      setTimeout(() => {
-        popUpText.style.display = "none";
-        document.getElementById("triviaPopUp").style.display = "none";
-        this.questionText.innerHTML = "";
-        this.multipleAnswersBox.innerHTML = "";
-      }, 3000);
+    if (!remakeJson.length){
+        return "No question found"
     } else {
-      div.style.backgroundColor = "tomato";
-      popUpText.innerHTML = `Wrong! Correct answer: <span>${correctAnswer}</span>`;
-      popUpText.style.backgroundColor = "tomato";
-
-      try {
-        await fetch("/updateScore", {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ score: currentScore }),
-        });
-      } catch (error) {
-        console.error("Score update failed:", error);
-      }
-
-      setTimeout(() => {
-        popUpText.style.display = "none";
-        document.getElementById("triviaPopUp").style.display = "none";
-        this.questionText.innerHTML = "";
-        this.multipleAnswersBox.innerHTML = "";
-        window.location.href = "/gameOver";
-      }, 3000);
+        const firstObject = remakeJson[0]
+        const objectCorrectAnswer = firstObject.correctAnswer
+        const objectIncorrectAnswers = firstObject.incorrectAnswers
+        const objectQuestion= firstObject.question
+        return startTriviaQuest(objectCorrectAnswer, objectIncorrectAnswers, objectQuestion)
     }
-
-    popUpText.style.display = "block";
-  }
-
-  decodeHTML(str) {
-    const txt = document.createElement("textarea");
-    txt.innerHTML = str;
-    return txt.value;
-  }
 }
 
-const apiUrl =
-  "https://the-trivia-api.com/api/questions?categories=food_and_drink&limit=10&difficulty=easy";
-const quiz = new FoodTriviaQuiz(apiUrl);
+function startTriviaQuest(correctAnswer, incorrectAnswers, question) {
+  const questionText = document.getElementById("questionText");
+  const answersBox = document.getElementById("multipleAnswersBox");
+
+    let rightAnswer = [{answer: correctAnswer, isCorrect: true}] // vi lägger strängen i en array o adderar en nyckel för att array destruc ska funka
+    let faultyAnswers = incorrectAnswers.map(ans => ({ answer: ans, isCorrect: false }))
+
+    let arrayOfanwsers = [...rightAnswer, ...faultyAnswers] // här
+    shuffleArray(arrayOfanwsers)
+
+  questionText.innerHTML = question;
+  answersBox.innerHTML = "";
+
+  return new Promise((resolve) => {
+    for (let choice of arrayOfanwsers) {
+      const div = document.createElement("div");
+      div.classList.add("choiceTwo");
+      div.textContent = choice.answer;
+
+      div.addEventListener("click", () => {
+        if (div.classList.contains("clicked")) return;
+        div.classList.add("clicked");
+
+        RightAnswer.showResult(div, choice.isCorrect, correctAnswer);
+
+        setTimeout(() => {
+          RightAnswer.clearQuestion();
+
+          if (choice.isCorrect) {
+            lives++;
+            livesBox.innerHTML = `Lives left: ${lives}`;
+            resolve(true);  
+          } else {
+            resolve(false); 
+          }
+        }, 2000);
+      });
+
+      answersBox.appendChild(div);
+    }
+  });
+}
+
+class RightAnswer {
+    static showResult(div, isCorrect, correctAnswer){
+        const popUpText = document.getElementById("popUptext");
+
+        if (isCorrect){
+            div.classList.add("correct");
+            popUpText.textContent = "Correct! +1 Extra life!";
+            popUpText.style.backgroundColor = "lightgreen";
+        } else {
+            div.classList.add("wrong");
+            popUpText.innerHTML = `Wrong! Correct answer: <span>${correctAnswer}</span>`;
+            popUpText.style.backgroundColor = "tomato";
+        }
+
+        popUpText.style.display = "block";
+    }
+
+    static showFeedbackForGame(div, isCorrect) {
+        const popUpText = document.getElementById("popUptext");
+
+        if (isCorrect) {
+            div.classList.add("correct");
+            popUpText.textContent = "Correct! +10 points";
+            popUpText.style.backgroundColor = "lightgreen";
+        } else {
+            div.classList.add("wrong");
+            popUpText.textContent = "Wrong! -1 life";
+            popUpText.style.backgroundColor = "tomato";
+        }
+
+        popUpText.style.display = "block";
+        
+        setTimeout(() => {
+            popUpText.style.display = "none";
+        }, 2000);
+    }
+
+    static clearQuestion() {
+        document.getElementById("questionText").innerHTML = "";
+        document.getElementById("multipleAnswersBox").innerHTML = "";
+        document.getElementById("popUptext").style.display = "none";
+        document.getElementById("triviaPopUp").style.display = "none";
+    }
+}
+
+/* "correctAnswer":"England",
+"incorrectAnswers":["Mexico","Philippines","Spain"],
+"question":"Fish & Chips is a dish that is most associated with which part of the world?"
+*/

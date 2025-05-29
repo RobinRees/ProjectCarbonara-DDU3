@@ -104,10 +104,10 @@
   {
     "username": "justin",
     "password": "justin",
-    "score": 70,
-    "loggedIn": false,
+    "score": 150,
+    "loggedIn": true,
     "id": 15,
-    "roundScore": 50
+    "roundScore": 30
   },
   {
     "username": "alice",
