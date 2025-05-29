@@ -206,7 +206,7 @@ table tbody tr:nth-child(even) {
 #imgBox {
     width: 280px;
     height: 280px;
-    background-image: url(gameOver.png);
+    background-image: url(../images/gameOver.png);
     background-position: center;
     background-size: contain;
     position: absolute;
