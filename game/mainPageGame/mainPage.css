@@ -476,7 +476,7 @@ footer {
 }
 #footerAdBox {
   position: fixed;
-  bottom: -800px; /* gömd först */
+  bottom: -800px;
   left: 50%;
   transform: translateX(-50%);
   transition: bottom 1s ease-in-out;
@@ -508,7 +508,7 @@ footer {
 
 #closeAdBox {
   position: absolute;
-  top: 20px; /* flytta ner så mycket du vill */
+  top: 20px;
   right: 50px;
   background: rgba(0, 0, 0, 0.6);
   color: white;

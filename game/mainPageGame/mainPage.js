@@ -358,7 +358,7 @@ setTimeout(() => {
   } else {
     console.warn("AdBox not found");
   }
-}, 5000);
+}, 10000);
 
 document.getElementById("closeAdBox").addEventListener("click", () => {
   const adBox = document.getElementById("footerAdBox");
