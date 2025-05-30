@@ -107,7 +107,7 @@
     "score": 150,
     "loggedIn": true,
     "id": 15,
-    "roundScore": 30
+    "roundScore": 10
   },
   {
     "username": "alice",
@@ -123,5 +123,13 @@
     "score": 80,
     "loggedIn": false,
     "id": 17
+  },
+  {
+    "username": "c",
+    "password": "cing",
+    "score": 60,
+    "loggedIn": false,
+    "id": 18,
+    "roundScore": 40
   }
 ]

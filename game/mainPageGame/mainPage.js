@@ -1,4 +1,3 @@
-//import { startTransition } from "react";
 import { createTopTen } from "../utilities.js";
 
 let currentPlayer = null;
@@ -13,7 +12,6 @@ const livesBox = document.getElementById("livesBox");
   if (response.status === 200) {
     currentPlayer = await response.json();
     console.log(currentPlayer);
-    showCurrentPlayer();
     createChoices();
     createTopTen(currentPlayer);
   }
@@ -33,7 +31,7 @@ let triviaCounter = 0;
 console.log(triviaCounter);
 
 async function createChoices() {
-  showCurrentPlayer();
+   document.getElementById("usernameDisplay").textContent = `${currentPlayer.username}`;
 
   const meal = await fetchRandomMeal();
   const localIngredients = await fetchIngredientsData();
@@ -65,13 +63,6 @@ async function fetchIngredientsData() {
   return await localJson.json();
 }
 
-function showCurrentPlayer() {
-
-    document.getElementById(
-        "usernameDisplay"
-    ).textContent = `${currentPlayer.username}`;
-
-}
 
 async function showBigMealImg(meal) {
   foodImageDiv.style.backgroundImage = `url("${meal.strMealThumb}")`;
@@ -234,7 +225,6 @@ document.getElementById("nextButton").addEventListener("click", () => {
   correctGuesses = 0;
   choicesBox.innerHTML = "";
   foodImageDiv.innerHTML = "";
-  // recipeBox.innerHTML = "";
   showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
   showCorrectGuess.style.display = "block";
 
@@ -304,11 +294,11 @@ class RightAnswer {
         const popUpText = document.getElementById("popUptext");
 
         if (isCorrect){
-            div.classList.add("correct");
-            popUpText.textContent = "Correct! +1 Extra life!";
-            popUpText.style.backgroundColor = "lightgreen";
+            popUpText.classList.add("correct")
+            popUpText.innerHTML = `Correct!`;
+            popUpText.style.backgroundColor = "green"
         } else {
-            div.classList.add("wrong");
+            popUpText.classList.add("wrong")
             popUpText.innerHTML = `Wrong! Correct answer: <span>${correctAnswer}</span>`;
             popUpText.style.backgroundColor = "tomato";
         }
@@ -321,12 +311,10 @@ class RightAnswer {
 
         if (isCorrect) {
             div.classList.add("correct");
-            popUpText.textContent = "Correct! +10 points";
-            popUpText.style.backgroundColor = "lightgreen";
+            div.style.backgroundColor = "lightgreen"
         } else {
             div.classList.add("wrong");
-            popUpText.textContent = "Wrong! -1 life";
-            popUpText.style.backgroundColor = "tomato";
+            div.style.backgroundColor = "tomato";
         }
 
         popUpText.style.display = "block";
@@ -343,8 +331,3 @@ class RightAnswer {
         document.getElementById("triviaPopUp").style.display = "none";
     }
 }
-
-/* "correctAnswer":"England",
-"incorrectAnswers":["Mexico","Philippines","Spain"],
-"question":"Fish & Chips is a dish that is most associated with which part of the world?"
-*/
