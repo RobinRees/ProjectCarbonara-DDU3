@@ -359,3 +359,13 @@ document.getElementById("closeAdBox").addEventListener("click", () => {
     console.log("Clicking")
     adBox.style.display = "none"
 });
+
+document.getElementById("howToPlayButton").addEventListener("click", () => {
+
+    const howToPlayBox = document.getElementById("howToPlayBox")
+    howToPlayBox.style.display = "block";
+})
+
+document.getElementById("closeHowToPlay").addEventListener("click", () => {
+    document.getElementById("howToPlayBox").style.display = "none";
+})
