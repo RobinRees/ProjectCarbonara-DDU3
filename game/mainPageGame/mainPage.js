@@ -35,8 +35,8 @@ async function createChoices() {
 
     showBigMealImg(meal);
 
-    const realIngredients = getRealIngriedients(meal, 3);
-    const fakeIngredients = getFakeIndgriedients(
+    const realIngredients = getRealIngridients(meal, 3);
+    const fakeIngredients = getFakeIndgridients(
         localIngredients,
         realIngredients,
         7
@@ -72,7 +72,7 @@ async function showBigMealImg(meal) {
     foodImageDiv.style.backgroundImage = `url("${meal.strMealThumb}")`;
 }
 
-function getRealIngriedients(meal, count) {
+function getRealIngridients(meal, count) {
     let arrayOfIngredients = [];
 
     for (let i = 1; i < 21; i++) {
@@ -86,7 +86,7 @@ function getRealIngriedients(meal, count) {
     return getRandomItem(arrayOfIngredients, count);
 }
 
-function getFakeIndgriedients(ourIngr, realIngr, count) {
+function getFakeIndgridients(ourIngr, realIngr, count) {
     const mealIngrLower = realIngr.map((item) => item.toLowerCase());
 
     const arrayOfFakeIngredients = ourIngr.filter((item) => {
