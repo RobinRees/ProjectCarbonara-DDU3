@@ -46,24 +46,24 @@ async function createChoices() {
     foodImageDiv.style.backgroundImage = `url("${meal.strMealThumb}")`;
 
     // Denna hämtar dem riktiga ingredienserna - Alltså dem som rätten innehåller
-    let realIngredients = [];
+    const realIngredients = [];
     for (let i = 1; i <= 20; i++) {
         const ing = meal[`strIngredient${i}`];
         if (ing && ing.trim()) {
             realIngredients.push(ing.toLowerCase());
         }
     }
-    realIngredients = getRandomItems(realIngredients, 3);
+    const selectedReal = getRandomItems(realIngredients, 3);
 
-    // Hämta fejk-ingredienser (jämför mot realIngredients)
+    // Går igenom alla localIngredients och filtrerar bort de som redan finns i realIngredients
     const fakeIngredients = localIngredients.filter(
-        item => !realIngredients.includes(item.name.toLowerCase())
+        item => !selectedReal.includes(item.name.toLowerCase())
     );
     const selectedFake = getRandomItems(fakeIngredients, 7);
 
     // Skapar en ny array (AllChoices) lägger till både ingredienserna som stämmer och inte stämmer och lägger till nycklen isCorrect: true/false beroende på vilken array dem först kom ifrån
     const allChoices = [
-        ...realIngredients.map(name => ({
+        ...selectedReal.map(name => ({
             name,
             image: `https://www.themealdb.com/images/ingredients/${name}.png`,
             isCorrect: true
