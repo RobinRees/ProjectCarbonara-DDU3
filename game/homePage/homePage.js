@@ -6,22 +6,9 @@ const startButton = document.querySelector("#startButton");
 const signUp = document.querySelector("#signUp");
 const createPassword = document.querySelector("#createPassword");
 const createPlayer = document.querySelector("#createPlayer");
-const headerDivLeft = document.querySelector("#headerDivLeft");
 const logInDiv = document.querySelector("#logInDiv");
-const headerDivRight = document.querySelector("#headerDivRight");
 const signInDiv = document.querySelector("#signInDiv");
 
-headerDivLeft.addEventListener("click", () => {
-    logInDiv.style.display = "flex"
-    signInDiv.style.display = "none"
-})
-
-headerDivRight.addEventListener("click", () => {
-    logInDiv.style.display = "none"
-    signInDiv.style.display = "flex"
-})
-
-// LOGIN
 async function logIn() {
     let usernameInput = username.value
     let passwordInput = password.value
