@@ -33,19 +33,19 @@ function showCurrentPlayer() {
 
 async function createChoices() {
 
-    // Hämta slumpad måltid
+    // Hämtar random måltid från vårt API
     const meal = await fetch("https://www.themealdb.com/api/json/v1/1/random.php")
         .then(res => res.json())
         .then(data => data.meals[0]);
 
-    // Hämta lokala ingredienser
+    // Hämta ingredienserna som vi har på datorn
     const localIngredients = await fetch("../database/ingredients.json")
         .then(res => res.json());
 
-    // Visa matbild
+    // Visar bilden
     foodImageDiv.style.backgroundImage = `url("${meal.strMealThumb}")`;
 
-    // Hämta riktiga ingredienser
+    // Denna hämtar dem riktiga ingredienserna - Alltså dem som rätten innehåller
     let realIngredients = [];
     for (let i = 1; i <= 20; i++) {
         const ing = meal[`strIngredient${i}`];
@@ -61,7 +61,7 @@ async function createChoices() {
     );
     const selectedFake = getRandomItems(fakeIngredients, 7);
 
-    // Bygg alla val
+    // Skapar en ny array (AllChoices) lägger till både ingredienserna som stämmer och inte stämmer och lägger till nycklen isCorrect: true/false beroende på vilken array dem först kom ifrån
     const allChoices = [
         ...realIngredients.map(name => ({
             name,
