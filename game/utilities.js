@@ -87,10 +87,7 @@ export function checkUserCredentials(loginData) {
 
 export function updateUserScore(newScore) {
     const users = JSON.parse(Deno.readTextFileSync("database/scoreboard.json"))
-    console.log(newScore, "rad 86");
-
     const user = users.find(u => u.loggedIn == true);
-    console.log(user, "rad 89");
 
 
     if (newScore > user.score) {
@@ -146,8 +143,6 @@ export async function createTopTen(currentPlayer) {
         row.querySelector(".rank").style.fontWeight = "initial";
         row.querySelector(".score").style.fontWeight = "initial";
     });
-
-
 
     topPlayers.forEach((player, i) => {
         const row = rows[i];

@@ -109,10 +109,8 @@ async function test4() {
         dataResponse4.textContent = `Error: ${data}`;
     }
     test5()
-
 }
 
-// Tidigare test4 → nu test5
 async function test5() {
     const response = await fetch("http://localhost:8000/signUp", {
         method: "POST",
@@ -138,7 +136,6 @@ async function test5() {
 
 }
 
-// Tidigare test5 → nu test6
 async function test6() {
     const response = await fetch("http://localhost:8000/signUp", {
         method: "DELETE",
@@ -152,7 +149,7 @@ async function test6() {
     console.log(data);
 
     statusResponse6.textContent = `Status: ${response.status}`;
-    const expectedStatus = 400;
+    const expectedStatus = 405;
     if (response.status === expectedStatus) {
         document.getElementById("test6").classList.add("testOK");
         dataResponse6.textContent = `${data.error}`;
@@ -189,7 +186,6 @@ async function test7() {
     test8()
 }
 
-// Tidigare test11 → nu test8
 async function test8() {
     const response = await fetch("http://localhost:8000/getLoggedInUser");
     const data = await response.json();
@@ -266,7 +262,7 @@ async function test11() {
     console.log(data);
 
     statusResponse11.textContent = `Status: ${response.status}`;
-    const expectedStatus = 400;
+    const expectedStatus = 405;
     if (response.status === expectedStatus) {
         document.getElementById("test11").classList.add("testOK");
         dataResponse11.textContent = `${data.error}`;
@@ -307,7 +303,7 @@ async function test13() {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username: "wow", password: "testing123" })
+        body: JSON.stringify({ username: "wo", password: "testing123" })
     });
 
     const data = await response.json();
@@ -463,6 +459,22 @@ async function test20() {
     } else {
         document.getElementById("test20").classList.add("testFAIL");
         dataRespons20.textContent = `Error: ${data}`;
+    }
+    test21();
+}
+async function test21() {
+    const response = await fetch("http://localhost:8000/getTopTen");
+    const data = await response.json();
+
+    statusResponse21.textContent = `Status: ${response.status}`;
+    const expectedStatus = 200;
+    if (response.status === expectedStatus) {
+        document.getElementById("test21").classList.add("testOK");
+
+        dataResponse21.textContent = `${JSON.stringify(data)}`;
+    } else {
+        document.getElementById("test21").classList.add("testFAIL");
+        dataRespons21.textContent = `Error: ${data}`;
     }
 }
 
