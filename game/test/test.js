@@ -34,7 +34,6 @@ async function test1() {
     test2()
 }
 
-// Tidigare test1 → nu test2
 async function test2() {
     const response = await fetch("http://localhost:8000/signUp", {
         method: "POST",
@@ -60,7 +59,6 @@ async function test2() {
 
 }
 
-// Tidigare test2 → nu test3
 async function test3() {
     const response = await fetch("http://localhost:8000/signUp", {
         method: "POST",
@@ -86,7 +84,6 @@ async function test3() {
 
 }
 
-// Tidigare test3 → nu test4
 async function test4() {
     const response = await fetch("http://localhost:8000/signUp", {
         method: "POST",
@@ -159,10 +156,7 @@ async function test6() {
     }
     test7()
 }
-// TEST FOR LOGIN
 
-
-// Tidigare test6 → nu test7
 async function test7() {
     const response = await fetch("http://localhost:8000/logIn", {
         method: "POST",
@@ -203,7 +197,6 @@ async function test8() {
     test9()
 }
 
-// Tidigare test7 → nu test9
 async function test9() {
     const response = await fetch("http://localhost:8000/logIn", {
         method: "POST",

@@ -1,175 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project Carbonara</title>
 
-    <link rel="stylesheet" href="/mainPageGame/mainPage.css" />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="../images/carbonaraFavicon.png"
-    />
-  </head>
+    <link rel="stylesheet" href="/mainPageGame/mainPage.css">
+    <link rel="stylesheet" href="../styles/leaderboard.css">
+
+    <link rel="icon" type="image/x-icon" href="../images/carbonaraFavicon.png" />
+</head>
 
 
-  <body>
+<body>
     <nav>
-      <div>
-        <img src="../images/carbonaraGameLogo.png" alt="" />
-      </div>
-      <div>
-        <button class="menuButton" id="logOutButton" type="button">
-          Log Out
-        </button>
-      </div>
+        <div>
+            <img src="../images/carbonaraGameLogo.png" alt="" />
+        </div>
+        <div>
+            <button class="menuButton" id="logOutButton" type="button">
+                Log Out
+            </button>
+        </div>
     </nav>
     <main>
-      <div id="left">
-        <div id="playerBox">
-          <div id="icon">
-            <img src="../images/CarbonaraIcon.png" alt="Carbonara Icon" />
-          </div>
-          <div id="playerDetails">
-            <div id="player">Player</div>
-            <div id="usernameDisplay"></div>
-            <div id="showScore"></div>
-            <button id="howToPlayButton">How to play</button>
-            <div id="howToPlayBox">
-              <h2>How to Play</h2>
-              <ul>
-                <li>Guess what ingredients are included in the picture.</li>
-                <li>
-                  When you get 3 correct guesses, you can advance to the next
-                  meal.
-                </li>
-                <li>Get 9 incorrect guesses and you lose.</li>
-              </ul>
-              <button id="closeHowToPlay">Close</button>
+        <div id="left">
+            <div id="playerBox">
+                <div id="icon">
+                    <img src="../images/CarbonaraIcon.png" alt="Carbonara Icon" />
+                </div>
+                <div id="playerDetails">
+                    <div id="player">Player</div>
+                    <div id="usernameDisplay"></div>
+                    <div id="showScore"></div>
+                    <button id="howToPlayButton">How to play</button>
+                    <div id="howToPlayBox">
+                        <h2>How to Play</h2>
+                        <ul>
+                            <li>Guess what ingredients are included in the picture.</li>
+                            <li>
+                                When you get 3 correct guesses, you can advance to the next
+                                meal.
+                            </li>
+                            <li>Get 9 incorrect guesses and you lose.</li>
+                        </ul>
+                        <button id="closeHowToPlay">Close</button>
+                    </div>
+
+                </div>
+
             </div>
 
-          </div>
-
+            <div id="adBox"></div>
         </div>
+        <div id="middle">
+            <div id="mainInfo">
+                <h1 id="foodTitle"></h1>
+                <div id="foodImage"></div>
 
-        <div id="adBox"></div>
-      </div>
-      <div id="middle">
-        <div id="mainInfo">
-          <h1 id="foodTitle"></h1>
-          <div id="foodImage"></div>
+                <div id="gameInfo">
+                    <div id="livesBox" class="importantRed">Lives left: 9</div>
+                    <div id="correctGuesses" class="importantRed">Correct: 0/3</div>
+                </div>
+            </div>
+            <div id="hasChoices">
+                <div id="choicesBox"></div>
+            </div>
+        </div>
+        <div id="right">
+            <div id="leaderboard-container">
+                <div id="leaderboard-header">
+                    <h1>LEADER BOARD</h1>
+                    <img src="../images/chef.png" alt="" />
+                </div>
 
-          <div id="gameInfo">
-            <div id="livesBox" class="importantRed">Lives left: 9</div>
-            <div id="correctGuesses" class="importantRed">Correct: 0/3</div>
-          </div>
+                <table id="leaderboard">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Total Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                        <tr>
+                            <td class="rank"></td>
+                            <td class="name"></td>
+                            <td class="score"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="leaderboard-footer"></div>
+            </div>
         </div>
-        <div id="hasChoices">
-          <div id="choicesBox"></div>
-        </div>
-      </div>
-      <div id="right">
-        <div id="leaderboard-container">
-          <div id="leaderboard-header">
-            <h1>LEADER BOARD</h1>
-            <img src="../images/chef.png" alt="" />
-          </div>
-
-          <table id="leaderboard">
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Total Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- 10 rader – statiska -->
-              <tr>
-                <td class="rank"></td>
-                <td class="name"></td>
-                <td class="score"></td>
-              </tr>
-              <tr>
-                <td class="rank"></td>
-                <td class="name"></td>
-                <td class="score"></td>
-              </tr>
-              <tr>
-                <td class="rank"></td>
-                <td class="name"></td>
-                <td class="score"></td>
-              </tr>
-              <tr>
-                <td class="rank"></td>
-                <td class="name"></td>
-                <td class="score"></td>
-              </tr>
-              <tr>
-                <td class="rank"></td>
-                <td class="name"></td>
-                <td class="score"></td>
-              </tr>
-              <tr>
-                <td class="rank"></td>
-                <td class="name"></td>
-                <td class="score"></td>
-              </tr>
-              <tr>
-                <td class="rank"></td>
-                <td class="name"></td>
-                <td class="score"></td>
-              </tr>
-              <tr>
-                <td class="rank"></td>
-                <td class="name"></td>
-                <td class="score"></td>
-              </tr>
-              <tr>
-                <td class="rank"></td>
-                <td class="name"></td>
-                <td class="score"></td>
-              </tr>
-              <tr>
-                <td class="rank"></td>
-                <td class="name"></td>
-                <td class="score"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </main>
-    <div id="nextPopUp">
-      <div id="recipeBox">
-        <h2></h2>
-        <p></p>
-        <button id="nextButton">Next</button>
-      </div>
-    </div>
-
-    <div id="triviaPopUp">
-      <div id="questionBox">
-        <h2>Guess correct for an extra life!</h2>
-        <p id="questionText">Question here</p>
-        <div id="multipleAnswersBox"></div>
-
-        <div id="popUptext"></div>
-      </div>
-    </div>
-    <div id="footerAdBox">
-      <button id="closeAdBox">X</button>
-    </div>
 
     <div id="footerAdBox">
         <button id="closeAdBox">X</button>
     </div>
-
     <footer>
-      <p>© 2025 Carbonara Interactive™ · support@notarealmail.pasta</p>
+        <p>© 2025 Carbonara Interactive™ · support@carbonaragame.pasta</p>
     </footer>
+    <div id="triviaPopUp">
+        <div id="questionBox">
+            <h2>Guess correct for an extra life!</h2>
+            <p id="questionText">Question here</p>
+            <div id="multipleAnswersBox"></div>
 
+            <div id="popUptext"></div>
+        </div>
+    </div>
+    <div id="nextPopUp">
+        <div id="recipeBox">
+            <h2></h2>
+            <p></p>
+            <button id="nextButton">Next</button>
+        </div>
+    </div>
     <script type="module" src="/mainPageGame/mainPage.js" defer></script>
-  </body>
+</body>
+
 </html>

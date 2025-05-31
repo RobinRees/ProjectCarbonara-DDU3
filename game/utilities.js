@@ -44,20 +44,15 @@ export class User {
 }
 
 export function createNewUser(userData) {
-
-    const newUser = new User(userData);
-    console.log(newUser, "rad 43");
-
     const JSONscoreboard = Deno.readTextFileSync("database/scoreboard.json");
-
     let scoreboard = JSON.parse(JSONscoreboard);
 
-    const nameTaken = scoreboard.some(x => x.username === newUser.username);
+    const nameTaken = scoreboard.some(x => x.username === userData.username);
 
     if (nameTaken) {
-        console.log("Username already exists");
         return { nameTaken: "Username already exists" }
     } else {
+        const newUser = new User(userData);
         scoreboard.push(newUser)
         Deno.writeTextFileSync("database/scoreboard.json", JSON.stringify(scoreboard, null, 2))
         return { addedUser: newUser };
@@ -68,7 +63,6 @@ export function checkUserCredentials(loginData) {
     const JSONusers = Deno.readTextFileSync("database/scoreboard.json");
     const users = JSON.parse(JSONusers);
     console.log(users);
-
 
     const user = users.find(x => x.username === loginData.username);
     console.log(user);
@@ -89,13 +83,11 @@ export function updateUserScore(newScore) {
     const users = JSON.parse(Deno.readTextFileSync("database/scoreboard.json"))
     const user = users.find(u => u.loggedIn == true);
 
-
     if (newScore > user.score) {
         user.score = Number(newScore);
     } else {
         user.roundScore = newScore;
     }
-
     Deno.writeTextFileSync("database/scoreboard.json", JSON.stringify(users, null, 2));
 }
 
@@ -133,6 +125,10 @@ export async function createTopTen(currentPlayer) {
 
     const rows = document.querySelectorAll("table tbody tr");
     rows.forEach(row => {
+
+        // row.querySelector(".rank").classList.remove("currentPlayer");
+        // row.querySelector(".name").classList.remove("currentPlayer");
+        // row.querySelector(".score").classList.remove("currentPlayer");
         row.querySelector(".rank").style.backgroundColor = "initial";
         row.querySelector(".name").style.backgroundColor = "initial";
         row.querySelector(".score").style.backgroundColor = "initial";
@@ -143,6 +139,11 @@ export async function createTopTen(currentPlayer) {
         row.querySelector(".rank").style.fontWeight = "initial";
         row.querySelector(".score").style.fontWeight = "initial";
     });
+
+
+
+
+
 
     topPlayers.forEach((player, i) => {
         const row = rows[i];
@@ -156,6 +157,10 @@ export async function createTopTen(currentPlayer) {
         }
 
         if (row.querySelector(".name").textContent == currentPlayer.username) {
+
+            // row.querySelector(".rank").classList.add("currentPlayer");
+            // row.querySelector(".name").classList.add("currentPlayer");
+            // row.querySelector(".score").classList.add("currentPlayer");
             row.querySelector(".rank").style.backgroundColor = "#4a90e2"
             row.querySelector(".name").style.backgroundColor = "#4a90e2"
             row.querySelector(".score").style.backgroundColor = "#4a90e2"

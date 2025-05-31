@@ -55,6 +55,7 @@ nav button {
   gap: 15px;
   align-items: center;
   max-width: 500px;
+  box-shadow: 0 0 10px lightblue;
 }
 
 main {
@@ -86,21 +87,23 @@ main {
 }
 
 #icon img {
-    width: 50;
-    height: 50px;
-    object-fit: contain;
+  width: 50;
+  height: 50px;
+  object-fit: contain;
 }
 
 #playerBox {
+  position: relative;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 16px;
   background: white;
   border-radius: 16px;
   padding: 16px 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px lightblue;
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
   color: #333;
   width: 260px;
 }
@@ -128,11 +131,11 @@ main {
 
 /* Och detta */
 
-/* advertice */ 
+/* advertice */
 
 #adBox {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 15px;
@@ -157,6 +160,7 @@ main {
   padding: 15px;
   border-radius: 20px;
   width: 600px;
+  box-shadow: 0 0 10px lightblue;
 }
 
 #choicesBox {
@@ -315,75 +319,7 @@ h2 {
 
 /* LEADERBOARD CSS */
 
-#leaderboard-header img {
-  width: 165px;
-  position: absolute;
-  left: 150px;
-  top: -70px;
-}
 
-#hasMenuScoreBoard {
-  position: relative;
-}
-
-#leaderboard-container {
-  width: 300px;
-  max-width: 450px;
-  background-color: #fff;
-  border-radius: 9px;
-  overflow: visible;
-  right: 115px;
-  top: 120px;
-}
-
-#leaderboard-header {
-  background-color: #4a90e2;
-  color: white;
-  text-align: center;
-  padding: 12px;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  height: 131px;
-  position: relative;
-}
-
-#leaderboard-header h1 {
-  margin: 0;
-  font-size: 36px;
-  line-height: 36px;
-  position: absolute;
-  top: 60px;
-  right: 132px;
-  z-index: 0;
-  position: absolute;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-}
-
-table thead {
-  background-color: #e0e7ff;
-  font-weight: bold;
-}
-
-table th,
-table td {
-  padding: 9px;
-  text-align: center;
-}
-
-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-table * {
-  z-index: 0;
-  position: relative;
-}
 
 /* .popUpBackground {} */
 
@@ -400,7 +336,7 @@ table * {
   margin: auto;
 }
 
-#nextPopUp > div {
+#nextPopUp>div {
   background-color: #e0e7ff;
 }
 
@@ -461,6 +397,7 @@ table * {
 #popUptext span {
   font-weight: bold;
 }
+
 footer {
   position: relative;
   overflow: hidden;
@@ -474,6 +411,7 @@ footer {
   padding: 10px 0;
 
 }
+
 #footerAdBox {
   position: fixed;
   bottom: -800px;
@@ -486,18 +424,13 @@ footer {
   background-image: url('../images/adBildFooter.png');
   background-size: cover;
   background-position: center;
-  background-color: transparent;
+  /* background-color: transparent; */
   border-radius: 20px;
-
-  overflow: hidden; 
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
   padding: 10px;
 }
 
 #footerAdBox.show {
-  bottom: 0px; 
+  bottom: 0px;
 }
 
 #footerAd {
@@ -538,16 +471,18 @@ footer {
 #howToPlayBox {
   width: 300px;
   height: auto;
-  left: 45px;
+  right: -21px;
   position: absolute;
   border: 3px solid black;
   background-color: white;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
   text-align: left;
   border-radius: 10px;
   display: none;
+  top: 191px;
 }
+
 
 
 #closeHowToPlay {

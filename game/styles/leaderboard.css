@@ -1,0 +1,105 @@
+#hidden-leaderboard-container {
+    width: 300px;
+    max-width: 450px;
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: visible;
+    display: none;
+    position: absolute;
+    top: 160px;
+    z-index: 20;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 0 5px #4a90e2;
+}
+
+
+
+#leaderboard-footer {
+    height: 30px;
+    background-color: #4a90e2;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+
+#backButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    border-style: none;
+    padding: 1px 5px;
+    color: #4a90e2;
+    font-weight: bold;
+    width: fit-content;
+}
+
+
+
+
+#leaderboard-header img {
+    width: 165px;
+    position: absolute;
+    left: 150px;
+    top: -70px;
+}
+
+#leaderboard-container {
+    width: 300px;
+    max-width: 450px;
+    background-color: #fff;
+    border-radius: 9px;
+    overflow: visible;
+    right: 115px;
+    top: 120px;
+}
+
+#leaderboard-header {
+    background-color: #4a90e2;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    height: 131px;
+    position: relative;
+}
+
+#leaderboard-header h1 {
+    margin: 0;
+    font-size: 36px;
+    line-height: 36px;
+    position: absolute;
+    top: 60px;
+    right: 132px;
+    z-index: 0;
+    position: absolute;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+table thead {
+    background-color: #e0e7ff;
+    font-weight: bold;
+}
+
+table th,
+table td {
+    padding: 9px;
+    text-align: center;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table * {
+    z-index: 0;
+    position: relative;
+}

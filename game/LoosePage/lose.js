@@ -22,7 +22,7 @@ let currentPlayer = null;
 })();
 
 const leaderboardButton = document.getElementById("leaderboardButton");
-const leaderboard = document.getElementById("leaderboard-container");
+const leaderboard = document.getElementById("hidden-leaderboard-container");
 
 leaderboardButton.addEventListener("click", () => {
     createTopTen(currentPlayer)

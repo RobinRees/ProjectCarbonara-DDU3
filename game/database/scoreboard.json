@@ -32,8 +32,23 @@
     "username": "dghfjdfhh",
     "password": "dfjfgdh4",
     "score": 70,
-    "loggedIn": true,
+    "loggedIn": false,
     "id": 5,
     "roundScore": 60
+  },
+  {
+    "username": "nicki",
+    "password": "pelles6565",
+    "score": 60,
+    "loggedIn": false,
+    "id": 6
+  },
+  {
+    "username": "paddan",
+    "password": "1234hhhh",
+    "score": 50,
+    "loggedIn": true,
+    "id": 7,
+    "roundScore": 50
   }
 ]
