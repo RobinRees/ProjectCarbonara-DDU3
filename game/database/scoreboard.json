@@ -47,8 +47,24 @@
     "username": "paddan",
     "password": "1234hhhh",
     "score": 50,
-    "loggedIn": true,
+    "loggedIn": false,
     "id": 7,
     "roundScore": 50
+  },
+  {
+    "username": "rocketman",
+    "password": "kimjon55",
+    "score": 10,
+    "loggedIn": false,
+    "id": 8,
+    "roundScore": 10
+  },
+  {
+    "username": "programmer",
+    "password": "guyguy88",
+    "score": 30,
+    "loggedIn": false,
+    "id": 9,
+    "roundScore": 30
   }
 ]
