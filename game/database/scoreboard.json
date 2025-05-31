@@ -13,5 +13,27 @@
     "score": 0,
     "loggedIn": false,
     "id": 2
+  },
+  {
+    "username": "Tester",
+    "password": "Tester1",
+    "score": 0,
+    "loggedIn": false,
+    "id": 3
+  },
+  {
+    "username": "dhjkfgjhfgd",
+    "password": "sdfgdfshdf1",
+    "score": 0,
+    "loggedIn": false,
+    "id": 4
+  },
+  {
+    "username": "dghfjdfhh",
+    "password": "dfjfgdh4",
+    "score": 70,
+    "loggedIn": true,
+    "id": 5,
+    "roundScore": 60
   }
 ]

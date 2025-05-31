@@ -527,3 +527,30 @@ footer {
 #closeAdBtn:hover {
   background: red;
 }
+
+#howToPlayButton {
+  display: block;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#howToPlayBox {
+  width: 300px;
+  height: auto;
+  left: 45px;
+  position: absolute;
+  border: 3px solid black;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  padding: 20px;
+  text-align: left;
+  border-radius: 10px;
+  display: none;
+}
+
+
+#closeHowToPlay {
+  display: block;
+  margin: auto;
+}
