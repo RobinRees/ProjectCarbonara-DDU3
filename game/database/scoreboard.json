@@ -32,8 +32,23 @@
     "username": "dghfjdfhh",
     "password": "dfjfgdh4",
     "score": 70,
-    "loggedIn": true,
+    "loggedIn": false,
     "id": 5,
     "roundScore": 60
+  },
+  {
+    "username": "Trams",
+    "password": "Trams2",
+    "score": 60,
+    "loggedIn": false,
+    "id": 6
+  },
+  {
+    "username": "dlfgsdfg",
+    "password": "sdfgghfgh2",
+    "score": 50,
+    "loggedIn": false,
+    "id": 7,
+    "roundScore": 50
   }
 ]
