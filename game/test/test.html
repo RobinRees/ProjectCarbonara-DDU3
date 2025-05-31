@@ -55,7 +55,8 @@
 
         <button type="button" id="test5">
             <h1>TEST5</h1>
-            <h2>Testar ogiltig Content-Type</h2>
+            <h2>POST-förfrågan till /signUp</h2>
+            <h3>Testar felaktig Content-Type</h3>
             <p>Förväntad status: 400</p>
             <p id="statusResponse5"></p>
             <p id="dataResponse5"></p>
@@ -63,8 +64,9 @@
 
         <button type="button" id="test6">
             <h1>TEST6</h1>
-            <h2>Testar ogiltig metod</h2>
-            <p>Förväntad status: 400</p>
+            <h2>DELETE-förfrågan till /signUp</h2>
+            <h3>Testar ogiltig metod</h3>
+            <p>Förväntad status: 405</p>
             <p id="statusResponse6"></p>
             <p id="dataResponse6"></p>
         </button>
@@ -110,15 +112,15 @@
             <h1>TEST11</h1>
             <h2>DELETE-förfrågan till /logIn</h2>
             <h3>Testar felaktig metod</h3>
-            <p>Förväntad status: 400</p>
+            <p>Förväntad status: 405</p>
             <p id="statusResponse11"></p>
             <p id="dataResponse11"></p>
         </button>
 
         <button type="button" id="test12">
             <h1>TEST12</h1>
-            <h2>DELETE-förfrågan till /signUp</h2>
-            <h3>Testar felaktig metod</h3>
+            <h2>POST-förfrågan till /logIn</h2>
+            <h3>Testar user som ej existerar</h3>
             <p>Förväntad status: 404</p>
             <p id="statusResponse12"></p>
             <p id="dataResponse12"></p>
@@ -192,6 +194,15 @@
             <p>Förväntad status: 200</p>
             <p id="statusResponse20"></p>
             <p id="dataResponse20"></p>
+        </button>
+
+        <button type="button" id="test21">
+            <h1>TEST21</h1>
+            <h2>GET-förfrågan till /getTopTen</h2>
+            <h3>Test för top 10 users i databasen utifrån poäng</h3>
+            <p>Förväntad status: 200</p>
+            <p id="statusResponse21"></p>
+            <p id="dataResponse21"></p>
         </button>
     </main>
     <script src="test.js"></script>
