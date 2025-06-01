@@ -108,11 +108,8 @@ function renderChoices(choices, meal) {
         div.appendChild(text);
 
         if (choice.image) {
+            div.classList.add("hasImage");
             div.style.backgroundImage = `url("${choice.image}")`;
-            div.style.backgroundSize = "contain";
-            div.style.backgroundRepeat = "no-repeat";
-            div.style.backgroundPosition = "center";
-            div.style.flexDirection = "column";
         }
 
         div.addEventListener("click", () => handleChoiceClick(div, choice, meal));
@@ -126,7 +123,7 @@ async function handleChoiceClick(div, choice, meal) {
   div.classList.add("clicked");
 
   if (choice.isCorrect) {
-    div.style.backgroundColor = "lightGreen";
+    div.classList.add("correctChoice");
     correctGuesses++;
     showCorrectGuess.innerHTML = `Correct: ${correctGuesses}/3`;
     currentScore += 10;
@@ -150,7 +147,7 @@ async function handleChoiceClick(div, choice, meal) {
       foodTitle.style.display = "block";
     }
   } else {
-    div.style.backgroundColor = "tomato";
+    div.classList.add("incorrectChoice");
     lives--;
     livesBox.innerHTML = `Lives left: ${lives}`;
     if (lives === 0 && triviaCounter === 0) {
