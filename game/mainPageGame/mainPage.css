@@ -496,7 +496,11 @@ footer {
   top: 191px;
 }
 
-
+.currentPlayer {
+  background-color: #4a90e2;
+  color: white;
+  font-weight: bold;
+}
 
 #closeHowToPlay {
   display: block;

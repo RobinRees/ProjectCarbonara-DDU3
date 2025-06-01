@@ -126,18 +126,10 @@ export async function createTopTen(currentPlayer) {
     const rows = document.querySelectorAll("table tbody tr");
     rows.forEach(row => {
 
-        // row.querySelector(".rank").classList.remove("currentPlayer");
-        // row.querySelector(".name").classList.remove("currentPlayer");
-        // row.querySelector(".score").classList.remove("currentPlayer");
-        row.querySelector(".rank").style.backgroundColor = "initial";
-        row.querySelector(".name").style.backgroundColor = "initial";
-        row.querySelector(".score").style.backgroundColor = "initial";
-        row.querySelector(".name").style.color = "initial";
-        row.querySelector(".rank").style.color = "initial";
-        row.querySelector(".score").style.color = "initial";
-        row.querySelector(".name").style.fontWeight = "initial";
-        row.querySelector(".rank").style.fontWeight = "initial";
-        row.querySelector(".score").style.fontWeight = "initial";
+        row.querySelector(".rank").classList.remove("currentPlayer");
+        row.querySelector(".name").classList.remove("currentPlayer");
+        row.querySelector(".score").classList.remove("currentPlayer");
+
     });
 
 
@@ -158,18 +150,9 @@ export async function createTopTen(currentPlayer) {
 
         if (row.querySelector(".name").textContent == currentPlayer.username) {
 
-            // row.querySelector(".rank").classList.add("currentPlayer");
-            // row.querySelector(".name").classList.add("currentPlayer");
-            // row.querySelector(".score").classList.add("currentPlayer");
-            row.querySelector(".rank").style.backgroundColor = "#4a90e2"
-            row.querySelector(".name").style.backgroundColor = "#4a90e2"
-            row.querySelector(".score").style.backgroundColor = "#4a90e2"
-            row.querySelector(".name").style.color = "white"
-            row.querySelector(".rank").style.color = "white"
-            row.querySelector(".score").style.color = "white"
-            row.querySelector(".name").style.fontWeight = "bold"
-            row.querySelector(".rank").style.fontWeight = "bold"
-            row.querySelector(".score").style.fontWeight = "bold"
+            row.querySelector(".rank").classList.add("currentPlayer");
+            row.querySelector(".name").classList.add("currentPlayer");
+            row.querySelector(".score").classList.add("currentPlayer");
         }
     });
 

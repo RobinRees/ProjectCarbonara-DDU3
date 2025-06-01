@@ -179,19 +179,19 @@ async function handler(request) {
 
     if (
         request.method === "GET" &&
-        !allowedApiPaths.includes(url.pathname)
+        !allowedApiPaths.includes(url.pathname) &&
+        !url.pathname.includes(".")
     ) {
         return new Response(JSON.stringify({ error: "Invalid endpoint" }), createOptions(400));
     }
 
-    if (request.method === "GET") {
-        return serveDir(request, {
-            fsRoot: ".",
-            urlRoot: "",
-            showDirListing: false,
-            enableCors: true,
-        });
-    }
+    return serveDir(request, {
+        fsRoot: ".",
+        urlRoot: "",
+        showDirListing: false,
+        enableCors: true,
+    });
+
 }
 
 
