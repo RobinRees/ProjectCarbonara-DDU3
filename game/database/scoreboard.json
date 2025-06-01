@@ -50,5 +50,12 @@
     "loggedIn": false,
     "id": 7,
     "roundScore": 50
+  },
+  {
+    "username": "gdfrshdfgh",
+    "password": "dfjfghj3",
+    "score": 50,
+    "loggedIn": false,
+    "id": 8
   }
 ]
