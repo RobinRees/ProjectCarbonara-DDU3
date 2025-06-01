@@ -37,56 +37,33 @@
     "roundScore": 60
   },
   {
-    "username": "nicki",
-    "password": "pelles6565",
+    "username": "Trams",
+    "password": "Trams2",
     "score": 60,
     "loggedIn": false,
     "id": 6
   },
   {
-    "username": "paddan",
-    "password": "1234hhhh",
+    "username": "dlfgsdfg",
+    "password": "sdfgghfgh2",
     "score": 50,
     "loggedIn": false,
     "id": 7,
     "roundScore": 50
   },
   {
-    "username": "rocketman",
-    "password": "kimjon55",
-    "score": 10,
+    "username": "gdfrshdfgh",
+    "password": "dfjfghj3",
+    "score": 50,
     "loggedIn": false,
-    "id": 8,
-    "roundScore": 10
+    "id": 8
   },
   {
-    "username": "programmer",
-    "password": "guyguy88",
-    "score": 30,
-    "loggedIn": false,
-    "id": 9,
-    "roundScore": 30
-  },
-  {
-    "username": "username",
-    "password": "password1234",
-    "score": 0,
-    "loggedIn": false,
-    "id": 10
-  },
-  {
-    "username": "carbonara",
-    "password": "meatloaf44",
-    "score": 0,
-    "loggedIn": false,
-    "id": 11
-  },
-  {
-    "username": "arianbarbarian",
-    "password": "wauswai22",
-    "score": 90,
+    "username": "fdsggh",
+    "password": "sdgfhjg32",
+    "score": 70,
     "loggedIn": true,
-    "id": 12,
-    "roundScore": 40
+    "id": 9,
+    "roundScore": 70
   }
 ]
