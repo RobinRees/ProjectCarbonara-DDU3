@@ -571,10 +571,6 @@ footer {
     font-size: 14px
   }
 
-  #right {
-    display: none;
-  }
-
   .importantRed {
     font-size: 20px;
   }
@@ -587,6 +583,7 @@ footer {
   }
 
   #right {
+    display: none;
     position: absolute;
     top: 25%;
     box-shadow: 0 0 10px black;
