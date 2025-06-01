@@ -62,8 +62,23 @@
     "username": "fdsggh",
     "password": "sdgfhjg32",
     "score": 70,
-    "loggedIn": true,
+    "loggedIn": false,
     "id": 9,
     "roundScore": 70
+  },
+  {
+    "username": "Tester23",
+    "password": "sdfjkmgs32",
+    "score": 30,
+    "loggedIn": false,
+    "id": 10,
+    "roundScore": 30
+  },
+  {
+    "username": "qwdsafd",
+    "password": "wtyer3456",
+    "score": 0,
+    "loggedIn": true,
+    "id": 11
   }
 ]
