@@ -315,6 +315,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  display: block;
 }
 
 #looseScreen {
@@ -505,6 +506,10 @@ footer {
 #closeHowToPlay {
   display: block;
   margin: auto;
+}
+
+.show-leaderboard {
+  display: block !important;
 }
 
 
