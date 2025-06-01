@@ -315,6 +315,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  display: block;
 }
 
 #looseScreen {
@@ -521,6 +522,10 @@ footer {
 .choice.incorrectChoice {
     background-color: tomato;
 }
+.show-leaderboard {
+  display: block !important;
+}
+
 
 @media screen and (max-width: 1300px) {
 

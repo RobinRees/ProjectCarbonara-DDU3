@@ -34,62 +34,62 @@ function showCurrentPlayer() {
 async function createChoices() {
 
 
-    const meal = await fetch("https://www.themealdb.com/api/json/v1/1/random.php")
-        .then(res => res.json())
-        .then(data => data.meals[0]);
+  const meal = await fetch("https://www.themealdb.com/api/json/v1/1/random.php")
+    .then(res => res.json())
+    .then(data => data.meals[0]);
 
 
-    const localIngredients = await fetch("../database/ingredients.json")
-        .then(res => res.json());
+  const localIngredients = await fetch("../database/ingredients.json")
+    .then(res => res.json());
 
 
-    foodImageDiv.style.backgroundImage = `url("${meal.strMealThumb}")`;
+  foodImageDiv.style.backgroundImage = `url("${meal.strMealThumb}")`;
 
 
-    const realIngredients = [];
-    for (let i = 1; i <= 20; i++) {
-        const ing = meal[`strIngredient${i}`];
-        if (ing && ing.trim()) {
-            realIngredients.push(ing.toLowerCase());
-        }
+  const realIngredients = [];
+  for (let i = 1; i <= 20; i++) {
+    const ing = meal[`strIngredient${i}`];
+    if (ing && ing.trim()) {
+      realIngredients.push(ing.toLowerCase());
     }
-    const selectedReal = getRandomItems(realIngredients, 3);
+  }
+  const selectedReal = getRandomItems(realIngredients, 3);
 
 
-    const fakeIngredients = localIngredients.filter(
-        item => !selectedReal.includes(item.name.toLowerCase())
-    );
-    const selectedFake = getRandomItems(fakeIngredients, 7);
+  const fakeIngredients = localIngredients.filter(
+    item => !selectedReal.includes(item.name.toLowerCase())
+  );
+  const selectedFake = getRandomItems(fakeIngredients, 7);
 
 
-    const allChoices = [
-        ...selectedReal.map(name => ({
-            name,
-            image: `https://www.themealdb.com/images/ingredients/${name}.png`,
-            isCorrect: true
-        })),
-        ...selectedFake.map(item => ({
-            name: item.name,
-            image: item.image,
-            isCorrect: false
-        }))
-    ];
+  const allChoices = [
+    ...selectedReal.map(name => ({
+      name,
+      image: `https://www.themealdb.com/images/ingredients/${name}.png`,
+      isCorrect: true
+    })),
+    ...selectedFake.map(item => ({
+      name: item.name,
+      image: item.image,
+      isCorrect: false
+    }))
+  ];
 
 
-    shuffleArray(allChoices);
-    renderChoices(allChoices, meal);
+  shuffleArray(allChoices);
+  renderChoices(allChoices, meal);
 }
 
 
 function getRandomItems(array, count) {
-    const result = [];
-    while (result.length < count) {
-        const item = array[Math.floor(Math.random() * array.length)];
-        if (!result.includes(item)) {
-            result.push(item);
-        }
+  const result = [];
+  while (result.length < count) {
+    const item = array[Math.floor(Math.random() * array.length)];
+    if (!result.includes(item)) {
+      result.push(item);
     }
-    return result;
+  }
+  return result;
 }
 
 function shuffleArray(array) {
@@ -97,25 +97,25 @@ function shuffleArray(array) {
 }
 
 function renderChoices(choices, meal) {
-    choicesBox.innerHTML = "";
+  choicesBox.innerHTML = "";
 
-    choices.forEach(choice => {
-        const div = document.createElement("div");
-        div.classList.add("choice");
+  choices.forEach(choice => {
+    const div = document.createElement("div");
+    div.classList.add("choice");
 
-        const text = document.createElement("p");
-        text.textContent = choice.name;
-        div.appendChild(text);
+    const text = document.createElement("p");
+    text.textContent = choice.name;
+    div.appendChild(text);
 
         if (choice.image) {
             div.classList.add("hasImage");
             div.style.backgroundImage = `url("${choice.image}")`;
         }
 
-        div.addEventListener("click", () => handleChoiceClick(div, choice, meal));
+    div.addEventListener("click", () => handleChoiceClick(div, choice, meal));
 
-        choicesBox.appendChild(div);
-    });
+    choicesBox.appendChild(div);
+  });
 }
 
 async function handleChoiceClick(div, choice, meal) {
@@ -323,17 +323,13 @@ document.getElementById("howToPlayButton").addEventListener("click", () => {
 });
 
 document.getElementById("closeHowToPlay").addEventListener("click", () => {
-    document.getElementById("howToPlayBox").style.display = "none";
+  document.getElementById("howToPlayBox").style.display = "none";
 })
 
 document.getElementById("leaderboardButton").addEventListener("click", () => {
-    console.log("show leaderboard");
+  console.log("show leaderboard");
 
-    const leaderboard = document.getElementById("right");
+  const leaderboard = document.getElementById("right");
+  leaderboard.classList.toggle("show-leaderboard");
 
-    if (leaderboard.style.display === "none") {
-        leaderboard.style.display = "block";
-    } else {
-        leaderboard.style.display = "none";
-    }
 })
