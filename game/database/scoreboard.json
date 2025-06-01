@@ -66,5 +66,27 @@
     "loggedIn": false,
     "id": 9,
     "roundScore": 30
+  },
+  {
+    "username": "username",
+    "password": "password1234",
+    "score": 0,
+    "loggedIn": false,
+    "id": 10
+  },
+  {
+    "username": "carbonara",
+    "password": "meatloaf44",
+    "score": 0,
+    "loggedIn": false,
+    "id": 11
+  },
+  {
+    "username": "arianbarbarian",
+    "password": "wauswai22",
+    "score": 90,
+    "loggedIn": true,
+    "id": 12,
+    "roundScore": 40
   }
 ]

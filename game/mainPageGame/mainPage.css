@@ -13,6 +13,7 @@ nav {
   margin-bottom: 25px;
   background-color: #4a90e2;
   padding: 5px 0;
+  position: relative;
 }
 
 nav h1 {
@@ -31,15 +32,25 @@ nav div {
 nav button {
   border-style: none;
   outline: none;
-  /* padding: 10px; */
-  /* width: 100px; */
+  padding: 15px;
   font-size: 14px;
   color: white;
   background-color: #4a90e2;
   position: absolute;
-  right: 25px;
-  top: 30px;
 }
+
+#leaderboardButton {
+  display: none;
+  left: 0;
+  top: 32px;
+}
+
+#logOutButton {
+  align-content: center;
+  right: 0;
+  top: 32px;
+}
+
 
 .menuButton:hover {
   /* background-color: white; */
@@ -566,6 +577,19 @@ footer {
 
   .importantRed {
     font-size: 20px;
+  }
+
+  /* nav {
+    /* justify-content: space-between; */
+
+  #leaderboardButton {
+    display: block;
+  }
+
+  #right {
+    position: absolute;
+    top: 25%;
+    box-shadow: 0 0 10px black;
   }
 
 }

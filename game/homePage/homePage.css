@@ -24,7 +24,6 @@ main {
 
 #logInDiv {
     display: flex;
-    height: fit-content;
 }
 
 #logInDiv,
@@ -36,6 +35,7 @@ main {
     border-radius: 30px;
     padding: 30px;
     margin-top: 20px;
+    height: fit-content;
 }
 
 #signInDiv {
