@@ -164,12 +164,34 @@ async function handler(request) {
         });
     }
 
-    return serveDir(request, {
-        fsRoot: ".",
-        urlRoot: "",
-        showDirListing: false,
-        enableCors: true,
-    });
+    const allowedApiPaths = [
+        "/signUp",
+        "/logIn",
+        "/getLoggedInUser",
+        "/logOutUser",
+        "/updateScore",
+        "/getTopTen",
+        "/game",
+        "/gameOver",
+        "/home",
+        "/"
+    ];
+
+    if (
+        request.method === "GET" &&
+        !allowedApiPaths.includes(url.pathname)
+    ) {
+        return new Response(JSON.stringify({ error: "Invalid endpoint" }), createOptions(400));
+    }
+
+    if (request.method === "GET") {
+        return serveDir(request, {
+            fsRoot: ".",
+            urlRoot: "",
+            showDirListing: false,
+            enableCors: true,
+        });
+    }
 }
 
 
