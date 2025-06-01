@@ -13,6 +13,7 @@ nav {
   margin-bottom: 25px;
   background-color: #4a90e2;
   padding: 5px 0;
+  position: relative;
 }
 
 nav h1 {
@@ -31,15 +32,25 @@ nav div {
 nav button {
   border-style: none;
   outline: none;
-  /* padding: 10px; */
-  /* width: 100px; */
+  padding: 15px;
   font-size: 14px;
   color: white;
   background-color: #4a90e2;
   position: absolute;
-  right: 25px;
-  top: 30px;
 }
+
+#leaderboardButton {
+  display: none;
+  left: 0;
+  top: 32px;
+}
+
+#logOutButton {
+  align-content: center;
+  right: 0;
+  top: 32px;
+}
+
 
 .menuButton:hover {
   /* background-color: white; */
@@ -61,6 +72,7 @@ nav button {
 main {
   display: flex;
   justify-content: space-evenly;
+  gap: 15px;
 }
 
 #right {
@@ -159,15 +171,17 @@ main {
   background-color: white;
   padding: 15px;
   border-radius: 20px;
-  width: 600px;
+  max-width: 600px;
   box-shadow: 0 0 10px lightblue;
+  flex-shrink: 1;
+  width: fit-content;
 }
 
 #choicesBox {
-  height: 250px;
+  /* height: 250px; */
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 100px);
   gap: 15px;
 }
 
@@ -260,7 +274,7 @@ button:hover {
   width: 280px;
   height: 280px;
   border: 1px solid black;
-  position: relative;
+  /* position: relative; */
 }
 
 h2 {
@@ -488,4 +502,114 @@ footer {
 #closeHowToPlay {
   display: block;
   margin: auto;
+}
+
+
+@media screen and (max-width: 1300px) {
+
+  main {
+    margin: 0 15px;
+  }
+
+  #choicesBox {
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(3, 100px);
+  }
+
+  .choice {
+    font-size: 14px;
+    flex-basis: 100px;
+
+  }
+
+}
+
+@media screen and (max-width: 1150px) {
+
+  #choicesBox {
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(4, 100px);
+  }
+
+
+}
+
+@media screen and (max-width: 1075px) {
+
+
+  main {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  #middle {
+    gap: 30px;
+  }
+
+
+  #adBox {
+    display: none;
+  }
+
+  #choicesBox {
+    grid-template-columns: repeat(5, 100px);
+    grid-template-rows: repeat(2, 100px);
+  }
+
+
+}
+
+@media screen and (max-width: 600px) {
+
+  #choicesBox {
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(4, 100px);
+  }
+
+  .choice {
+    font-size: 14px
+  }
+
+  #right {
+    display: none;
+  }
+
+  .importantRed {
+    font-size: 20px;
+  }
+
+  /* nav {
+    /* justify-content: space-between; */
+
+  #leaderboardButton {
+    display: block;
+  }
+
+  #right {
+    position: absolute;
+    top: 25%;
+    box-shadow: 0 0 10px black;
+  }
+
+}
+
+@media screen and (max-width: 420px) {
+
+  #foodImage {
+    width: 200px;
+    height: 200px;
+  }
+
+
+
+  #choicesBox {
+    grid-template-columns: repeat(2, 100px);
+    grid-template-rows: repeat(5, 100px);
+  }
+
+  .importantRed {
+    font-size: 16px;
+  }
+
 }

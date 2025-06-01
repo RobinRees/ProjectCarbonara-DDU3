@@ -369,3 +369,15 @@ document.getElementById("howToPlayButton").addEventListener("click", () => {
 document.getElementById("closeHowToPlay").addEventListener("click", () => {
     document.getElementById("howToPlayBox").style.display = "none";
 })
+
+document.getElementById("leaderboardButton").addEventListener("click", () => {
+    console.log("show leaderboard");
+
+    const leaderboard = document.getElementById("right");
+
+    if (leaderboard.style.display === "none") {
+        leaderboard.style.display = "block";
+    } else {
+        leaderboard.style.display = "none";
+    }
+})
