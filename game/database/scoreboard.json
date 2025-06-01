@@ -77,8 +77,17 @@
   {
     "username": "qwdsafd",
     "password": "wtyer3456",
-    "score": 0,
+    "score": 50,
+    "loggedIn": false,
+    "id": 11,
+    "roundScore": 50
+  },
+  {
+    "username": "dfghdfghj",
+    "password": "dfgjdfh435",
+    "score": 130,
     "loggedIn": true,
-    "id": 11
+    "id": 12,
+    "roundScore": 130
   }
 ]
