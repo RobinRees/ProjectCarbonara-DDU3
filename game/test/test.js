@@ -15,7 +15,7 @@ const test12BTN = document.getElementById("test12");
 const test13BTN = document.getElementById("test13");
 const test14BTN = document.getElementById("test14");
 
-
+test1();
 
 async function test1() {
     const response = await fetch("http://localhost:8000/getLoggedInUser");
