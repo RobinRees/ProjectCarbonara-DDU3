@@ -414,10 +414,8 @@ h2 {
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: relative;
+  margin-top: 30px;
   height: 60px;
   background-color: #4a90e2;
   text-align: center;
@@ -509,19 +507,20 @@ footer {
 }
 
 .choice.hasImage {
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    flex-direction: column;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-direction: column;
 }
 
 .choice.correctChoice {
-    background-color: lightgreen;
+  background-color: lightgreen;
 }
 
 .choice.incorrectChoice {
-    background-color: tomato;
+  background-color: tomato;
 }
+
 .show-leaderboard {
   display: block !important;
 }
